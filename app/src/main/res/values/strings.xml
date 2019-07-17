@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">FBUTeam</string>
     <string name="title_activity_home">HomeActivity</string>
+
+    <string name="username_signup">Username</string>
+    <string name="password_signup">Password</string>
+    <string name="email_signup">Email</string>
+    <string name="create_new_signup">create new</string>
+
+    <string name="prompt_email_signup">Email</string>
+    <string name="prompt_username_signup">Username</string>
+    <string name="prompt_password_signup">Password</string>
 </resources>
