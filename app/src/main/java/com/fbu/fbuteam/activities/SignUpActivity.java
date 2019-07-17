@@ -1,4 +1,4 @@
-package com.fbu.fbuteam;
+package com.fbu.fbuteam.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fbu.fbuteam.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.parse.ParseUser;
 
