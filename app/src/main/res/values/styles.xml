@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -9,12 +9,28 @@
     </style>
 
     <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    
+    <style name="TextInputLayoutWhite" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">@color/white</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="boxStrokeColor">@drawable/text_input_layout_box_white</item>
+        <item name="endIconTint">@color/white</item>
+    </style>
 
+    <style name="TextInputEditTextWhite">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
+    <style name="ButtonFilledWhite">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:backgroundTint">@color/white</item>
+    </style>
 </resources>
