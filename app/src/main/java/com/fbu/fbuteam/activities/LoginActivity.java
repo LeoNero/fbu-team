@@ -27,17 +27,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        setupToolbar();
         persistUser();
         setupComponents();
 
         setupLoginClickListener();
         setupSignupClickListener();
-    }
-
-    private void setupToolbar() {
-        Toolbar toolbar = findViewById(R.id.my_toolbar);
-        setSupportActionBar(toolbar);
     }
 
     private void persistUser() {
