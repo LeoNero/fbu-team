@@ -10,4 +10,6 @@
     <string name="prompt_email_signup">Email</string>
     <string name="prompt_username_signup">Username</string>
     <string name="prompt_password_signup">Password</string>
+
+    <string name="signup">Sign up</string>
 </resources>
