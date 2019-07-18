@@ -11,7 +11,6 @@ import com.fbu.fbuteam.R;
 
 public class TagActivity extends AppCompatActivity {
 
-    //declare TextView and Button objects
     private TextView textView1;
     private TextView textView2;
     private Button sportsTag;
@@ -33,7 +32,6 @@ public class TagActivity extends AppCompatActivity {
     }
 
     private void initializeObjects() {
-        //initialize textView and Button objects
         textView1 = findViewById(R.id.textView1);
         textView2 = findViewById(R.id.textView2);
         sportsTag = findViewById(R.id.sportsTag);
