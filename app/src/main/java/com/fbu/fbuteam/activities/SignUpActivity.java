@@ -56,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
         user.signUpInBackground((error) -> {
             if (error == null) {
                 Toast.makeText(SignUpActivity.this, "Successfully signed up", Toast.LENGTH_SHORT).show();
-                goToHome();
+                goToTags();
             } else {
                 Log.e("SignUpActivity.", "Failed to sign up", error);
             }
@@ -76,8 +76,8 @@ public class SignUpActivity extends AppCompatActivity {
         return user;
     }
 
-    private void goToHome() {
-        Intent intent = new Intent(this, HomeActivity.class);
+    private void goToTags() {
+        Intent intent = new Intent(this, TagActivity.class);
         startActivity(intent);
         finish();
     }
