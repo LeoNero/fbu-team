@@ -11,12 +11,12 @@ import androidx.fragment.app.Fragment;
 
 import com.fbu.fbuteam.R;
 
-public class TagFragment extends Fragment {
+public class DetailTagsFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tag_fragment, container, false);
+        return inflater.inflate(R.layout.detailtags_fragment, container, false);
     }
 
     @Override
