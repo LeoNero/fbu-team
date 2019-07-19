@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -25,6 +26,9 @@ public class BigIdeasFragment extends Fragment {
     private Button govTag;
     private Button socialTag;
     private Button militaryTag;
+    private Button nextButton;
+
+    private OnItemSelectedListener callback;
 
     @Nullable
     @Override
@@ -37,6 +41,7 @@ public class BigIdeasFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initializeObjects(view);
+        goToDetailTags();
     }
 
     private void initializeObjects(View view) {
@@ -50,5 +55,22 @@ public class BigIdeasFragment extends Fragment {
         govTag = view.findViewById(R.id.govTag);
         socialTag = view.findViewById(R.id.socialTag);
         militaryTag = view.findViewById(R.id.militaryTag);
+        nextButton = view.findViewById(R.id.nextButton);
+    }
+
+    public void setOnItemSelectedListener(OnItemSelectedListener callback) {
+        this.callback = callback;
+    }
+
+    public interface OnItemSelectedListener {
+        void changeFragments();
+    }
+
+    private void goToDetailTags() {
+        nextButton.setOnClickListener(view1 -> {
+            if(callback != null){
+                callback.changeFragments();
+            }
+        });
     }
 }
