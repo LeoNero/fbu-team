@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,14 +19,14 @@ public class BigIdeasFragment extends Fragment {
 
     private TextView textView1;
     private TextView textView2;
-    private Button sportsTag;
-    private Button entTag;
-    private Button moneyTag;
-    private Button techTag;
-    private Button envTag;
-    private Button govTag;
-    private Button socialTag;
-    private Button militaryTag;
+    private CheckBox sportsTag;
+    private CheckBox entTag;
+    private CheckBox moneyTag;
+    private CheckBox techTag;
+    private CheckBox envTag;
+    private CheckBox govTag;
+    private CheckBox socialTag;
+    private CheckBox militaryTag;
     private Button nextButton;
 
     private OnItemSelectedListener callback;
@@ -47,14 +48,14 @@ public class BigIdeasFragment extends Fragment {
     private void initializeObjects(View view) {
         textView1 = view.findViewById(R.id.textView1);
         textView2 = view.findViewById(R.id.textView2);
-        sportsTag = view.findViewById(R.id.sportsTag);
-        entTag = view.findViewById(R.id.entTag);
-        moneyTag = view.findViewById(R.id.moneyTag);
-        techTag = view.findViewById(R.id.techTag);
-        envTag = view.findViewById(R.id.envTag);
-        govTag = view.findViewById(R.id.govTag);
-        socialTag = view.findViewById(R.id.socialTag);
-        militaryTag = view.findViewById(R.id.militaryTag);
+        sportsTag = view.findViewById(R.id.sportsBox);
+        entTag = view.findViewById(R.id.entBox);
+        moneyTag = view.findViewById(R.id.moneyBox);
+        techTag = view.findViewById(R.id.techBox);
+        envTag = view.findViewById(R.id.envBox);
+        govTag = view.findViewById(R.id.govBox);
+        socialTag = view.findViewById(R.id.socialBox);
+        militaryTag = view.findViewById(R.id.militaryBox);
         nextButton = view.findViewById(R.id.nextButton);
     }
 
