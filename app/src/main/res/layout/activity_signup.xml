@@ -29,14 +29,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_signup"
-        style="@style/TextInputLayoutWhite"
+        style="@style/TextInputLayoutWhite.DefaultMargin.First"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,14 +47,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/username_signup"
-        style="@style/TextInputLayoutWhite"
+        style="@style/TextInputLayoutWhite.DefaultMargin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:hint="@string/username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,14 +66,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_signup"
-        style="@style/TextInputLayoutWhite"
+        style="@style/TextInputLayoutWhite.DefaultMargin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:hint="@string/password"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,14 +86,9 @@
 
     <Button
         android:id="@+id/create_new_signup"
-        style="@style/ButtonFilledWhite"
+        style="@style/ButtonFilledWhite.DefaultMargin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:text="@string/create_new_signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
