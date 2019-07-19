@@ -1,17 +1,23 @@
 package com.fbu.fbuteam.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.fbu.fbuteam.R;
+import com.fbu.fbuteam.activities.HomeActivity;
+import com.fbu.fbuteam.activities.TagActivity;
 
 public class DetailTagsFragment extends Fragment {
+
+    private Button finishButton;
 
     @Nullable
     @Override
@@ -22,5 +28,20 @@ public class DetailTagsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        initializeObjects(view);
+        goToHome();
+    }
+
+    private void initializeObjects(@NonNull View view) {
+        finishButton = view.findViewById(R.id.finishButton);
+    }
+
+    private void goToHome() {
+        finishButton.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getContext(), HomeActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        });
     }
 }
