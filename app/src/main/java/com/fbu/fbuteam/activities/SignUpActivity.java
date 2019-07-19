@@ -59,6 +59,8 @@ public class SignUpActivity extends AppCompatActivity {
                 goToTags();
             } else {
                 Log.e("SignUpActivity.", "Failed to sign up", error);
+                String message = error.getMessage();
+                Toast.makeText(SignUpActivity.this, message, Toast.LENGTH_LONG).show();
             }
         });
     }
