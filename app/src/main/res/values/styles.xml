@@ -16,12 +16,24 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-    
+
     <style name="TextInputLayoutWhite" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:textColorHint">@color/white</item>
         <item name="hintTextColor">@color/white</item>
         <item name="boxStrokeColor">@drawable/text_input_layout_box_white</item>
         <item name="endIconTint">@color/white</item>
+    </style>
+
+    <style name="TextInputLayoutWhite.DefaultMargin">
+        <item name="android:layout_marginStart">@dimen/default_margin_start</item>
+        <item name="android:layout_marginLeft">@dimen/default_margin_left</item>
+        <item name="android:layout_marginTop">@dimen/default_margin_top</item>
+        <item name="android:layout_marginEnd">@dimen/default_margin_end</item>
+        <item name="android:layout_marginRight">@dimen/default_margin_right</item>
+    </style>
+
+    <style name="TextInputLayoutWhite.DefaultMargin.First">
+        <item name="android:layout_marginTop">@dimen/default_margin_first_item</item>
     </style>
 
     <style name="TextInputEditTextWhite">
@@ -32,5 +44,13 @@
     <style name="ButtonFilledWhite">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:backgroundTint">@color/white</item>
+    </style>
+
+    <style name="ButtonFilledWhite.DefaultMargin">
+        <item name="android:layout_marginStart">@dimen/default_margin_start</item>
+        <item name="android:layout_marginLeft">@dimen/default_margin_left</item>
+        <item name="android:layout_marginTop">@dimen/default_margin_top</item>
+        <item name="android:layout_marginEnd">@dimen/default_margin_end</item>
+        <item name="android:layout_marginRight">@dimen/default_margin_right</item>
     </style>
 </resources>
