@@ -29,6 +29,7 @@ public class BigIdeasFragment extends Fragment {
     private CheckBox socialTag;
     private CheckBox militaryTag;
     private Button nextButton;
+    CheckBox[] checkBoxes = new CheckBox[8];
 
     private OnItemSelectedListener callback;
 
@@ -62,65 +63,85 @@ public class BigIdeasFragment extends Fragment {
     }
 
     public void onCheckboxClicked(View view) {
-        boolean checked = ((CheckBox) view).isChecked();
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.sportsBox:
-                if (checked) {
+                if (sportsTag.isChecked()) {
                     //do something
                 } else {
                     //do something else
                 }
                 break;
             case R.id.entBox:
-                if (checked) {
+                if (entTag.isChecked()) {
                     //do something
                 } else {
                     //do something else
                 }
                 break;
             case R.id.moneyBox:
-                if (checked) {
+                if (moneyTag.isChecked()) {
                     //do something
                 } else {
                     //do something else
                 }
                 break;
             case R.id.techBox:
-                if (checked) {
+                if (techTag.isChecked()) {
                     //do something
                 } else {
                     //do something else
                 }
                 break;
             case R.id.envBox:
-                if (checked) {
+                if (envTag.isChecked()) {
                     //do something
                 } else {
                     //do something else
                 }
                 break;
             case R.id.govBox:
-                if (checked) {
+                if (govTag.isChecked()) {
                     //do something
                 } else {
                     //do something else
                 }
                 break;
             case R.id.socialBox:
-                if (checked) {
+                if (socialTag.isChecked()) {
                     //do something
                 } else {
                     //do something else
                 }
                 break;
             case R.id.militaryBox:
-                if (checked) {
+                if (militaryTag.isChecked()) {
                     //do something
                 } else {
                     //do something else
                 }
                 break;
         }
+    }
+
+    private boolean allChecked() {
+        checkBoxes[0] = sportsTag;
+        checkBoxes[1] = entTag;
+        checkBoxes[2] = moneyTag;
+        checkBoxes[3] = techTag;
+        checkBoxes[4] = envTag;
+        checkBoxes[5] = govTag;
+        checkBoxes[6] = socialTag;
+        checkBoxes[7] = militaryTag;
+
+        boolean allChecked = true;
+
+        for (int i = 0; i < checkBoxes.length; i++) {
+            if (!checkBoxes[i].isChecked()) {
+                allChecked = false;
+                break;
+            }
+        }
+        return allChecked;
     }
 
     public void setOnItemSelectedListener(OnItemSelectedListener callback) {
@@ -133,8 +154,12 @@ public class BigIdeasFragment extends Fragment {
 
     private void goToDetailTags() {
         nextButton.setOnClickListener(view1 -> {
-            if(callback != null){
-                callback.changeFragments();
+            if (allChecked()) {
+                if (callback != null) {
+                    callback.changeFragments();
+                }
+            } else {
+                Toast.makeText(getContext(), "Please select at least one topic.", Toast.LENGTH_LONG).show();
             }
         });
     }

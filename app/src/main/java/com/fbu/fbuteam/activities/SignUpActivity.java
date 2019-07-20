@@ -44,7 +44,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void signUp() {
         ParseUser user = createParseUser();
-
         if (anyFieldIsEmpty()) {
             Toast.makeText(SignUpActivity.this, "Please fill out all fields.", Toast.LENGTH_LONG).show();
         } else {
