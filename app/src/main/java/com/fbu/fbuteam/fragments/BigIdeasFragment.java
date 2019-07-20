@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +43,7 @@ public class BigIdeasFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initializeObjects(view);
+        onCheckboxClicked(view);
         goToDetailTags();
     }
 
@@ -57,6 +59,68 @@ public class BigIdeasFragment extends Fragment {
         socialTag = view.findViewById(R.id.socialBox);
         militaryTag = view.findViewById(R.id.militaryBox);
         nextButton = view.findViewById(R.id.nextButton);
+    }
+
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        switch(view.getId()) {
+            case R.id.sportsBox:
+                if (checked) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+            case R.id.entBox:
+                if (checked) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+            case R.id.moneyBox:
+                if (checked) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+            case R.id.techBox:
+                if (checked) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+            case R.id.envBox:
+                if (checked) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+            case R.id.govBox:
+                if (checked) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+            case R.id.socialBox:
+                if (checked) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+            case R.id.militaryBox:
+                if (checked) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+        }
     }
 
     public void setOnItemSelectedListener(OnItemSelectedListener callback) {

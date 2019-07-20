@@ -59,6 +59,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="100dp"
         android:text="Sports"
+        android:onClick="onCheckboxClicked"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -70,6 +71,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="48dp"
         android:text="Entertainment"
+        android:onClick="onCheckboxClicked"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sportsBox" />
 
@@ -81,6 +83,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="48dp"
         android:text="Money"
+        android:onClick="onCheckboxClicked"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entBox" />
 
@@ -92,6 +95,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="48dp"
         android:text="Technoloy"
+        android:onClick="onCheckboxClicked"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/moneyBox" />
 
@@ -103,6 +107,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="Environment"
+        android:onClick="onCheckboxClicked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -114,6 +119,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="Government"
+        android:onClick="onCheckboxClicked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/envBox" />
 
@@ -125,6 +131,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="Social Justice"
+        android:onClick="onCheckboxClicked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/govBox" />
 
@@ -136,6 +143,8 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="Military"
+        android:onClick="onCheckboxClicked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/socialBox" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
