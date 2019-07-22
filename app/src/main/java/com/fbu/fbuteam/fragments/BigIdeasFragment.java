@@ -68,7 +68,7 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         nextButton = view.findViewById(R.id.nextButton);
     }
 
-    private boolean allChecked() {
+    private boolean atLeastOneChecked() {
 
         checkBoxes[0] = sportsTag;
         checkBoxes[1] = entTag;
@@ -79,15 +79,15 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         checkBoxes[6] = socialTag;
         checkBoxes[7] = militaryTag;
 
-        boolean allChecked = true;
+        boolean atLeastOneChecked = false;
 
         for (int i = 0; i < checkBoxes.length; i++) {
-            if (!checkBoxes[i].isChecked()) {
-                allChecked = false;
+            if (checkBoxes[i].isChecked()) {
+                atLeastOneChecked = true;
                 break;
             }
         }
-        return allChecked;
+        return atLeastOneChecked;
     }
 
     public void setOnItemSelectedListener(OnItemSelectedListener callback) {
@@ -99,8 +99,61 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         switch (compoundButton.getId()) {
             case R.id.sportsBox:
                 if (sportsTag.isChecked()) {
-                    Toast.makeText(getContext(), "it worked", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "It worked", Toast.LENGTH_LONG).show();
+                    //do something
+                } else {
+                    //do something else
                 }
+                break;
+            case R.id.entBox:
+                if (entTag.isChecked()) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+            case R.id.moneyBox:
+                if (moneyTag.isChecked()) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+            case R.id.techBox:
+                if (entTag.isChecked()) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+            case R.id.envBox:
+                if (envTag.isChecked()) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+            case R.id.govBox:
+                if (govTag.isChecked()) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+            case R.id.socialBox:
+                if (socialTag.isChecked()) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
+            case R.id.militaryBox:
+                if (militaryTag.isChecked()) {
+                    //do something
+                } else {
+                    //do something else
+                }
+                break;
         }
     }
 
@@ -110,7 +163,7 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
 
     private void goToDetailTags() {
         nextButton.setOnClickListener(view1 -> {
-            if (allChecked()) {
+            if (atLeastOneChecked()) {
                 if (callback != null) {
                     callback.changeFragments();
                 }
