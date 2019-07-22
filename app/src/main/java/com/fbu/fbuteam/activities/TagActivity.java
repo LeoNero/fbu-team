@@ -14,10 +14,7 @@ import com.fbu.fbuteam.fragments.BigIdeasFragment;
 import com.fbu.fbuteam.fragments.DetailTagsFragment;
 
 public class TagActivity extends AppCompatActivity implements BigIdeasFragment.OnItemSelectedListener {
-
-    BigIdeasFragment bigIdeasFragment;
-    View view;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
