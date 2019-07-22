@@ -20,6 +20,8 @@ import androidx.fragment.app.Fragment;
 
 import com.fbu.fbuteam.R;
 
+import java.util.ArrayList;
+
 public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
 
     private TextView textView1;
@@ -34,6 +36,7 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
     private CheckBox militaryTag;
     private Button nextButton;
     CheckBox[] checkBoxes = new CheckBox[8];
+    ArrayList<CheckBox> selectedTags = new ArrayList<>();
 
     private OnItemSelectedListener callback;
 
@@ -83,6 +86,7 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
 
         for (int i = 0; i < checkBoxes.length; i++) {
             if (checkBoxes[i].isChecked()) {
+                selectedTags.add(checkBoxes[i]);
                 atLeastOneChecked = true;
                 break;
             }
