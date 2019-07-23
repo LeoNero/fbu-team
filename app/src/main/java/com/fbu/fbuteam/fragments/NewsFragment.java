@@ -1,6 +1,7 @@
 package com.fbu.fbuteam.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +11,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import com.fbu.fbuteam.R;
+import com.fbu.fbuteam.activities.EndlessRecyclerViewScrollListener;
 import com.fbu.fbuteam.activities.NewsAdapter;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import org.w3c.dom.Node;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,6 +31,11 @@ public class NewsFragment extends Fragment {
     private RecyclerView rvNews;
     private NewsAdapter adapter;
     private List<Node> myNewsNodes;
+    private LinearLayoutManager linearLayoutManager;
+    public static final int newsNodesPerQuery = 20;
+    private SwipeRefreshLayout swipeContainer;
+
+    private EndlessRecyclerViewScrollListener scrollListener;
 
     @Nullable
     @Override
@@ -36,16 +47,27 @@ public class NewsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         rvNews = view.findViewById(R.id.rvNews);
 
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+
         //TODO create the data source
-        //myNewsNodes = new ArrayList<>();
+        myNewsNodes = new ArrayList<>();
         // Use this in the query for news articles to power recycler view
 
-        //creating the adapter
-        adapter = new NewsAdapter(getContext(), myNewsNodes);
-        //set the adapter on the recycler view
-        rvNews.setAdapter(adapter);
-        //set the layout manager on the recycler view
-        rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
-    }
 
+        adapter = new NewsAdapter(getContext(), myNewsNodes);
+        rvNews.setAdapter(adapter);
+        rvNews.setLayoutManager(linearLayoutManager);
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+
+
+        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                //loadNextDataFromApi();
+            }
+
+        };
+        rvNews.addOnScrollListener(scrollListener);
+
+    }
 }
