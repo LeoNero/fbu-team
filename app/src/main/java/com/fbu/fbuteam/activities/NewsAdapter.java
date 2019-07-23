@@ -10,9 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.fbu.fbuteam.R;
-import com.parse.ParseFile;
 
 import org.w3c.dom.Node;
 
@@ -21,11 +19,11 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private Context context;
-    private List<Node> news;
+    private List<Node> newsNodes;
 
     public NewsAdapter(Context context, List<Node> news) {
         this.context = context;
-        this.news = news;
+        this.newsNodes = newsNodes;
     }
 
     @NonNull
@@ -37,13 +35,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Node news = news.get(position);
-        holder.bind(news);
+        Node node = newsNodes.get(position);
+        holder.bind(node);
     }
 
     @Override
     public int getItemCount() {
-        return news.size();
+        return newsNodes.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -61,10 +59,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         }
 
-    }
+        public void bind(final Node node) {
+            //TODO: bind the view elements to the news article node
 
-    public void bind(Node news) {
-        //TODO: bind the view elements to the post
+        }
+
+
     }
 
 }
