@@ -43,20 +43,13 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
     @Override
     public void changeFragments() {
 
-        createFragment();
 
 
 
 //        FragmentManager manager = getSupportFragmentManager();
 //        FragmentTransaction transaction = manager.beginTransaction();
 //        transaction.replace(R.id.placeholder, new DetailTagsFragment());
+//        transaction.commit();
         //Log.d("AA", selectedChildren.size()+ "");
-    }
-
-    public void createFragment() {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.placeholder, new TestFragment1());
-        transaction.commit();
     }
 }

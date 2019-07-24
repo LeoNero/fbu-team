@@ -1,6 +1,7 @@
 package com.fbu.fbuteam.fragments;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.icu.text.UnicodeSetSpanner;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.fbu.fbuteam.R;
+import com.fbu.fbuteam.activities.HomeActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,7 +47,7 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
 
     public static List<BigIdea> allBigIdeas = new ArrayList<>();
     public static List<BigIdea> userSelectedBigIdeas = new ArrayList<>();
-    int nextUserSelection = 0;
+    private int nextUserSelection = 0;
 
     //****TESTS****
 
@@ -94,28 +96,28 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         allBigIdeas.add(new BigIdea("Military"));
     }
 
-    private boolean atLeastOneChecked() {
-
-        checkBoxes[0] = sportsTag;
-        checkBoxes[1] = entTag;
-        checkBoxes[2] = moneyTag;
-        checkBoxes[3] = techTag;
-        checkBoxes[4] = envTag;
-        checkBoxes[5] = govTag;
-        checkBoxes[6] = socialTag;
-        checkBoxes[7] = militaryTag;
-
-        boolean atLeastOneChecked = false;
-
-        for (int i = 0; i < checkBoxes.length; i++) {
-            if (checkBoxes[i].isChecked()) {
-                selectedTags.add(checkBoxes[i]);
-                atLeastOneChecked = true;
-                break;
-            }
-        }
-        return atLeastOneChecked;
-    }
+//    private boolean atLeastOneChecked() {
+//
+//        checkBoxes[0] = sportsTag;
+//        checkBoxes[1] = entTag;
+//        checkBoxes[2] = moneyTag;
+//        checkBoxes[3] = techTag;
+//        checkBoxes[4] = envTag;
+//        checkBoxes[5] = govTag;
+//        checkBoxes[6] = socialTag;
+//        checkBoxes[7] = militaryTag;
+//
+//        boolean atLeastOneChecked = false;
+//
+//        for (int i = 0; i < checkBoxes.length; i++) {
+//            if (checkBoxes[i].isChecked()) {
+//                selectedTags.add(checkBoxes[i]);
+//                atLeastOneChecked = true;
+//                break;
+//            }
+//        }
+//        return atLeastOneChecked;
+//    }
 
     public void setOnItemSelectedListener(OnItemSelectedListener callback) {
         this.callback = callback;
@@ -192,9 +194,16 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
 
     private void goToDetailTags() {
         nextButton.setOnClickListener(view1 -> {
-            if (atLeastOneChecked()) {
-                if (callback != null) {
-                    callback.changeFragments();
+            nextUserSelection++; //increment variable that keeps track of where we are in the list
+            if (!userSelectedBigIdeas.isEmpty()) { //if the arrayList of selected tags is NOT empty
+                if (nextUserSelection <= userSelectedBigIdeas.size()) { //if the tracking variable is less than or equal to the size of the arrayList (we haven't gone through the whole list yet)
+                    if (callback != null) {
+                        callback.changeFragments(); //continue setup
+                    }
+                } else { //if the whole list has been traversed, go to the Home Screen
+                    Intent intent = new Intent(getContext(), HomeActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             } else {
                 Toast.makeText(getContext(), "Please select at least one topic.", Toast.LENGTH_LONG).show();
