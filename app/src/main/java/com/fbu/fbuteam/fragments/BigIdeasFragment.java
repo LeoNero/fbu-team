@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.icu.text.UnicodeSetSpanner;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,29 +63,22 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.bigideas_fragment, container, false);
-        return rootView;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        initializeObjects(view);
-        goToDetailTags();
-    }
-
-    private void initializeObjects(View view) {
-        textView1 = view.findViewById(R.id.textView1);
-        textView2 = view.findViewById(R.id.textView2);
-        sportsTag = view.findViewById(R.id.sportsBox);
-        entTag = view.findViewById(R.id.entBox);
-        moneyTag = view.findViewById(R.id.moneyBox);
-        techTag = view.findViewById(R.id.techBox);
-        envTag = view.findViewById(R.id.envBox);
-        govTag = view.findViewById(R.id.govBox);
-        socialTag = view.findViewById(R.id.socialBox);
-        militaryTag = view.findViewById(R.id.militaryBox);
-        nextButton = view.findViewById(R.id.nextButton);
+        sportsTag = (CheckBox) rootView.findViewById(R.id.sportsBox);
+        sportsTag.setOnCheckedChangeListener(this);
+        entTag = (CheckBox) rootView.findViewById(R.id.entBox);
+        entTag.setOnCheckedChangeListener(this);
+        moneyTag = (CheckBox) rootView.findViewById(R.id.moneyBox);
+        moneyTag.setOnCheckedChangeListener(this);
+        techTag = (CheckBox) rootView.findViewById(R.id.techBox);
+        techTag.setOnCheckedChangeListener(this);
+        envTag = (CheckBox) rootView.findViewById(R.id.envBox);
+        envTag.setOnCheckedChangeListener(this);
+        govTag = (CheckBox) rootView.findViewById(R.id.govBox);
+        govTag.setOnCheckedChangeListener(this);
+        socialTag = (CheckBox) rootView.findViewById(R.id.socialBox);
+        socialTag.setOnCheckedChangeListener(this);
+        militaryTag = (CheckBox) rootView.findViewById(R.id.militaryBox);
+        militaryTag.setOnCheckedChangeListener(this);
 
         allBigIdeas.add(new BigIdea("Sports")); //index 0
         allBigIdeas.add(new BigIdea("Entertainment"));
@@ -94,30 +88,46 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         allBigIdeas.add(new BigIdea("Government"));
         allBigIdeas.add(new BigIdea("Social Justice"));
         allBigIdeas.add(new BigIdea("Military"));
+
+        return rootView;
     }
 
-//    private boolean atLeastOneChecked() {
-//
-//        checkBoxes[0] = sportsTag;
-//        checkBoxes[1] = entTag;
-//        checkBoxes[2] = moneyTag;
-//        checkBoxes[3] = techTag;
-//        checkBoxes[4] = envTag;
-//        checkBoxes[5] = govTag;
-//        checkBoxes[6] = socialTag;
-//        checkBoxes[7] = militaryTag;
-//
-//        boolean atLeastOneChecked = false;
-//
-//        for (int i = 0; i < checkBoxes.length; i++) {
-//            if (checkBoxes[i].isChecked()) {
-//                selectedTags.add(checkBoxes[i]);
-//                atLeastOneChecked = true;
-//                break;
-//            }
-//        }
-//        return atLeastOneChecked;
-//    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initializeTextView(view);
+        goToDetailTags();
+    }
+
+    private void initializeTextView(View view) {
+        textView1 = view.findViewById(R.id.textView1);
+        textView2 = view.findViewById(R.id.textView2);
+        nextButton = view.findViewById(R.id.nextButton);
+    }
+
+    private boolean atLeastOneChecked() {
+
+        checkBoxes[0] = sportsTag;
+        checkBoxes[1] = entTag;
+        checkBoxes[2] = moneyTag;
+        checkBoxes[3] = techTag;
+        checkBoxes[4] = envTag;
+        checkBoxes[5] = govTag;
+        checkBoxes[6] = socialTag;
+        checkBoxes[7] = militaryTag;
+
+        boolean atLeastOneChecked = false;
+
+        for (int i = 0; i < checkBoxes.length; i++) {
+            if (checkBoxes[i].isChecked()) {
+                selectedTags.add(checkBoxes[i]);
+                atLeastOneChecked = true;
+                break;
+            }
+        }
+        return atLeastOneChecked;
+    }
 
     public void setOnItemSelectedListener(OnItemSelectedListener callback) {
         this.callback = callback;
@@ -132,6 +142,7 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
                     //***TESTS***
                     //add selected boxes to userSelectedBigIdeas
                     userSelectedBigIdeas.add(allBigIdeas.get(0));
+                    Log.d("AA", userSelectedBigIdeas.get(0)+"");
                 } else {
                     userSelectedBigIdeas.remove(allBigIdeas.get(0));
                 }
@@ -194,7 +205,7 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
 
     private void goToDetailTags() {
         nextButton.setOnClickListener(view1 -> {
-            nextUserSelection++; //increment variable that keeps track of where we are in the list
+            nextUserSelection++; //increment variable that keeps track of where we are in the list after user clicks next
             if (!userSelectedBigIdeas.isEmpty()) { //if the arrayList of selected tags is NOT empty
                 if (nextUserSelection <= userSelectedBigIdeas.size()) { //if the tracking variable is less than or equal to the size of the arrayList (we haven't gone through the whole list yet)
                     if (callback != null) {
