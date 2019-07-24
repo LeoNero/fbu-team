@@ -26,7 +26,6 @@ import com.fbu.fbuteam.activities.HomeActivity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Queue;
 
 public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
 
@@ -41,14 +40,12 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
     private CheckBox socialTag;
     private CheckBox militaryTag;
     private Button nextButton;
-    CheckBox[] checkBoxes = new CheckBox[8];
+    CheckBox[] allTags = new CheckBox[8];
     ArrayList<CheckBox> selectedTags = new ArrayList<>();
 
     //****TESTS****
 
-    public static List<BigIdea> allBigIdeas = new ArrayList<>();
-    public static List<BigIdea> userSelectedBigIdeas = new ArrayList<>();
-    public static int nextUserSelection = 0;
+    public static List<List<String>> selectedBigIdeas = new ArrayList<>();
 
     //****TESTS****
 
@@ -57,7 +54,7 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         super.onCreate(savedInstanceState);
     }
 
-    private OnItemSelectedListener callback;
+    private OnNextClickListener callback;
 
     @Nullable
     @Override
@@ -106,28 +103,28 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         nextButton = view.findViewById(R.id.nextButton);
     }
 
-    private boolean atLeastOneChecked() {
-
-        checkBoxes[0] = sportsTag;
-        checkBoxes[1] = entTag;
-        checkBoxes[2] = moneyTag;
-        checkBoxes[3] = techTag;
-        checkBoxes[4] = envTag;
-        checkBoxes[5] = govTag;
-        checkBoxes[6] = socialTag;
-        checkBoxes[7] = militaryTag;
-
-        boolean atLeastOneChecked = false;
-
-        for (int i = 0; i < checkBoxes.length; i++) {
-            if (checkBoxes[i].isChecked()) {
-                selectedTags.add(checkBoxes[i]);
-                atLeastOneChecked = true;
-                break;
-            }
-        }
-        return atLeastOneChecked;
-    }
+//    private boolean atLeastOneChecked() {
+//
+//        checkBoxes[0] = sportsTag;
+//        checkBoxes[1] = entTag;
+//        checkBoxes[2] = moneyTag;
+//        checkBoxes[3] = techTag;
+//        checkBoxes[4] = envTag;
+//        checkBoxes[5] = govTag;
+//        checkBoxes[6] = socialTag;
+//        checkBoxes[7] = militaryTag;
+//
+//        boolean atLeastOneChecked = false;
+//
+//        for (int i = 0; i < checkBoxes.length; i++) {
+//            if (checkBoxes[i].isChecked()) {
+//                selectedTags.add(checkBoxes[i]);
+//                atLeastOneChecked = true;
+//                break;
+//            }
+//        }
+//        return atLeastOneChecked;
+//    }
 
     public void setOnItemSelectedListener(OnItemSelectedListener callback) {
         this.callback = callback;
