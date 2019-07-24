@@ -47,7 +47,7 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
 
     public static List<BigIdea> allBigIdeas = new ArrayList<>();
     public static List<BigIdea> userSelectedBigIdeas = new ArrayList<>();
-    private int nextUserSelection = 0;
+    public static int nextUserSelection = 0;
 
     //****TESTS****
 

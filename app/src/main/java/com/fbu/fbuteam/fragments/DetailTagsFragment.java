@@ -19,6 +19,20 @@ public class DetailTagsFragment extends Fragment {
 
     private Button finishButton;
 
+    public static DetailTagsFragment newInstance(int currentPosition) {
+        DetailTagsFragment detailTagsFragment = new DetailTagsFragment();
+        Bundle args = new Bundle();
+        args.putInt("current_position", BigIdeasFragment.nextUserSelection);
+        detailTagsFragment.setArguments(args);
+        return detailTagsFragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        int currentPosition = getArguments().getInt("current_position", 0);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
