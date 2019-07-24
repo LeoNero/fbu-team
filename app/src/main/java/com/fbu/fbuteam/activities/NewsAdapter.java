@@ -1,7 +1,6 @@
 package com.fbu.fbuteam.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private Context context;
     private List<Node> newsNodes;
 
-    public NewsAdapter(Context context, List<Node> news) {
+    public NewsAdapter(Context context, List<Node> newsNodes) {
         this.context = context;
         this.newsNodes = newsNodes;
     }
@@ -29,7 +28,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_news, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_newsNode, parent, false);
         return new ViewHolder(view);
     }
 

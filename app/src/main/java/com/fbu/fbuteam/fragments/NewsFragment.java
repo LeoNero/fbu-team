@@ -17,12 +17,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.activities.EndlessRecyclerViewScrollListener;
 import com.fbu.fbuteam.activities.NewsAdapter;
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import org.w3c.dom.Node;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -46,14 +48,11 @@ public class NewsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         rvNews = view.findViewById(R.id.rvNews);
-
         linearLayoutManager = new LinearLayoutManager(getActivity());
 
         //TODO create the data source
-        myNewsNodes = new ArrayList<>();
         // Use this in the query for news articles to power recycler view
-
-
+        myNewsNodes = new ArrayList<>();
         adapter = new NewsAdapter(getContext(), myNewsNodes);
         rvNews.setAdapter(adapter);
         rvNews.setLayoutManager(linearLayoutManager);
@@ -63,11 +62,23 @@ public class NewsFragment extends Fragment {
         scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                //loadNextDataFromApi();
+                loadNextData();
             }
 
         };
         rvNews.addOnScrollListener(scrollListener);
 
+        queryForNodes();
+
+    }
+
+    public void loadNextData() {
+        ;
+        //TODO query for next posts for endless scroll
+    }
+
+    private void queryForNodes() {
+        ;
+        //TODO query for top news articles
     }
 }
