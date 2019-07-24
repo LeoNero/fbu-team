@@ -64,6 +64,20 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         return rootView;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initializeTextView(view);
+        goToDetailTags();
+    }
+
+    private void initializeTextView(View view) {
+        textView1 = view.findViewById(R.id.textView1);
+        textView2 = view.findViewById(R.id.textView2);
+        nextButton = view.findViewById(R.id.nextButton);
+    }
+
     private void createOnCheckedChangeListener(View rootView) {
         sportsTag = (CheckBox) rootView.findViewById(R.id.sportsBox);
         sportsTag.setOnCheckedChangeListener(this);
@@ -83,42 +97,32 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         militaryTag.setOnCheckedChangeListener(this);
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    private boolean atLeastOneChecked() {
 
-        initializeTextView(view);
-        goToDetailTags();
+        createCheckBoxArray();
+
+        boolean atLeastOneChecked = false;
+
+        for (int i = 0; i < allTags.length; i++) {
+            if (allTags[i].isChecked()) {
+                selectedTags.add(allTags[i]);
+                atLeastOneChecked = true;
+                break;
+            }
+        }
+        return atLeastOneChecked;
     }
 
-    private void initializeTextView(View view) {
-        textView1 = view.findViewById(R.id.textView1);
-        textView2 = view.findViewById(R.id.textView2);
-        nextButton = view.findViewById(R.id.nextButton);
+    private void createCheckBoxArray() {
+        allTags[0] = sportsTag;
+        allTags[1] = entTag;
+        allTags[2] = moneyTag;
+        allTags[3] = techTag;
+        allTags[4] = envTag;
+        allTags[5] = govTag;
+        allTags[6] = socialTag;
+        allTags[7] = militaryTag;
     }
-
-//    private boolean atLeastOneChecked() {
-//
-//        checkBoxes[0] = sportsTag;
-//        checkBoxes[1] = entTag;
-//        checkBoxes[2] = moneyTag;
-//        checkBoxes[3] = techTag;
-//        checkBoxes[4] = envTag;
-//        checkBoxes[5] = govTag;
-//        checkBoxes[6] = socialTag;
-//        checkBoxes[7] = militaryTag;
-//
-//        boolean atLeastOneChecked = false;
-//
-//        for (int i = 0; i < checkBoxes.length; i++) {
-//            if (checkBoxes[i].isChecked()) {
-//                selectedTags.add(checkBoxes[i]);
-//                atLeastOneChecked = true;
-//                break;
-//            }
-//        }
-//        return atLeastOneChecked;
-//    }
 
     public void setOnItemSelectedListener(OnItemSelectedListener callback) {
         this.callback = callback;
