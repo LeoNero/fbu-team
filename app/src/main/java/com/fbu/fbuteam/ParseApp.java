@@ -5,11 +5,15 @@ import android.app.Application;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
+import com.fbu.fbuteam.models.Node;
+
 public class ParseApp extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        ParseObject.registerSubclass(Node.class);
         setUpParse();
     }
 
@@ -19,6 +23,7 @@ public class ParseApp extends Application {
                 .clientKey("LeoHaleyPlaxides")
                 .server("https://fbu-team-app.herokuapp.com/parse")
                 .build();
+
         Parse.initialize(configuration);
     }
 }
