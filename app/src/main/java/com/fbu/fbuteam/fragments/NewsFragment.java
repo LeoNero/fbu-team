@@ -16,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.activities.EndlessRecyclerViewScrollListener;
+import com.fbu.fbuteam.activities.HomeActivity;
 import com.fbu.fbuteam.activities.NewsAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -69,7 +70,29 @@ public class NewsFragment extends Fragment {
         rvNews.addOnScrollListener(scrollListener);
 
         queryForNodes();
+        swipeRefresh();
 
+    }
+
+    private void  swipeRefresh() {
+        //set a listener on refresh so when the user swipes down, adapter is cleared,
+        //new posts are loaded, scroll listener is reset and swipeContainer knows user is not
+        //currently refreshing
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                HomeActivity.showProgressBar();
+                adapter.clear();
+                queryForNodes();
+                HomeActivity.hideProgressBar();
+                scrollListener.resetState();
+                swipeContainer.setRefreshing(false);
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
     }
 
     public void loadNextData() {

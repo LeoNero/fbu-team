@@ -19,6 +19,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class  HomeActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private BottomNavigationView bnvHome;
+    static MenuItem miActionProgressItem;
+
 
     private FragmentManager fragmentManager;
     private Fragment newsFragment;
@@ -104,4 +106,26 @@ public class  HomeActivity extends AppCompatActivity {
     private void openSelectedFragment() {
         fragmentManager.beginTransaction().replace(R.id.frameLayoutHome, currentFragment).commit();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_timeline, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    public static void showProgressBar() {
+        miActionProgressItem.setVisible(true);
+    }
+
+    public static void hideProgressBar() {
+        miActionProgressItem.setVisible(false);
+    }
+
 }
