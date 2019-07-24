@@ -142,13 +142,13 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
                     //***TESTS***
                     //add selected boxes to userSelectedBigIdeas
                     userSelectedBigIdeas.add(allBigIdeas.get(0));
-                    Log.d("AA", userSelectedBigIdeas.get(0)+"");
                 } else {
                     userSelectedBigIdeas.remove(allBigIdeas.get(0));
                 }
                 break;
             case R.id.entBox:
                 if (entTag.isChecked()) {
+                    Toast.makeText(getContext(), "It worked again", Toast.LENGTH_LONG).show();
                     userSelectedBigIdeas.add(allBigIdeas.get(1));
                 } else {
                     userSelectedBigIdeas.remove(allBigIdeas.get(1));
@@ -205,10 +205,11 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
 
     private void goToDetailTags() {
         nextButton.setOnClickListener(view1 -> {
-            nextUserSelection++; //increment variable that keeps track of where we are in the list after user clicks next
             if (!userSelectedBigIdeas.isEmpty()) { //if the arrayList of selected tags is NOT empty
+                nextUserSelection++; //increment variable that keeps track of where we are in the list after user clicks next
                 if (nextUserSelection <= userSelectedBigIdeas.size()) { //if the tracking variable is less than or equal to the size of the arrayList (we haven't gone through the whole list yet)
                     if (callback != null) {
+                        Log.d("ArrayList Size", userSelectedBigIdeas.size() + ""); //log to check size of list
                         callback.changeFragments(); //continue setup
                     }
                 } else { //if the whole list has been traversed, go to the Home Screen
