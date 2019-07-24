@@ -43,22 +43,16 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
 
     //****TESTS****
 
-    List<String> a = Arrays.asList("hi", "hey");
-    List<String> b = Arrays.asList("hi", "hey");
-    List<List<String>> children = new ArrayList<>();
+    public static List<BigIdea> allBigIdeas = new ArrayList<>();
+    public static List<BigIdea> userSelectedBigIdeas = new ArrayList<>();
+    int nextUserSelection = 0;
 
-    public void testArray() {
-        children.add(a);
-        children.add(b);
-    }
+    //****TESTS****
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        testArray();
     }
-
-    //****TESTS****
 
     private OnItemSelectedListener callback;
 
@@ -89,6 +83,15 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         socialTag = view.findViewById(R.id.socialBox);
         militaryTag = view.findViewById(R.id.militaryBox);
         nextButton = view.findViewById(R.id.nextButton);
+
+        allBigIdeas.add(new BigIdea("Sports")); //index 0
+        allBigIdeas.add(new BigIdea("Entertainment"));
+        allBigIdeas.add(new BigIdea("Money"));
+        allBigIdeas.add(new BigIdea("Technology"));
+        allBigIdeas.add(new BigIdea("Environment"));
+        allBigIdeas.add(new BigIdea("Government"));
+        allBigIdeas.add(new BigIdea("Social Justice"));
+        allBigIdeas.add(new BigIdea("Military"));
     }
 
     private boolean atLeastOneChecked() {
@@ -124,76 +127,92 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
             case R.id.sportsBox:
                 if (sportsTag.isChecked()) {
                     Toast.makeText(getContext(), "It worked", Toast.LENGTH_LONG).show();
-                    //do something
+                    //***TESTS***
+                    //add selected boxes to userSelectedBigIdeas
+                    userSelectedBigIdeas.add(allBigIdeas.get(0));
                 } else {
-                    //do something else
+                    userSelectedBigIdeas.remove(allBigIdeas.get(0));
                 }
                 break;
             case R.id.entBox:
                 if (entTag.isChecked()) {
-                    //do something
+                    userSelectedBigIdeas.add(allBigIdeas.get(1));
                 } else {
-                    //do something else
+                    userSelectedBigIdeas.remove(allBigIdeas.get(1));
                 }
                 break;
             case R.id.moneyBox:
                 if (moneyTag.isChecked()) {
-                    //do something
+                    userSelectedBigIdeas.add(allBigIdeas.get(2));
                 } else {
-                    //do something else
+                    userSelectedBigIdeas.remove(allBigIdeas.get(2));
                 }
                 break;
             case R.id.techBox:
                 if (entTag.isChecked()) {
-                    //do something
+                    userSelectedBigIdeas.add(allBigIdeas.get(3));
                 } else {
-                    //do something else
+                    userSelectedBigIdeas.remove(allBigIdeas.get(3));
                 }
                 break;
             case R.id.envBox:
                 if (envTag.isChecked()) {
-                    //do something
+                    userSelectedBigIdeas.add(allBigIdeas.get(4));
                 } else {
-                    //do something else
+                    userSelectedBigIdeas.remove(allBigIdeas.get(4));
                 }
                 break;
             case R.id.govBox:
                 if (govTag.isChecked()) {
-                    //do something
+                    userSelectedBigIdeas.add(allBigIdeas.get(5));
                 } else {
-                    //do something else
+                    userSelectedBigIdeas.remove(allBigIdeas.get(5));
                 }
                 break;
             case R.id.socialBox:
                 if (socialTag.isChecked()) {
-                    //do something
+                    userSelectedBigIdeas.add(allBigIdeas.get(6));
                 } else {
-                    //do something else
+                    userSelectedBigIdeas.remove(allBigIdeas.get(6));
                 }
                 break;
             case R.id.militaryBox:
                 if (militaryTag.isChecked()) {
-                    //do something
+                    userSelectedBigIdeas.add(allBigIdeas.get(7));
                 } else {
-                    //do something else
+                    userSelectedBigIdeas.remove(allBigIdeas.get(7));
                 }
                 break;
         }
     }
 
     public interface OnItemSelectedListener {
-        void changeFragments(List<List<String>> children);
+        void changeFragments();
     }
 
     private void goToDetailTags() {
         nextButton.setOnClickListener(view1 -> {
             if (atLeastOneChecked()) {
                 if (callback != null) {
-                    callback.changeFragments(children);
+                    callback.changeFragments();
                 }
             } else {
                 Toast.makeText(getContext(), "Please select at least one topic.", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    //***TEST CLASSES***
+    static class BigIdea {
+        String name;
+        List<SmallIdea> smallIdeas;
+
+        public BigIdea(String name) {
+            this.name = name;
+        }
+    }
+
+    static class SmallIdea {
+        String name;
     }
 }

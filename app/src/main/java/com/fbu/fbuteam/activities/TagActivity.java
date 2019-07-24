@@ -19,9 +19,6 @@ import java.util.List;
 
 public class TagActivity extends AppCompatActivity implements BigIdeasFragment.OnItemSelectedListener {
 
-    private int currentStep = 0;
-    private List<List<String>> selectedChildren;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +41,7 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
     }
 
     @Override
-    public void changeFragments(List<List<String>> selectedChildren) {
-        currentStep = 0;
-        this.selectedChildren = selectedChildren;
+    public void changeFragments() {
 
         createFragment();
 
@@ -55,7 +50,7 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
 //        FragmentManager manager = getSupportFragmentManager();
 //        FragmentTransaction transaction = manager.beginTransaction();
 //        transaction.replace(R.id.placeholder, new DetailTagsFragment());
-        Log.d("AA", selectedChildren.size()+ "");
+        //Log.d("AA", selectedChildren.size()+ "");
     }
 
     public void createFragment() {
