@@ -65,5 +65,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         newsNodes.clear();
         notifyDataSetChanged();
     }
+
+    // Clean all elements of the recycler
+    public void clear() {
+        newsNodes.clear();
+        notifyDataSetChanged();
+    }
 }
 

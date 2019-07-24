@@ -1,6 +1,7 @@
 package com.fbu.fbuteam.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,25 +13,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.fbu.fbuteam.Models.NewsArticle;
 import com.fbu.fbuteam.R;
-import com.fbu.fbuteam.utils.EndlessRecyclerViewScrollListener;
 import com.fbu.fbuteam.activities.HomeActivity;
 import com.fbu.fbuteam.activities.NewsAdapter;
-
-import org.w3c.dom.Node;
+import com.fbu.fbuteam.utils.EndlessRecyclerViewScrollListener;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NewsFragment extends Fragment {
 
-    public static final int newsNodesPerQuery = 20;
-    private RecyclerView rvNews;
-    private NewsAdapter adapter;
-    private List<Node> news;
-    private LinearLayoutManager linearLayoutManager;
-    private SwipeRefreshLayout swipeContainer;
-    private EndlessRecyclerViewScrollListener scrollListener;
+    public static final String TAG = "NewsFragment";
+    public static final int newsArticlesPerQuery = 20;
+    public RecyclerView rvNews;
+    public static NewsAdapter adapter;
+    public static ArrayList<NewsArticle> news;
+    public LinearLayoutManager linearLayoutManager;
+    public SwipeRefreshLayout swipeContainer;
+    public EndlessRecyclerViewScrollListener scrollListener;
 
     @Nullable
     @Override
@@ -40,26 +41,23 @@ public class NewsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        setupRecycler(view);
+        rvNews = view.findViewById(R.id.rvNews);
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+
+        setupRecycler();
         setup(view);
-        endlessScrollListener();
+        loadArticles();
         swipeRefresh();
-        queryForNodes();
     }
 
-    private void setupRecycler( View view) {
-        //TODO create the data source; use myNewsNodes in the query for news articles to power recycler view
+    private void setupRecycler() {
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        rvNews.setLayoutManager(linearLayoutManager);
         news = new ArrayList<>();
+        endlessScrollListener();
+        rvNews.addOnScrollListener(scrollListener);
         adapter = new NewsAdapter(getContext(), news);
         rvNews.setAdapter(adapter);
-        rvNews.setLayoutManager(linearLayoutManager);
-        rvNews.addOnScrollListener(scrollListener);
-        rvNews = view.findViewById(R.id.rvNews);
-    }
-
-    private void setup(View view) {
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        swipeContainer = view.findViewById(R.id.swipeContainer);
     }
 
     private void endlessScrollListener() {
@@ -71,11 +69,15 @@ public class NewsFragment extends Fragment {
         };
     }
 
-    private void  swipeRefresh() {
+    private void setup(View view) {
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+    }
+
+    private void swipeRefresh() {
         swipeContainer.setOnRefreshListener(() -> {
             HomeActivity.showProgressBar();
             adapter.clear();
-            queryForNodes();
+            loadArticles();
             HomeActivity.hideProgressBar();
             scrollListener.resetState();
             swipeContainer.setRefreshing(false);
@@ -92,11 +94,87 @@ public class NewsFragment extends Fragment {
     }
 
     private void loadNextData() {
-        //TODO query for next posts for endless scroll
+        ParseQuery<NewsArticle> newsArticleQuery = new ParseQuery<>(NewsArticle.class);
+        newsArticleQuery.setLimit(newsArticlesPerQuery);
+        newsArticleQuery.whereLessThan("createdAt", news.get(news.size()-1).getCreatedAt());
+        newsArticleQuery.addDescendingOrder(NewsArticle.KEY_CREATED_AT);
+        newsArticleQuery.findInBackground((objects, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Error with query");
+                e.printStackTrace();
+            } else {
+                news.addAll(objects);
+                adapter.notifyDataSetChanged();
+                for (int i = 0; i < objects.size(); i++) {
+                    NewsArticle newsArticle = objects.get(i);
+                    Log.d(TAG, "Name: " + newsArticle.getName()
+                            + " Created At: " + newsArticle.getCreatedAt().toString()
+                            + " Body Snippet: " + newsArticle.getBodySnippet());
+                }
+            }
+        });
     }
 
-    private void queryForNodes() {
-        //TODO query for top news articles
+    private void loadArticles() {
+        ParseQuery<NewsArticle> newsArticleQuery = new ParseQuery<>(NewsArticle.class);
+        newsArticleQuery.setLimit(newsArticlesPerQuery);
+        newsArticleQuery.addDescendingOrder(NewsArticle.KEY_CREATED_AT);
+        newsArticleQuery.findInBackground((objects, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Error with query");
+                e.printStackTrace();
+            }
+            else {
+                news.addAll(objects);
+                adapter.notifyDataSetChanged();
+                for (int i = 0; i < objects.size(); i++) {
+                    NewsArticle newsArticle = objects.get(i);
+                    Log.d(TAG, "Name: " + newsArticle.getName()
+                            + " Created At: " + newsArticle.getCreatedAt().toString()
+                            + " Body Snippet: " + newsArticle.getBodySnippet());
+                }
+            }
+        });
+    }
+
+    public static void searchNameQuery(String query) {
+        ParseQuery<NewsArticle> newsArticleQuery = new ParseQuery<>(NewsArticle.class);
+        newsArticleQuery.whereFullText("Body", query);
+        newsArticleQuery.findInBackground((articles, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Error with query");
+                e.printStackTrace();
+            } else {
+                news.addAll(articles);
+                Log.d("AA", news.size()+"");
+                adapter.notifyDataSetChanged();
+                for (int i = 0; i < articles.size(); i++) {
+                    NewsArticle newsArticle = articles.get(i);
+                    Log.d(TAG, "Name: " + newsArticle.getName()
+                            + " Created At: " + newsArticle.getCreatedAt().toString()
+                            + " Body Snippet: " + newsArticle.getBodySnippet());
+                }
+            }
+        });
+    }
+
+    public static void searchAuthorQuery(String query) {
+        ParseQuery<NewsArticle> newsArticleQuery = new ParseQuery<>(NewsArticle.class);
+        newsArticleQuery.whereContains(NewsArticle.KEY_AUTHOR, query) ;
+        newsArticleQuery.findInBackground((objects, e) -> {
+            if (e != null) {
+                Log.e(TAG, "Error with query");
+                e.printStackTrace();
+            } else {
+                news.addAll(objects);
+                adapter.notifyDataSetChanged();
+                for (int i = 0; i < objects.size(); i++) {
+                    NewsArticle newsArticle = objects.get(i);
+                    Log.d(TAG, "Name: " + newsArticle.getName()
+                            + " Created At: " + newsArticle.getCreatedAt().toString()
+                            + " Body Snippet: " + newsArticle.getBodySnippet());
+                }
+            }
+        });
     }
 }
-
