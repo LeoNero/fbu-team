@@ -60,6 +60,11 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.bigideas_fragment, container, false);
+        createOnCheckedChangeListener(rootView);
+        return rootView;
+    }
+
+    private void createOnCheckedChangeListener(View rootView) {
         sportsTag = (CheckBox) rootView.findViewById(R.id.sportsBox);
         sportsTag.setOnCheckedChangeListener(this);
         entTag = (CheckBox) rootView.findViewById(R.id.entBox);
@@ -76,17 +81,6 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         socialTag.setOnCheckedChangeListener(this);
         militaryTag = (CheckBox) rootView.findViewById(R.id.militaryBox);
         militaryTag.setOnCheckedChangeListener(this);
-
-        allBigIdeas.add(new BigIdea("Sports")); //index 0
-        allBigIdeas.add(new BigIdea("Entertainment"));
-        allBigIdeas.add(new BigIdea("Money"));
-        allBigIdeas.add(new BigIdea("Technology"));
-        allBigIdeas.add(new BigIdea("Environment"));
-        allBigIdeas.add(new BigIdea("Government"));
-        allBigIdeas.add(new BigIdea("Social Justice"));
-        allBigIdeas.add(new BigIdea("Military"));
-
-        return rootView;
     }
 
     @Override
