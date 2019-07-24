@@ -6,14 +6,21 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.fragments.BigIdeasFragment;
 import com.fbu.fbuteam.fragments.DetailTagsFragment;
+import com.fbu.fbuteam.fragments.TestFragment1;
+
+import java.util.List;
 
 public class TagActivity extends AppCompatActivity implements BigIdeasFragment.OnItemSelectedListener {
+
+    private int currentStep = 0;
+    private List<List<String>> selectedChildren;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +44,24 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
     }
 
     @Override
-    public void changeFragments() {
+    public void changeFragments(List<List<String>> selectedChildren) {
+        currentStep = 0;
+        this.selectedChildren = selectedChildren;
+
+        createFragment();
+
+
+
+//        FragmentManager manager = getSupportFragmentManager();
+//        FragmentTransaction transaction = manager.beginTransaction();
+//        transaction.replace(R.id.placeholder, new DetailTagsFragment());
+        Log.d("AA", selectedChildren.size()+ "");
+    }
+
+    public void createFragment() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.placeholder, new DetailTagsFragment());
+        transaction.add(R.id.placeholder, new TestFragment1());
         transaction.commit();
     }
 }

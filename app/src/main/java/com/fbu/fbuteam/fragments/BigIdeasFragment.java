@@ -21,6 +21,9 @@ import androidx.fragment.app.Fragment;
 import com.fbu.fbuteam.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Queue;
 
 public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
 
@@ -38,14 +41,31 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
     CheckBox[] checkBoxes = new CheckBox[8];
     ArrayList<CheckBox> selectedTags = new ArrayList<>();
 
+    //****TESTS****
+
+    List<String> a = Arrays.asList("hi", "hey");
+    List<String> b = Arrays.asList("hi", "hey");
+    List<List<String>> children = new ArrayList<>();
+
+    public void testArray() {
+        children.add(a);
+        children.add(b);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        testArray();
+    }
+
+    //****TESTS****
+
     private OnItemSelectedListener callback;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.bigideas_fragment, container, false);
-        CheckBox box = (CheckBox) rootView.findViewById(R.id.sportsBox);
-        box.setOnCheckedChangeListener(this);
         return rootView;
     }
 
@@ -162,14 +182,14 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
     }
 
     public interface OnItemSelectedListener {
-        void changeFragments();
+        void changeFragments(List<List<String>> children);
     }
 
     private void goToDetailTags() {
         nextButton.setOnClickListener(view1 -> {
             if (atLeastOneChecked()) {
                 if (callback != null) {
-                    callback.changeFragments();
+                    callback.changeFragments(children);
                 }
             } else {
                 Toast.makeText(getContext(), "Please select at least one topic.", Toast.LENGTH_LONG).show();
