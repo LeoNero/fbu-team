@@ -79,7 +79,7 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
         DetailTagsFragment detailTagsFragment = DetailTagsFragment.newInstance(children);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.placeholder, detailTagsFragment);
-        ft.addToBackStack("backstackName");
+        ft.addToBackStack("backstack");
         ft.commit();
     }
 

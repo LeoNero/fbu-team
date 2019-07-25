@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -14,9 +16,19 @@ import java.util.List;
 
 public class DetailTagsFragment extends Fragment {
 
-    private Button finishButton;
+    public static Button finishButton;
     private Button button;
     private List <String> children;
+    private CheckBox tagOne;
+    private CheckBox tagTwo;
+    private CheckBox tagThree;
+    private CheckBox tagFour;
+    private CheckBox tagFive;
+    private CheckBox tagSix;
+    private CheckBox tagSeven;
+    private CheckBox tagEight;
+    private CheckBox tagNine;
+    private CheckBox tagTen;
 
     private OnNextClickListener callback;
 
