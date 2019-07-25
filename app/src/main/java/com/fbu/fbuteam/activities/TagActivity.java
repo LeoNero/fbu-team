@@ -17,7 +17,9 @@ import com.fbu.fbuteam.fragments.TestFragment1;
 
 import java.util.List;
 
-public class TagActivity extends AppCompatActivity implements BigIdeasFragment.OnNextClickListener {
+public class TagActivity extends AppCompatActivity implements BigIdeasFragment.OnNextClickListener, DetailTagsFragment.OnNextClickListener {
+
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

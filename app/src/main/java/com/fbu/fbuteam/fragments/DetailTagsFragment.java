@@ -23,6 +23,7 @@ public class DetailTagsFragment extends Fragment {
     private Button finishButton;
     private Button button;
     private List <String> children;
+
     private OnNextClickListener callback;
 
     public static DetailTagsFragment newInstance(List<String> children) {
@@ -75,11 +76,11 @@ public class DetailTagsFragment extends Fragment {
     }
 
     public void setOnNextClickListener(OnNextClickListener callback) {
-        callback = callback;
+        this.callback = callback;
     }
 
     public interface OnNextClickListener {
-        public void goToNextDetailsFragment();
+        void goToNextDetailsFragment();
     }
 
     private void goToHome() {
