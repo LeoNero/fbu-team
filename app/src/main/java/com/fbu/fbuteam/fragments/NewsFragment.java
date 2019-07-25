@@ -1,7 +1,6 @@
 package com.fbu.fbuteam.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +14,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import com.fbu.fbuteam.R;
-import com.fbu.fbuteam.activities.EndlessRecyclerViewScrollListener;
+import com.fbu.fbuteam.utils.EndlessRecyclerViewScrollListener;
 import com.fbu.fbuteam.activities.HomeActivity;
 import com.fbu.fbuteam.activities.NewsAdapter;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
 
 import org.w3c.dom.Node;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 
 public class NewsFragment extends Fragment {
@@ -37,8 +34,8 @@ public class NewsFragment extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     public static final int newsNodesPerQuery = 20;
     private SwipeRefreshLayout swipeContainer;
-
     private EndlessRecyclerViewScrollListener scrollListener;
+
 
     @Nullable
     @Override
@@ -58,8 +55,16 @@ public class NewsFragment extends Fragment {
         rvNews.setAdapter(adapter);
         rvNews.setLayoutManager(linearLayoutManager);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        rvNews.addOnScrollListener(scrollListener);
 
+        queryForNodes();
+        swipeRefresh();
+        adapter.testNewsArray();
+        endlessScrollListener();
 
+    }
+
+    private void endlessScrollListener() {
         scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
@@ -67,23 +72,16 @@ public class NewsFragment extends Fragment {
             }
 
         };
-        rvNews.addOnScrollListener(scrollListener);
-
-        queryForNodes();
-        swipeRefresh();
-
     }
 
     private void  swipeRefresh() {
-        //set a listener on refresh so when the user swipes down, adapter is cleared,
-        //new posts are loaded, scroll listener is reset and swipeContainer knows user is not
-        //currently refreshing
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 HomeActivity.showProgressBar();
                 adapter.clear();
                 queryForNodes();
+                adapter.testNewsArrayRefresh();
                 HomeActivity.hideProgressBar();
                 scrollListener.resetState();
                 swipeContainer.setRefreshing(false);
@@ -104,4 +102,5 @@ public class NewsFragment extends Fragment {
         ;
         //TODO query for top news articles
     }
+
 }
