@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.fragments.BigIdeasFragment;
@@ -61,5 +63,28 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
     @Override
     public void goToNextDetailsFragment() {
         populateNextDetailsFragment();
+    }
+
+    private void populateNextDetailsFragment() {
+        currentUserSelection++;
+
+        if (currentUserSelection >= selectedBigIdeas.size()) {
+            Toast.makeText(getApplicationContext(), "Home Screen", Toast.LENGTH_SHORT).show();
+            goToHome();
+            return;
+        }
+
+        List<String> children = selectedBigIdeas.get(currentUserSelection);
+
+        DetailTagsFragment detailTagsFragment = DetailTagsFragment.newInstance(children);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.placeholder, detailTagsFragment);
+        ft.commit();
+    }
+
+    private void goToHome() {
+        Intent intent = new Intent(TagActivity.this, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -82,12 +82,4 @@ public class DetailTagsFragment extends Fragment {
     public interface OnNextClickListener {
         void goToNextDetailsFragment();
     }
-
-    private void goToHome() {
-        finishButton.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getContext(), HomeActivity.class);
-            startActivity(intent);
-            getActivity().finish();
-        });
-    }
 }
