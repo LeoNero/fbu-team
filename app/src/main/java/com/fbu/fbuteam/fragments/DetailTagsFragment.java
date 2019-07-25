@@ -57,6 +57,7 @@ public class DetailTagsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeObjects(view);
+        initializeCheckBoxes(view);
         setTextBasedOnChildren();
         nextClick();
     }
@@ -79,6 +80,19 @@ public class DetailTagsFragment extends Fragment {
         finishButton.setOnClickListener(view -> {
             callback.goToNextDetailsFragment();
         });
+    }
+
+    private void initializeCheckBoxes(View rootView) {
+        tagOne = (CheckBox) rootView.findViewById(R.id.checkBox1);
+        tagTwo = (CheckBox) rootView.findViewById(R.id.checkBox2);
+        tagThree = (CheckBox) rootView.findViewById(R.id.checkBox3);
+        tagFour = (CheckBox) rootView.findViewById(R.id.checkBox4);
+        tagFive = (CheckBox) rootView.findViewById(R.id.checkBox5);
+        tagSix = (CheckBox) rootView.findViewById(R.id.checkBox6);
+        tagSeven = (CheckBox) rootView.findViewById(R.id.checkBox7);
+        tagEight = (CheckBox) rootView.findViewById(R.id.checkBox8);
+        tagNine = (CheckBox) rootView.findViewById(R.id.checkBox9);
+        tagTen = (CheckBox) rootView.findViewById(R.id.checkBox10);
     }
 
     public void setOnNextClickListener(OnNextClickListener callback) {
