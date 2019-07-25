@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.fbu.fbuteam.R;
+import com.fbu.fbuteam.models.Node;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class DetailTagsFragment extends Fragment {
 
     public static Button finishButton;
     private Button button;
-    private List <String> children;
+    private List<Node> children;
     private CheckBox tagOne;
     private CheckBox tagTwo;
     private CheckBox tagThree;
@@ -32,11 +34,11 @@ public class DetailTagsFragment extends Fragment {
 
     private OnNextClickListener callback;
 
-    public static DetailTagsFragment newInstance(List<String> children) {
+    public static DetailTagsFragment newInstance(List<Node> children) {
         DetailTagsFragment detailTagsFragment = new DetailTagsFragment();
         Bundle args = new Bundle();
         //Will change later to putParcelableArray
-        args.putStringArrayList("children", (ArrayList<String>) children);
+        args.putParcelableArrayList("children", (ArrayList<Node>) children);
         detailTagsFragment.setArguments(args);
         return detailTagsFragment;
     }
@@ -44,7 +46,7 @@ public class DetailTagsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        children = getArguments().getStringArrayList("children");
+        children = getArguments().getParcelableArrayList("children");
     }
 
     @Nullable
@@ -64,7 +66,7 @@ public class DetailTagsFragment extends Fragment {
 
     private void setTextBasedOnChildren() {
         String a = "";
-        for (String b : children) {
+        for (Node b : children) {
             a += b;
             a += " ";
         }

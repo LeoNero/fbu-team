@@ -39,7 +39,8 @@ public class BigIdeasFragment extends Fragment {
 
     //****TESTS****
 
-    public static List<List<String>> selectedBigIdeas = new ArrayList<>();
+    public List<List<Node>> selectedBigIdeas = new ArrayList<>();
+    public List<Node> bigIdeas = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,7 +107,7 @@ public class BigIdeasFragment extends Fragment {
     }
 
     public interface OnNextClickListener {
-        void goToDetailTagsFragment(List<List<String>> selectedBigIdeas);
+        void goToDetailTagsFragment(List<List<Node>> selectedBigIdeas);
     }
 
     private void goToDetailTags() {
@@ -122,11 +123,11 @@ public class BigIdeasFragment extends Fragment {
         });
     }
 
-    private List<List<String>> getSelectedBigIdeas() {
-        List<List<String>> b = new ArrayList<>();
+    private List<List<Node>> getSelectedBigIdeas() {
+        List<List<Node>> b = new ArrayList<>();
         for (int i = 0; i < allTags.length; i++) {
             if (allTags[i].isChecked()) {
-                List<String> children = new ArrayList<>(Arrays.asList(i + "", allTags[i].getText().toString()));
+                List<Node> children = bigIdeas.get(i).getChildren();
                 b.add(children);
             }
         }
@@ -134,7 +135,6 @@ public class BigIdeasFragment extends Fragment {
     }
 
     private void queryNodes() {
-        List<Node> bigIdeas = new ArrayList<>();
         Node.Query query = new Node.Query();
         query.withRelations();
         query.fromType("big-idea");
@@ -149,6 +149,7 @@ public class BigIdeasFragment extends Fragment {
                     if (children != null) { //if every big idea has children
                         for (Node b : children) { //b represents each "mini" list of children
                             Log.d("CHILDREN", b.getName()); //children
+                            Log.d("BB", children.size()+"");
                         }
                     }
                 }

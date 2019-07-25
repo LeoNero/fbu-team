@@ -16,6 +16,7 @@ import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.fragments.BigIdeasFragment;
 import com.fbu.fbuteam.fragments.DetailTagsFragment;
 import com.fbu.fbuteam.fragments.TestFragment1;
+import com.fbu.fbuteam.models.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.List;
 public class TagActivity extends AppCompatActivity implements BigIdeasFragment.OnNextClickListener, DetailTagsFragment.OnNextClickListener {
 
     private int currentUserSelection = -1;
-    private List<List<String>> selectedBigIdeas = new ArrayList<>();
+    private List<List<Node>> selectedBigIdeas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
     }
 
     @Override
-    public void goToDetailTagsFragment(List<List<String>> selectedBigIdeas) {
+    public void goToDetailTagsFragment(List<List<Node>> selectedBigIdeas) {
         currentUserSelection = -1;
         this.selectedBigIdeas = selectedBigIdeas;
 
@@ -74,7 +75,7 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
             return;
         }
 
-        List<String> children = selectedBigIdeas.get(currentUserSelection);
+        List<Node> children = selectedBigIdeas.get(currentUserSelection);
 
         DetailTagsFragment detailTagsFragment = DetailTagsFragment.newInstance(children);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

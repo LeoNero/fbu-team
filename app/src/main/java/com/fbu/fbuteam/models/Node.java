@@ -4,6 +4,7 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @ParseClassName("Node")
@@ -61,7 +62,7 @@ public class Node extends ParseObject {
             return (List<Node>) children;
         }
 
-        return null;
+        return new ArrayList<>();
     }
 
     public void setChildren(List<Node> children) {
