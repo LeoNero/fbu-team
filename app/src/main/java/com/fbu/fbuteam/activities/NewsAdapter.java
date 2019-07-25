@@ -54,7 +54,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvCreatedAt = itemView.findViewById(R.id.tvCreatedAt);
             tvBodySnippet = itemView.findViewById(R.id.tvBodySnippet);
-
         }
 
         private void bind(final Node node) {
@@ -66,6 +65,5 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         newsNodes.clear();
         notifyDataSetChanged();
     }
-
 }
 

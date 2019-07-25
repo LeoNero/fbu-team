@@ -19,8 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class  HomeActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private BottomNavigationView bnvHome;
-    static MenuItem miActionProgressItem;
-
+    private static MenuItem menuActionProgressItem;
 
     private FragmentManager fragmentManager;
     private Fragment newsFragment;
@@ -114,17 +113,17 @@ public class  HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+        menuActionProgressItem = menu.findItem(R.id.miActionProgress);
 
         return super.onPrepareOptionsMenu(menu);
     }
 
     public static void showProgressBar() {
-        miActionProgressItem.setVisible(true);
+        menuActionProgressItem.setVisible(true);
     }
 
     public static void hideProgressBar() {
-        miActionProgressItem.setVisible(false);
+        menuActionProgressItem.setVisible(false);
     }
 
 }

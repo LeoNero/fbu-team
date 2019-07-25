@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.utils.EndlessRecyclerViewScrollListener;
 import com.fbu.fbuteam.activities.HomeActivity;
@@ -23,18 +22,15 @@ import org.w3c.dom.Node;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class NewsFragment extends Fragment {
 
+    public static final int newsNodesPerQuery = 20;
     private RecyclerView rvNews;
     private NewsAdapter adapter;
-    private List<Node> myNewsNodes;
+    private List<Node> news;
     private LinearLayoutManager linearLayoutManager;
-    public static final int newsNodesPerQuery = 20;
     private SwipeRefreshLayout swipeContainer;
     private EndlessRecyclerViewScrollListener scrollListener;
-
 
     @Nullable
     @Override
@@ -44,7 +40,6 @@ public class NewsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
         setupRecycler(view);
         setup(view);
         endlessScrollListener();
@@ -54,8 +49,8 @@ public class NewsFragment extends Fragment {
 
     private void setupRecycler( View view) {
         //TODO create the data source; use myNewsNodes in the query for news articles to power recycler view
-        myNewsNodes = new ArrayList<>();
-        adapter = new NewsAdapter(getContext(), myNewsNodes);
+        news = new ArrayList<>();
+        adapter = new NewsAdapter(getContext(), news);
         rvNews.setAdapter(adapter);
         rvNews.setLayoutManager(linearLayoutManager);
         rvNews.addOnScrollListener(scrollListener);
@@ -73,7 +68,6 @@ public class NewsFragment extends Fragment {
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 loadNextData();
             }
-
         };
     }
 
@@ -104,6 +98,5 @@ public class NewsFragment extends Fragment {
     private void queryForNodes() {
         //TODO query for top news articles
     }
-
 }
 
