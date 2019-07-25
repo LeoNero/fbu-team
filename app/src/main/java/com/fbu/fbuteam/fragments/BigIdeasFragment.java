@@ -60,6 +60,7 @@ public class BigIdeasFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         createCheckBoxArray();
+        queryNodes();
         goToDetailTags();
     }
 
@@ -113,8 +114,6 @@ public class BigIdeasFragment extends Fragment {
             if (atLeastOneChecked()) {
                 if (callback != null) {
                     selectedBigIdeas = getSelectedBigIdeas();
-                    Log.d("AA", "Abc");
-                    queryNodes();
                     callback.goToDetailTagsFragment(selectedBigIdeas);
                 }
             } else {
@@ -135,23 +134,37 @@ public class BigIdeasFragment extends Fragment {
     }
 
     private void queryNodes() {
+        List<Node> bigIdeas = new ArrayList<>();
         Node.Query query = new Node.Query();
         query.withRelations();
         query.fromType("big-idea");
 
-        query.findInBackground((response, e) -> {
+        query.findInBackground((response, e) -> { //response queries for the big ideas
             if (e == null) {
                 for (Node a : response) {
-                    Log.d("RESPONSE", a.getName());
-                    List<Node> children = a.getChildren();
-
-                    if (children != null) {
-                        for (Node b : children) {
-                            Log.d("CHILDREN", b.getName());
+                    bigIdeas.add(a);
+                    Log.d("RESPONSE", a.getName()); //a represents each selected big idea
+                    Log.d("AA", bigIdeas.size()+"");
+                    List<Node> children = a.getChildren(); //list containing a list of the children of each big idea ([],[],[]) --> get a list<> of children for every big idea
+                    if (children != null) { //if every big idea has children
+                        for (Node b : children) { //b represents each "mini" list of children
+                            Log.d("CHILDREN", b.getName()); //children
                         }
                     }
                 }
+                populateBigIdeas(bigIdeas);
             }
         });
+    }
+
+    private void populateBigIdeas(List<Node> bigIdeas) {
+        sportsTag.setText(bigIdeas.get(0).getName());
+        entTag.setText(bigIdeas.get(1).getName());
+        moneyTag.setText(bigIdeas.get(2).getName());
+        techTag.setText(bigIdeas.get(3).getName());
+        envTag.setText(bigIdeas.get(4).getName());
+        govTag.setText(bigIdeas.get(5).getName());
+        socialTag.setText(bigIdeas.get(6).getName());
+        militaryTag.setText(bigIdeas.get(7).getName());
     }
 }
