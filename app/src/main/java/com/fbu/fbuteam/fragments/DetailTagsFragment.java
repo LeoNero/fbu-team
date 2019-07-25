@@ -15,14 +15,21 @@ import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.activities.HomeActivity;
 import com.fbu.fbuteam.activities.TagActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DetailTagsFragment extends Fragment {
 
     private Button finishButton;
+    private Button button;
+    private List <String> children;
+    private OnNextClickListener listener;
 
-    public static DetailTagsFragment newInstance(int currentPosition) {
+    public static DetailTagsFragment newInstance(List<String> children) {
         DetailTagsFragment detailTagsFragment = new DetailTagsFragment();
         Bundle args = new Bundle();
-        args.putInt("current_position", BigIdeasFragment.nextUserSelection);
+        //Will change later to putParcelableArray
+        args.putStringArrayList("children", (ArrayList<String>) children);
         detailTagsFragment.setArguments(args);
         return detailTagsFragment;
     }
@@ -30,7 +37,7 @@ public class DetailTagsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int currentPosition = getArguments().getInt("current_position", 0);
+        children = getArguments().getStringArrayList("children");
     }
 
     @Nullable
@@ -42,13 +49,15 @@ public class DetailTagsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initializeObjects(view);
+        setTextBasedOnChildren();
+        nextClick();
         goToHome();
     }
 
     private void initializeObjects(@NonNull View view) {
         finishButton = view.findViewById(R.id.finishButton);
+        button = view.findViewById(R.id.button);
     }
 
     private void goToHome() {

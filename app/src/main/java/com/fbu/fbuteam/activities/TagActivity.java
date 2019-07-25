@@ -17,7 +17,7 @@ import com.fbu.fbuteam.fragments.TestFragment1;
 
 import java.util.List;
 
-public class TagActivity extends AppCompatActivity implements BigIdeasFragment.OnItemSelectedListener {
+public class TagActivity extends AppCompatActivity implements BigIdeasFragment.OnNextClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +41,7 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
     }
 
     @Override
-    public void changeFragments() {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        DetailTagsFragment detailTagsFragment = DetailTagsFragment.newInstance(BigIdeasFragment.nextUserSelection);
-        transaction.replace(R.id.placeholder, detailTagsFragment);
-        transaction.commit();
+    public void goToDetailTagsFragment(List<List<String>> selectedBigIdeas) {
+
     }
 }
