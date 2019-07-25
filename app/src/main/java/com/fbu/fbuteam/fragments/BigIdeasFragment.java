@@ -60,49 +60,45 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.bigideas_fragment, container, false);
-        createOnCheckedChangeListener(rootView);
+        initializeObjects(rootView, rootView);
         return rootView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        initializeTextView(view);
+        createOnCheckedChangeListener();
+        createCheckBoxArray();
         goToDetailTags();
     }
 
-    private void initializeTextView(View view) {
+    private void createOnCheckedChangeListener() {
+        sportsTag.setOnCheckedChangeListener(this);
+        entTag.setOnCheckedChangeListener(this);
+        moneyTag.setOnCheckedChangeListener(this);
+        techTag.setOnCheckedChangeListener(this);
+        envTag.setOnCheckedChangeListener(this);
+        govTag.setOnCheckedChangeListener(this);
+        socialTag.setOnCheckedChangeListener(this);
+        militaryTag.setOnCheckedChangeListener(this);
+    }
+
+    private void initializeObjects(View rootView, View view) {
+        sportsTag = (CheckBox) rootView.findViewById(R.id.sportsBox);
+        entTag = (CheckBox) rootView.findViewById(R.id.entBox);
+        moneyTag = (CheckBox) rootView.findViewById(R.id.moneyBox);
+        techTag = (CheckBox) rootView.findViewById(R.id.techBox);
+        envTag = (CheckBox) rootView.findViewById(R.id.envBox);
+        govTag = (CheckBox) rootView.findViewById(R.id.govBox);
+        socialTag = (CheckBox) rootView.findViewById(R.id.socialBox);
+        militaryTag = (CheckBox) rootView.findViewById(R.id.militaryBox);
         textView1 = view.findViewById(R.id.textView1);
         textView2 = view.findViewById(R.id.textView2);
         nextButton = view.findViewById(R.id.nextButton);
     }
 
-    private void createOnCheckedChangeListener(View rootView) {
-        sportsTag = (CheckBox) rootView.findViewById(R.id.sportsBox);
-        sportsTag.setOnCheckedChangeListener(this);
-        entTag = (CheckBox) rootView.findViewById(R.id.entBox);
-        entTag.setOnCheckedChangeListener(this);
-        moneyTag = (CheckBox) rootView.findViewById(R.id.moneyBox);
-        moneyTag.setOnCheckedChangeListener(this);
-        techTag = (CheckBox) rootView.findViewById(R.id.techBox);
-        techTag.setOnCheckedChangeListener(this);
-        envTag = (CheckBox) rootView.findViewById(R.id.envBox);
-        envTag.setOnCheckedChangeListener(this);
-        govTag = (CheckBox) rootView.findViewById(R.id.govBox);
-        govTag.setOnCheckedChangeListener(this);
-        socialTag = (CheckBox) rootView.findViewById(R.id.socialBox);
-        socialTag.setOnCheckedChangeListener(this);
-        militaryTag = (CheckBox) rootView.findViewById(R.id.militaryBox);
-        militaryTag.setOnCheckedChangeListener(this);
-    }
-
     private boolean atLeastOneChecked() {
-
-        createCheckBoxArray();
-
         boolean atLeastOneChecked = false;
-
         for (int i = 0; i < allTags.length; i++) {
             if (allTags[i].isChecked()) {
                 selectedTags.add(allTags[i]);
@@ -124,78 +120,12 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         allTags[7] = militaryTag;
     }
 
-    public void setOnItemSelectedListener(OnItemSelectedListener callback) {
+    public void setOnNextClickListener(OnNextClickListener callback) {
         this.callback = callback;
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-        switch (compoundButton.getId()) {
-            case R.id.sportsBox:
-                if (sportsTag.isChecked()) {
-                    Toast.makeText(getContext(), "It worked", Toast.LENGTH_LONG).show();
-                    //***TESTS***
-                    //add selected boxes to userSelectedBigIdeas
-                    userSelectedBigIdeas.add(allBigIdeas.get(0));
-                } else {
-                    userSelectedBigIdeas.remove(allBigIdeas.get(0));
-                }
-                break;
-            case R.id.entBox:
-                if (entTag.isChecked()) {
-                    Toast.makeText(getContext(), "It worked again", Toast.LENGTH_LONG).show();
-                    userSelectedBigIdeas.add(allBigIdeas.get(1));
-                } else {
-                    userSelectedBigIdeas.remove(allBigIdeas.get(1));
-                }
-                break;
-            case R.id.moneyBox:
-                if (moneyTag.isChecked()) {
-                    userSelectedBigIdeas.add(allBigIdeas.get(2));
-                } else {
-                    userSelectedBigIdeas.remove(allBigIdeas.get(2));
-                }
-                break;
-            case R.id.techBox:
-                if (entTag.isChecked()) {
-                    userSelectedBigIdeas.add(allBigIdeas.get(3));
-                } else {
-                    userSelectedBigIdeas.remove(allBigIdeas.get(3));
-                }
-                break;
-            case R.id.envBox:
-                if (envTag.isChecked()) {
-                    userSelectedBigIdeas.add(allBigIdeas.get(4));
-                } else {
-                    userSelectedBigIdeas.remove(allBigIdeas.get(4));
-                }
-                break;
-            case R.id.govBox:
-                if (govTag.isChecked()) {
-                    userSelectedBigIdeas.add(allBigIdeas.get(5));
-                } else {
-                    userSelectedBigIdeas.remove(allBigIdeas.get(5));
-                }
-                break;
-            case R.id.socialBox:
-                if (socialTag.isChecked()) {
-                    userSelectedBigIdeas.add(allBigIdeas.get(6));
-                } else {
-                    userSelectedBigIdeas.remove(allBigIdeas.get(6));
-                }
-                break;
-            case R.id.militaryBox:
-                if (militaryTag.isChecked()) {
-                    userSelectedBigIdeas.add(allBigIdeas.get(7));
-                } else {
-                    userSelectedBigIdeas.remove(allBigIdeas.get(7));
-                }
-                break;
-        }
-    }
-
     public interface OnItemSelectedListener {
-        void changeFragments();
+        void goToDetailTagsFragment(List<List<String>> selectedBigIdeas);
     }
 
     private void goToDetailTags() {

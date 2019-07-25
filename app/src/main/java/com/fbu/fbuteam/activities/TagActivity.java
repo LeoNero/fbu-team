@@ -36,7 +36,7 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
     public void onAttachFragment(Fragment fragment) {
         if (fragment instanceof BigIdeasFragment) {
             BigIdeasFragment bigIdeasFragment = (BigIdeasFragment) fragment;
-            bigIdeasFragment.setOnItemSelectedListener(this);
+            bigIdeasFragment.setOnNextClickListener(this);
         }
     }
 
