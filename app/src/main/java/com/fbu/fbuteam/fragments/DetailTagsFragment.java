@@ -52,12 +52,26 @@ public class DetailTagsFragment extends Fragment {
         initializeObjects(view);
         setTextBasedOnChildren();
         nextClick();
-        goToHome();
+    }
+
+    private void setTextBasedOnChildren() {
+        String a = "";
+        for (String b : children) {
+            a += b;
+            a += " ";
+        }
+        button.setText(a);
     }
 
     private void initializeObjects(@NonNull View view) {
         finishButton = view.findViewById(R.id.finishButton);
         button = view.findViewById(R.id.button);
+    }
+
+    private void nextClick() {
+        finishButton.setOnClickListener(view -> {
+            listener.goToNextDetailsFragment();
+        });
     }
 
     private void goToHome() {
