@@ -1,6 +1,7 @@
 package com.fbu.fbuteam.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.fbu.fbuteam.R;
+import com.fbu.fbuteam.models.Node;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -111,6 +113,8 @@ public class BigIdeasFragment extends Fragment {
             if (atLeastOneChecked()) {
                 if (callback != null) {
                     selectedBigIdeas = getSelectedBigIdeas();
+                    Log.d("AA", "Abc");
+                    queryNodes();
                     callback.goToDetailTagsFragment(selectedBigIdeas);
                 }
             } else {
@@ -128,5 +132,26 @@ public class BigIdeasFragment extends Fragment {
             }
         }
         return b;
+    }
+
+    private void queryNodes() {
+        Node.Query query = new Node.Query();
+        query.withRelations();
+        query.fromType("big-idea");
+
+        query.findInBackground((response, e) -> {
+            if (e == null) {
+                for (Node a : response) {
+                    Log.d("RESPONSE", a.getName());
+                    List<Node> children = a.getChildren();
+
+                    if (children != null) {
+                        for (Node b : children) {
+                            Log.d("CHILDREN", b.getName());
+                        }
+                    }
+                }
+            }
+        });
     }
 }
