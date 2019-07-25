@@ -15,11 +15,13 @@ import com.fbu.fbuteam.fragments.BigIdeasFragment;
 import com.fbu.fbuteam.fragments.DetailTagsFragment;
 import com.fbu.fbuteam.fragments.TestFragment1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TagActivity extends AppCompatActivity implements BigIdeasFragment.OnNextClickListener, DetailTagsFragment.OnNextClickListener {
 
-    
+    private int currentUserSelection = -1;
+    private List<List<String>> selectedBigIdeas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
