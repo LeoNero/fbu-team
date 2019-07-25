@@ -1,18 +1,11 @@
 package com.fbu.fbuteam.fragments;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.icu.text.UnicodeSetSpanner;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,13 +14,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.fbu.fbuteam.R;
-import com.fbu.fbuteam.activities.HomeActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
+public class BigIdeasFragment extends Fragment {
 
     private TextView textView1;
     private TextView textView2;
@@ -47,8 +39,6 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
 
     public static List<List<String>> selectedBigIdeas = new ArrayList<>();
 
-    //****TESTS****
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,20 +57,8 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        createOnCheckedChangeListener();
         createCheckBoxArray();
         goToDetailTags();
-    }
-
-    private void createOnCheckedChangeListener() {
-        sportsTag.setOnCheckedChangeListener(this);
-        entTag.setOnCheckedChangeListener(this);
-        moneyTag.setOnCheckedChangeListener(this);
-        techTag.setOnCheckedChangeListener(this);
-        envTag.setOnCheckedChangeListener(this);
-        govTag.setOnCheckedChangeListener(this);
-        socialTag.setOnCheckedChangeListener(this);
-        militaryTag.setOnCheckedChangeListener(this);
     }
 
     private void initializeObjects(View rootView, View view) {
@@ -139,5 +117,16 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
                 Toast.makeText(getContext(), "Please select at least one topic.", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private List<List<String>> getSelectedBigIdeas() {
+        List<List<String>> b = new ArrayList<>();
+        for (int i = 0; i < allTags.length; i++) {
+            if (allTags[i].isChecked()) {
+                List<String> children = new ArrayList<>(Arrays.asList(i + "", allTags[i].getText().toString()));
+                b.add(children);
+            }
+        }
+        return b;
     }
 }
