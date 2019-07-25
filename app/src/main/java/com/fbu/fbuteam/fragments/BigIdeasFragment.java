@@ -124,41 +124,20 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         this.callback = callback;
     }
 
-    public interface OnItemSelectedListener {
+    public interface OnNextClickListener {
         void goToDetailTagsFragment(List<List<String>> selectedBigIdeas);
     }
 
     private void goToDetailTags() {
         nextButton.setOnClickListener(view1 -> {
-            if (!userSelectedBigIdeas.isEmpty()) { //if the arrayList of selected tags is NOT empty
-                nextUserSelection++; //increment variable that keeps track of where we are in the list after user clicks next
-                if (nextUserSelection <= userSelectedBigIdeas.size()) { //if the tracking variable is less than or equal to the size of the arrayList (we haven't gone through the whole list yet)
-                    if (callback != null) {
-                        Log.d("ArrayList Size", userSelectedBigIdeas.size() + ""); //log to check size of list
-                        callback.changeFragments(); //continue setup
-                    }
-                } else { //if the whole list has been traversed, go to the Home Screen
-                    Intent intent = new Intent(getContext(), HomeActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
+            if (atLeastOneChecked()) {
+                if (callback != null) {
+                    selectedBigIdeas = getSelectedBigIdeas();
+                    callback.goToDetailTagsFragment(selectedBigIdeas);
                 }
             } else {
                 Toast.makeText(getContext(), "Please select at least one topic.", Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    //***TEST CLASSES***
-    static class BigIdea {
-        String name;
-        List<SmallIdea> smallIdeas;
-
-        public BigIdea(String name) {
-            this.name = name;
-        }
-    }
-
-    static class SmallIdea {
-        String name;
     }
 }
