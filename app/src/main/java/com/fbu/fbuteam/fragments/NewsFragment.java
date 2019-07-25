@@ -20,10 +20,9 @@ import com.fbu.fbuteam.activities.NewsAdapter;
 
 import org.w3c.dom.Node;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 
 public class NewsFragment extends Fragment {
@@ -45,23 +44,27 @@ public class NewsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        rvNews = view.findViewById(R.id.rvNews);
-        linearLayoutManager = new LinearLayoutManager(getActivity());
 
-        //TODO create the data source
-        // Use this in the query for news articles to power recycler view
+        setupRecycler(view);
+        setup(view);
+        endlessScrollListener();
+        swipeRefresh();
+        queryForNodes();
+    }
+
+    private void setupRecycler( View view) {
+        //TODO create the data source; use myNewsNodes in the query for news articles to power recycler view
         myNewsNodes = new ArrayList<>();
         adapter = new NewsAdapter(getContext(), myNewsNodes);
         rvNews.setAdapter(adapter);
         rvNews.setLayoutManager(linearLayoutManager);
-        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         rvNews.addOnScrollListener(scrollListener);
+        rvNews = view.findViewById(R.id.rvNews);
+    }
 
-        queryForNodes();
-        swipeRefresh();
-        adapter.testNewsArray();
-        endlessScrollListener();
-
+    private void setup(View view) {
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        swipeContainer = view.findViewById(R.id.swipeContainer);
     }
 
     private void endlessScrollListener() {
@@ -75,32 +78,32 @@ public class NewsFragment extends Fragment {
     }
 
     private void  swipeRefresh() {
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                HomeActivity.showProgressBar();
-                adapter.clear();
-                queryForNodes();
-                adapter.testNewsArrayRefresh();
-                HomeActivity.hideProgressBar();
-                scrollListener.resetState();
-                swipeContainer.setRefreshing(false);
-            }
+        swipeContainer.setOnRefreshListener(() -> {
+            HomeActivity.showProgressBar();
+            adapter.clear();
+            queryForNodes();
+            HomeActivity.hideProgressBar();
+            scrollListener.resetState();
+            swipeContainer.setRefreshing(false);
         });
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+        swipeContainerColorScheme();
+    }
+
+    private void swipeContainerColorScheme() {
+        swipeContainer.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
     }
 
-    public void loadNextData() {
-        ;
+    private void loadNextData() {
         //TODO query for next posts for endless scroll
     }
 
     private void queryForNodes() {
-        ;
         //TODO query for top news articles
     }
 
 }
+

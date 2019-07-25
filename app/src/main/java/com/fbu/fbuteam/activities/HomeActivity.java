@@ -25,7 +25,6 @@ public class  HomeActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private Fragment newsFragment;
     private Fragment profileFragment;
-
     private Fragment currentFragment;
 
     @Override
