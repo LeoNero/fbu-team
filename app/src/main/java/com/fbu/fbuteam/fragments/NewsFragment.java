@@ -139,6 +139,7 @@ public class NewsFragment extends Fragment {
 
     public static void searchNameQuery(String query) {
         ParseQuery<NewsArticle> newsArticleQuery = new ParseQuery<>(NewsArticle.class);
+        //ParseQuery<NewsArticle> newsArticleQuery = ParseQuery.getQuery("NewsArticle");
         newsArticleQuery.whereFullText("Body", query);
         newsArticleQuery.findInBackground((articles, e) -> {
             if (e != null) {
@@ -177,4 +178,3 @@ public class NewsFragment extends Fragment {
             }
         });
     }
-}
