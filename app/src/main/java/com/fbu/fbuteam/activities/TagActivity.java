@@ -42,6 +42,11 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
             BigIdeasFragment bigIdeasFragment = (BigIdeasFragment) fragment;
             bigIdeasFragment.setOnNextClickListener(this);
         }
+
+        if (fragment instanceof DetailTagsFragment) {
+            DetailTagsFragment detailsTagsFragment = (DetailTagsFragment) fragment;
+            detailsTagsFragment.setOnNextClickListener(this);
+        }
     }
 
     @Override
