@@ -32,14 +32,16 @@ public class DetailTagsFragment extends Fragment {
     private TagsAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
 
-    public static RecyclerView rvTags;
-    public static Node bigIdea;
-    public static List<Node> bigIdeasList;
+    private RecyclerView rvTags;
+    private Node bigIdea;
+    private List<Node> bigIdeasList;
+    private int currentUserSelection;
 
-    public static DetailTagsFragment newInstance(Node bigIdea) {
+    public static DetailTagsFragment newInstance(Node bigIdea, int currentUserSelection) {
         DetailTagsFragment detailTagsFragment = new DetailTagsFragment();
         Bundle args = new Bundle();
         args.putParcelable("bigIdea", bigIdea);
+        args.putInt("currentUserSelection", currentUserSelection);
         detailTagsFragment.setArguments(args);
         return detailTagsFragment;
     }
@@ -48,6 +50,7 @@ public class DetailTagsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bigIdea = getArguments().getParcelable("bigIdea");
+        currentUserSelection = getArguments().getInt("currentUserSelection");
     }
 
     @Nullable
@@ -58,7 +61,8 @@ public class DetailTagsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+
+        //super.onViewCreated(view, savedInstanceState);
         rvTags = view.findViewById(R.id.rvTags);
         //set the layout manager on the recycler view
         linearLayoutManager = new LinearLayoutManager(getContext());
@@ -69,9 +73,10 @@ public class DetailTagsFragment extends Fragment {
         adapter = new TagsAdapter(getContext(), bigIdeasList);
         //set the adapter on the recycler view
         rvTags.setAdapter(adapter);
-
-        bigIdeasList.add(bigIdea);
-        adapter.notifyDataSetChanged();
+        for (int i = 0; i < bigIdea.getChildren().size(); i++) {
+            bigIdeasList.add(bigIdea.getChildren().get(i));
+        }
+        //adapter.notifyDataSetChanged();
 
         initializeObjects(view);
         setTextBasedOnBigIdea();
@@ -94,13 +99,13 @@ public class DetailTagsFragment extends Fragment {
         });
     }
 
-    public void populateDetailTags(View view) {
+    private void populateDetailTags(View view) {
         //create checkBoxes dynamically
-        rvTags = view.findViewById(R.id.rvTags);
+        //rvTags = view.findViewById(R.id.rvTags);
         for (int i = 0; i < bigIdea.getChildren().size(); i++) {
             CheckBox tagBox = new CheckBox(getContext());
             tagBox.setText(bigIdea.getChildren().get(i).getName());
-            rvTags.addView(tagBox);
+            //rvTags.addView(tagBox);
         }
     }
 

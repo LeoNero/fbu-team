@@ -38,7 +38,8 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         bigIdea = selectedBigIdeas.get(position);
-        holder.bind();
+        //holder.bind(bigIdea);
+        holder.tagBox.setText(bigIdea.getName());
     }
 
     @Override
@@ -50,19 +51,9 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.ViewHolder> {
 
         private CheckBox tagBox;
 
-        public ViewHolder(@NonNull View itemView) {
+        private ViewHolder(@NonNull View itemView) {
             super(itemView);
             tagBox = itemView.findViewById(R.id.tagBox);
-        }
-
-        public void bind() {
-            //create checkBoxes dynamically
-            rvTags = view.findViewById(R.id.rvTags);
-            for (int i = 0; i < bigIdea.getChildren().size(); i++) {
-                CheckBox tagBox = new CheckBox(getContext());
-                tagBox.setText(bigIdea.getChildren().get(i).getName());
-                rvTags.addView(tagBox);
-            }
         }
     }
 }
