@@ -1,6 +1,7 @@
 package com.fbu.fbuteam.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.models.Node;
+import com.parse.ParseException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ public class DetailTagsFragment extends Fragment {
 
     public static Button finishButton;
     private Button button;
-    private List<Node> children;
+    private Node bigIdea;
     private CheckBox tagOne;
     private CheckBox tagTwo;
     private CheckBox tagThree;
@@ -34,11 +36,11 @@ public class DetailTagsFragment extends Fragment {
 
     private OnNextClickListener callback;
 
-    public static DetailTagsFragment newInstance(List<Node> children) {
+    public static DetailTagsFragment newInstance(Node bigIdea) {
         DetailTagsFragment detailTagsFragment = new DetailTagsFragment();
         Bundle args = new Bundle();
         //Will change later to putParcelableArray
-        args.putParcelableArrayList("children", (ArrayList<Node>) children);
+        args.putParcelable("bigIdea", bigIdea);
         detailTagsFragment.setArguments(args);
         return detailTagsFragment;
     }
@@ -46,7 +48,7 @@ public class DetailTagsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        children = getArguments().getParcelableArrayList("children");
+        bigIdea = getArguments().getParcelable("bigIdea");
     }
 
     @Nullable
@@ -65,12 +67,7 @@ public class DetailTagsFragment extends Fragment {
     }
 
     private void setTextBasedOnChildren() {
-        String a = "";
-        for (Node b : children) {
-            a += b;
-            a += " ";
-        }
-        button.setText(a);
+        button.setText(bigIdea.getName());
     }
 
     private void initializeObjects(@NonNull View view) {

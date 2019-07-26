@@ -24,7 +24,7 @@ import java.util.List;
 public class TagActivity extends AppCompatActivity implements BigIdeasFragment.OnNextClickListener, DetailTagsFragment.OnNextClickListener {
 
     private int currentUserSelection = -1;
-    private List<List<Node>> selectedBigIdeas = new ArrayList<>();
+    private List<Node> selectedBigIdeas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
     }
 
     @Override
-    public void goToDetailTagsFragment(List<List<Node>> selectedBigIdeas) {
+    public void goToDetailTagsFragment(List<Node> selectedBigIdeas) {
         currentUserSelection = -1;
         this.selectedBigIdeas = selectedBigIdeas;
 
@@ -75,9 +75,9 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
             return;
         }
 
-        List<Node> children = selectedBigIdeas.get(currentUserSelection);
+        Node bigIdea = selectedBigIdeas.get(currentUserSelection);
 
-        DetailTagsFragment detailTagsFragment = DetailTagsFragment.newInstance(children);
+        DetailTagsFragment detailTagsFragment = DetailTagsFragment.newInstance(bigIdea);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.placeholder, detailTagsFragment);
         ft.addToBackStack("backstack");

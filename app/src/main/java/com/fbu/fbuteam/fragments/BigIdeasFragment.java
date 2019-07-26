@@ -39,7 +39,7 @@ public class BigIdeasFragment extends Fragment {
 
     //****TESTS****
 
-    public List<List<Node>> selectedBigIdeas = new ArrayList<>();
+    public List<Node> selectedBigIdeas = new ArrayList<>();
     public List<Node> bigIdeas = new ArrayList<>();
 
     @Override
@@ -107,7 +107,7 @@ public class BigIdeasFragment extends Fragment {
     }
 
     public interface OnNextClickListener {
-        void goToDetailTagsFragment(List<List<Node>> selectedBigIdeas);
+        void goToDetailTagsFragment(List<Node> selectedBigIdeas);
     }
 
     private void goToDetailTags() {
@@ -123,12 +123,12 @@ public class BigIdeasFragment extends Fragment {
         });
     }
 
-    private List<List<Node>> getSelectedBigIdeas() {
-        List<List<Node>> b = new ArrayList<>();
+    private List<Node> getSelectedBigIdeas() {
+        List<Node> b = new ArrayList<>();
         for (int i = 0; i < allTags.length; i++) {
             if (allTags[i].isChecked()) {
-                List<Node> children = bigIdeas.get(i).getChildren();
-                b.add(children);
+                Node bigIdea = bigIdeas.get(i);
+                b.add(bigIdea);
             }
         }
         return b;
