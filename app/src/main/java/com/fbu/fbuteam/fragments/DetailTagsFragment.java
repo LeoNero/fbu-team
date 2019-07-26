@@ -28,11 +28,13 @@ public class DetailTagsFragment extends Fragment {
 
     public static Button finishButton;
     private Button button;
-    private Node bigIdea;
-    private List<Node> bigIdeasList;
     private OnNextClickListener callback;
-    private RecyclerView rvTags;
     private TagsAdapter adapter;
+    private LinearLayoutManager linearLayoutManager;
+
+    public static RecyclerView rvTags;
+    public static Node bigIdea;
+    public static List<Node> bigIdeasList;
 
     public static DetailTagsFragment newInstance(Node bigIdea) {
         DetailTagsFragment detailTagsFragment = new DetailTagsFragment();
@@ -58,22 +60,22 @@ public class DetailTagsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvTags = view.findViewById(R.id.rvTags);
-
+        //set the layout manager on the recycler view
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        rvTags.setLayoutManager(linearLayoutManager);
         //create the data source
         bigIdeasList = new ArrayList<>();
         //create the adapter
         adapter = new TagsAdapter(getContext(), bigIdeasList);
         //set the adapter on the recycler view
         rvTags.setAdapter(adapter);
-        //set the layout manager on the recycler view
-        rvTags.setLayoutManager(new LinearLayoutManager(getContext()));
 
         bigIdeasList.add(bigIdea);
         adapter.notifyDataSetChanged();
 
         initializeObjects(view);
         setTextBasedOnBigIdea();
-        //populateDetailTags(view);
+        populateDetailTags(view);
         nextClick();
     }
 
@@ -92,13 +94,13 @@ public class DetailTagsFragment extends Fragment {
         });
     }
 
-    private void populateDetailTags(View view) {
+    public void populateDetailTags(View view) {
         //create checkBoxes dynamically
         rvTags = view.findViewById(R.id.rvTags);
         for (int i = 0; i < bigIdea.getChildren().size(); i++) {
-            CheckBox checkBox = new CheckBox(getContext());
-            checkBox.setText(bigIdea.getChildren().get(i).getName());
-            rvTags.addView(checkBox);
+            CheckBox tagBox = new CheckBox(getContext());
+            tagBox.setText(bigIdea.getChildren().get(i).getName());
+            rvTags.addView(tagBox);
         }
     }
 
