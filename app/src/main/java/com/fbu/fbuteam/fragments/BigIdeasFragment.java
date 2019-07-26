@@ -90,14 +90,14 @@ public class BigIdeasFragment extends Fragment {
     }
 
     private void createCheckBoxArray() {
-        allTags[0] = sportsTag;
-        allTags[1] = entTag;
-        allTags[2] = moneyTag;
-        allTags[3] = techTag;
-        allTags[4] = envTag;
-        allTags[5] = govTag;
-        allTags[6] = socialTag;
-        allTags[7] = militaryTag;
+        allTags[0] = entTag;
+        allTags[1] = moneyTag;
+        allTags[2] = envTag;
+        allTags[3] = govTag;
+        allTags[4] = socialTag;
+        allTags[5] = militaryTag;
+        allTags[6] = sportsTag;
+        allTags[7] = techTag;
     }
 
     public void setOnNextClickListener(OnNextClickListener callback) {
@@ -126,10 +126,11 @@ public class BigIdeasFragment extends Fragment {
         for (int i = 0; i < allTags.length; i++) {
             if (allTags[i].isChecked()) {
                 Node bigIdea = bigIdeas.get(i);
+                Log.d("LL", bigIdeas.get(i).getName());
                 b.add(bigIdea);
             }
         }
-        return b;
+        return b; //this is the list of selected big ideas
     }
 
     private void queryNodes() {
@@ -150,6 +151,14 @@ public class BigIdeasFragment extends Fragment {
                     }
                 }
                 populateBigIdeas(bigIdeas);
+                Log.d("DD", bigIdeas.get(0).getName());
+                Log.d("EE", bigIdeas.get(1).getName());
+                Log.d("FF",  bigIdeas.get(2).getName());
+                Log.d("GG",  bigIdeas.get(3).getName());
+                Log.d("HH", bigIdeas.get(4).getName());
+                Log.d("II", bigIdeas.get(5).getName());
+                Log.d("JJ",  bigIdeas.get(6).getName());
+                Log.d("KK",  bigIdeas.get(7).getName());
             }
         });
     }

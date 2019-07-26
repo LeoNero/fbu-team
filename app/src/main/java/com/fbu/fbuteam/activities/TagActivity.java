@@ -2,20 +2,15 @@ package com.fbu.fbuteam.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.fragments.BigIdeasFragment;
 import com.fbu.fbuteam.fragments.DetailTagsFragment;
-import com.fbu.fbuteam.fragments.TestFragment1;
 import com.fbu.fbuteam.models.Node;
 
 import java.util.ArrayList;
@@ -24,7 +19,7 @@ import java.util.List;
 public class TagActivity extends AppCompatActivity implements BigIdeasFragment.OnNextClickListener, DetailTagsFragment.OnNextClickListener {
 
     private int currentUserSelection = -1;
-    private List<Node> selectedBigIdeas = new ArrayList<>();
+    public static List<Node> selectedBigIdeas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

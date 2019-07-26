@@ -12,7 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.fbu.fbuteam.R;
+import com.fbu.fbuteam.activities.TagActivity;
 import com.fbu.fbuteam.models.Node;
 import com.parse.ParseException;
 
@@ -24,8 +29,10 @@ public class DetailTagsFragment extends Fragment {
     public static Button finishButton;
     private Button button;
     private Node bigIdea;
+    private List<Node> bigIdeasList;
     private OnNextClickListener callback;
-    private ConstraintLayout layout;
+    private RecyclerView rvTags;
+    private TagsAdapter adapter;
 
     public static DetailTagsFragment newInstance(Node bigIdea) {
         DetailTagsFragment detailTagsFragment = new DetailTagsFragment();
@@ -50,9 +57,23 @@ public class DetailTagsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        rvTags = view.findViewById(R.id.rvTags);
+
+        //create the data source
+        bigIdeasList = new ArrayList<>();
+        //create the adapter
+        adapter = new TagsAdapter(getContext(), bigIdeasList);
+        //set the adapter on the recycler view
+        rvTags.setAdapter(adapter);
+        //set the layout manager on the recycler view
+        rvTags.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        bigIdeasList.add(bigIdea);
+        adapter.notifyDataSetChanged();
+
         initializeObjects(view);
         setTextBasedOnBigIdea();
-        populateDetailTags(view);
+        //populateDetailTags(view);
         nextClick();
     }
 
@@ -73,11 +94,11 @@ public class DetailTagsFragment extends Fragment {
 
     private void populateDetailTags(View view) {
         //create checkBoxes dynamically
-        layout = view.findViewById(R.id.layout);
+        rvTags = view.findViewById(R.id.rvTags);
         for (int i = 0; i < bigIdea.getChildren().size(); i++) {
             CheckBox checkBox = new CheckBox(getContext());
             checkBox.setText(bigIdea.getChildren().get(i).getName());
-            layout.addView(checkBox);
+            rvTags.addView(checkBox);
         }
     }
 
