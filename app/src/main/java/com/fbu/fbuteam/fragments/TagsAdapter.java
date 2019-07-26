@@ -56,10 +56,10 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.ViewHolder> {
         }
 
         public void bind() {
-            //TODO bind the view elements to...?
             for (int i = 0; i < bigIdea.getChildren().size(); i++) {
                 tagBox = new CheckBox(context);
                 tagBox.setText(bigIdea.getChildren().get(i).getName());
+
             }
         }
     }
