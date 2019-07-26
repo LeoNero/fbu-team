@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.models.Node;
@@ -23,23 +24,12 @@ public class DetailTagsFragment extends Fragment {
     public static Button finishButton;
     private Button button;
     private Node bigIdea;
-    private CheckBox tagOne;
-    private CheckBox tagTwo;
-    private CheckBox tagThree;
-    private CheckBox tagFour;
-    private CheckBox tagFive;
-    private CheckBox tagSix;
-    private CheckBox tagSeven;
-    private CheckBox tagEight;
-    private CheckBox tagNine;
-    private CheckBox tagTen;
-
     private OnNextClickListener callback;
+    private ConstraintLayout layout;
 
     public static DetailTagsFragment newInstance(Node bigIdea) {
         DetailTagsFragment detailTagsFragment = new DetailTagsFragment();
         Bundle args = new Bundle();
-        //Will change later to putParcelableArray
         args.putParcelable("bigIdea", bigIdea);
         detailTagsFragment.setArguments(args);
         return detailTagsFragment;
@@ -61,12 +51,12 @@ public class DetailTagsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeObjects(view);
-        initializeCheckBoxes(view);
-        setTextBasedOnChildren();
+        setTextBasedOnBigIdea();
+        populateDetailTags(view);
         nextClick();
     }
 
-    private void setTextBasedOnChildren() {
+    private void setTextBasedOnBigIdea() {
         button.setText(bigIdea.getName());
     }
 
@@ -81,17 +71,14 @@ public class DetailTagsFragment extends Fragment {
         });
     }
 
-    private void initializeCheckBoxes(View rootView) {
-        tagOne = (CheckBox) rootView.findViewById(R.id.checkBox1);
-        tagTwo = (CheckBox) rootView.findViewById(R.id.checkBox2);
-        tagThree = (CheckBox) rootView.findViewById(R.id.checkBox3);
-        tagFour = (CheckBox) rootView.findViewById(R.id.checkBox4);
-        tagFive = (CheckBox) rootView.findViewById(R.id.checkBox5);
-        tagSix = (CheckBox) rootView.findViewById(R.id.checkBox6);
-        tagSeven = (CheckBox) rootView.findViewById(R.id.checkBox7);
-        tagEight = (CheckBox) rootView.findViewById(R.id.checkBox8);
-        tagNine = (CheckBox) rootView.findViewById(R.id.checkBox9);
-        tagTen = (CheckBox) rootView.findViewById(R.id.checkBox10);
+    private void populateDetailTags(View view) {
+        //create checkBoxes dynamically
+        layout = view.findViewById(R.id.layout);
+        for (int i = 0; i < bigIdea.getChildren().size(); i++) {
+            CheckBox checkBox = new CheckBox(getContext());
+            checkBox.setText(bigIdea.getChildren().get(i).getName());
+            layout.addView(checkBox);
+        }
     }
 
     public void setOnNextClickListener(OnNextClickListener callback) {

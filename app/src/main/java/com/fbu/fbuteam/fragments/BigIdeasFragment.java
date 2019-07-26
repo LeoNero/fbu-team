@@ -37,9 +37,7 @@ public class BigIdeasFragment extends Fragment {
     CheckBox[] allTags = new CheckBox[8];
     ArrayList<CheckBox> selectedTags = new ArrayList<>();
 
-    //****TESTS****
-
-    public List<Node> selectedBigIdeas = new ArrayList<>();
+    public static List<Node> selectedBigIdeas = new ArrayList<>();
     public List<Node> bigIdeas = new ArrayList<>();
 
     @Override
@@ -143,8 +141,6 @@ public class BigIdeasFragment extends Fragment {
             if (e == null) {
                 for (Node a : response) {
                     bigIdeas.add(a);
-                    Log.d("RESPONSE", a.getName()); //a represents each selected big idea
-                    Log.d("AA", bigIdeas.size()+"");
                     List<Node> children = a.getChildren(); //list containing a list of the children of each big idea ([],[],[]) --> get a list<> of children for every big idea
                     if (children != null) { //if every big idea has children
                         for (Node b : children) { //b represents each "mini" list of children

@@ -58,7 +58,6 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
         this.selectedBigIdeas = selectedBigIdeas;
 
         populateNextDetailsFragment();
-
     }
 
     @Override
