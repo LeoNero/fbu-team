@@ -4,7 +4,8 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 @ParseClassName("NewsArticle")
@@ -25,6 +26,7 @@ public class NewsArticle extends ParseObject {
 
     public java.util.Date getCreatedAt() {
         return getDate(KEY_CREATED_AT);
+
     }
 
     public void setCreatedAt(Date createdAt) {
