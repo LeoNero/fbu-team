@@ -13,6 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.models.Node;
@@ -27,6 +30,8 @@ public class BigIdeasFragment extends Fragment {
     private TextView textView2;
     private Button nextButton;
     private BigIdeasAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private RecyclerView rvBigIdeas;
     private ArrayList<CheckBox> allTags = new ArrayList<>();
     private ArrayList<CheckBox> selectedTags = new ArrayList<>();
 
@@ -44,18 +49,25 @@ public class BigIdeasFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView =  inflater.inflate(R.layout.bigideas_fragment, container, false);
-        initializeObjects(rootView, rootView);
+        initializeObjects(rootView);
         return rootView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        rvBigIdeas = (RecyclerView) view.findViewById(R.id.rvBigIdeas);
+        layoutManager = new GridLayoutManager(getContext(), 2);
+        rvBigIdeas.setLayoutManager(layoutManager);
+        adapter = new BigIdeasAdapter(getContext(), bigIdeas);
+
+
         queryNodes();
         goToDetailTags();
     }
 
-    private void initializeObjects(View rootView, View view) {
+    private void initializeObjects(View view) {
         textView1 = view.findViewById(R.id.textView1);
         textView2 = view.findViewById(R.id.textView2);
         nextButton = view.findViewById(R.id.nextButton);
@@ -136,17 +148,12 @@ public class BigIdeasFragment extends Fragment {
         });
     }
 
-    //TODO dynamically load Big Idea Checkboxes
-    //1. Create adapter
-    //2. Create xml file for single view
-    //3. Add recyclerView to bigideas_fragment.xml
-    //4. Modify onViewCreated
-
     private void populateBigIdeas(List<Node> bigIdeas) {
         for (int i = 0; i < bigIdeas.size(); i++) {
             CheckBox bigIdeaBox = new CheckBox(getContext());
             bigIdeaBox.setText(bigIdeas.get(i).getName());
             allTags.add(bigIdeaBox);
         }
+        Log.d("ALLTAGS", allTags.size()+"");
     }
 }
