@@ -61,6 +61,7 @@ public class BigIdeasFragment extends Fragment {
         layoutManager = new GridLayoutManager(getContext(), 2);
         rvBigIdeas.setLayoutManager(layoutManager);
         adapter = new BigIdeasAdapter(getContext(), bigIdeas);
+        rvBigIdeas.setAdapter(adapter);
 
 
         queryNodes();
@@ -155,5 +156,6 @@ public class BigIdeasFragment extends Fragment {
             allTags.add(bigIdeaBox);
         }
         Log.d("ALLTAGS", allTags.size()+"");
+        adapter.notifyDataSetChanged();
     }
 }

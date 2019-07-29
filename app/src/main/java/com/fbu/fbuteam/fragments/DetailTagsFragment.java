@@ -100,12 +100,11 @@ public class DetailTagsFragment extends Fragment {
 
     private void populateDetailTags() {
         //create checkBoxes dynamically
-        //rvTags = view.findViewById(R.id.rvTags);
         for (int i = 0; i < bigIdea.getChildren().size(); i++) {
             CheckBox tagBox = new CheckBox(getContext());
             tagBox.setText(bigIdea.getChildren().get(i).getName());
-            //rvTags.addView(tagBox);
         }
+        adapter.notifyDataSetChanged();
     }
 
     public void setOnNextClickListener(OnNextClickListener callback) {
