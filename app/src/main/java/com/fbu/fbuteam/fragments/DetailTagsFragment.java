@@ -30,7 +30,7 @@ public class DetailTagsFragment extends Fragment {
     private Button button;
     private OnNextClickListener callback;
     private DetailTagsAdapter adapter;
-    private LinearLayoutManager linearLayoutManager;
+    private LinearLayoutManager layoutManager;
 
     private RecyclerView rvTags;
     private Node bigIdea;
@@ -63,10 +63,11 @@ public class DetailTagsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         //super.onViewCreated(view, savedInstanceState);
-        rvTags = view.findViewById(R.id.rvTags);
+        rvTags = (RecyclerView) view.findViewById(R.id.rvTags);
         //set the layout manager on the recycler view
-        linearLayoutManager = new LinearLayoutManager(getContext());
-        rvTags.setLayoutManager(linearLayoutManager);
+        layoutManager = new GridLayoutManager(getContext(), 2);
+        rvTags.setLayoutManager(layoutManager);
+
         //create the data source
         bigIdeasList = new ArrayList<>();
         //create the adapter

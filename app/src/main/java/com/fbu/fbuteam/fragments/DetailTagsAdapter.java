@@ -43,7 +43,7 @@ public class DetailTagsAdapter extends RecyclerView.Adapter<DetailTagsAdapter.Vi
         return selectedBigIdeas.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private CheckBox tagBox;
 
