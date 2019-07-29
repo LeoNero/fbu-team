@@ -16,12 +16,9 @@
     <string name="news">News</string>
     <string name="profile">Profile</string>
 
-    <string name="title_first_section">First Section</string>
-    <string name="title_checkbox_preference">Checkbox Preference</string>
-    <string name="default_checkbox_preference">Default Checkbox Preference</string>
-    <string name="title_edittext_preference">Title EditText Preference</string>
-    <string name="summary_edittext_preference">Summary EditText Preference</string>
-    <string name="dialog_title_edittext_preference">Dialog Title EditText Preference</string>
-
+    <string name="general">General</string>
+    <string name="social">Social</string>
+    <string name="notifications">Notifications</string>
+    <string name="accountAndPrivacy">Account &amp; Privacy</string>
 
 </resources>
