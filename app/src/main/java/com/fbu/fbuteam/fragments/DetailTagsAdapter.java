@@ -15,15 +15,12 @@ import com.fbu.fbuteam.models.Node;
 
 import java.util.List;
 
-import static java.security.AccessController.getContext;
-
-public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.ViewHolder> {
+public class DetailTagsAdapter extends RecyclerView.Adapter<DetailTagsAdapter.ViewHolder> {
 
     private Context context;
     private List<Node> selectedBigIdeas;
-    Node bigIdea;
 
-    public TagsAdapter(Context context, List<Node> bigIdeas) {
+    public DetailTagsAdapter(Context context, List<Node> bigIdeas) {
         this.context = context;
         this.selectedBigIdeas = bigIdeas;
     }
@@ -37,8 +34,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        bigIdea = selectedBigIdeas.get(position);
-        //holder.bind(bigIdea);
+        Node bigIdea = selectedBigIdeas.get(position);
         holder.tagBox.setText(bigIdea.getName());
     }
 

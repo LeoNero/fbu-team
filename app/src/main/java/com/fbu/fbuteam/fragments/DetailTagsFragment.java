@@ -29,7 +29,7 @@ public class DetailTagsFragment extends Fragment {
     public static Button finishButton;
     private Button button;
     private OnNextClickListener callback;
-    private TagsAdapter adapter;
+    private DetailTagsAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
 
     private RecyclerView rvTags;
@@ -70,17 +70,18 @@ public class DetailTagsFragment extends Fragment {
         //create the data source
         bigIdeasList = new ArrayList<>();
         //create the adapter
-        adapter = new TagsAdapter(getContext(), bigIdeasList);
+        adapter = new DetailTagsAdapter(getContext(), bigIdeasList);
         //set the adapter on the recycler view
         rvTags.setAdapter(adapter);
         for (int i = 0; i < bigIdea.getChildren().size(); i++) {
             bigIdeasList.add(bigIdea.getChildren().get(i));
+            Log.d("ZZ", bigIdea.getChildren().get(i).getName());
         }
         //adapter.notifyDataSetChanged();
 
         initializeObjects(view);
         setTextBasedOnBigIdea();
-        populateDetailTags(view);
+        populateDetailTags();
         nextClick();
     }
 
@@ -99,7 +100,7 @@ public class DetailTagsFragment extends Fragment {
         });
     }
 
-    private void populateDetailTags(View view) {
+    private void populateDetailTags() {
         //create checkBoxes dynamically
         //rvTags = view.findViewById(R.id.rvTags);
         for (int i = 0; i < bigIdea.getChildren().size(); i++) {

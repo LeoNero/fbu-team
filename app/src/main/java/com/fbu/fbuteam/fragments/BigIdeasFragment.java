@@ -163,6 +163,12 @@ public class BigIdeasFragment extends Fragment {
         });
     }
 
+    //TODO dynamically load Big Idea Checkboxes
+    //1. Create adapter
+    //2. Create xml file for single view
+    //3. Add recyclerView to bigideas_fragment.xml
+    //4. Modify onViewCreated
+
     private void populateBigIdeas(List<Node> bigIdeas) {
         sportsTag.setText(bigIdeas.get(0).getName());
         entTag.setText(bigIdeas.get(1).getName());
