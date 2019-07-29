@@ -25,17 +25,10 @@ public class BigIdeasFragment extends Fragment {
 
     private TextView textView1;
     private TextView textView2;
-    private CheckBox sportsTag;
-    private CheckBox entTag;
-    private CheckBox moneyTag;
-    private CheckBox techTag;
-    private CheckBox envTag;
-    private CheckBox govTag;
-    private CheckBox socialTag;
-    private CheckBox militaryTag;
     private Button nextButton;
-    CheckBox[] allTags = new CheckBox[8];
-    ArrayList<CheckBox> selectedTags = new ArrayList<>();
+    private BigIdeasAdapter adapter;
+    private ArrayList<CheckBox> allTags = new ArrayList<>();
+    private ArrayList<CheckBox> selectedTags = new ArrayList<>();
 
     public static List<Node> selectedBigIdeas = new ArrayList<>();
     public List<Node> bigIdeas = new ArrayList<>();
@@ -58,20 +51,11 @@ public class BigIdeasFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        createCheckBoxArray();
         queryNodes();
         goToDetailTags();
     }
 
     private void initializeObjects(View rootView, View view) {
-        sportsTag = (CheckBox) rootView.findViewById(R.id.sportsBox);
-        entTag = (CheckBox) rootView.findViewById(R.id.entBox);
-        moneyTag = (CheckBox) rootView.findViewById(R.id.moneyBox);
-        techTag = (CheckBox) rootView.findViewById(R.id.techBox);
-        envTag = (CheckBox) rootView.findViewById(R.id.envBox);
-        govTag = (CheckBox) rootView.findViewById(R.id.govBox);
-        socialTag = (CheckBox) rootView.findViewById(R.id.socialBox);
-        militaryTag = (CheckBox) rootView.findViewById(R.id.militaryBox);
         textView1 = view.findViewById(R.id.textView1);
         textView2 = view.findViewById(R.id.textView2);
         nextButton = view.findViewById(R.id.nextButton);
@@ -79,25 +63,14 @@ public class BigIdeasFragment extends Fragment {
 
     private boolean atLeastOneChecked() {
         boolean atLeastOneChecked = false;
-        for (int i = 0; i < allTags.length; i++) {
-            if (allTags[i].isChecked()) {
-                selectedTags.add(allTags[i]);
+        for (int i = 0; i < allTags.size(); i++) {
+            if (allTags.get(i).isChecked()) {
+                selectedTags.add(allTags.get(i));
                 atLeastOneChecked = true;
                 break;
             }
         }
         return atLeastOneChecked;
-    }
-
-    private void createCheckBoxArray() {
-        allTags[0] = entTag;
-        allTags[1] = moneyTag;
-        allTags[2] = envTag;
-        allTags[3] = govTag;
-        allTags[4] = socialTag;
-        allTags[5] = militaryTag;
-        allTags[6] = sportsTag;
-        allTags[7] = techTag;
     }
 
     public void setOnNextClickListener(OnNextClickListener callback) {
@@ -123,8 +96,8 @@ public class BigIdeasFragment extends Fragment {
 
     private List<Node> getSelectedBigIdeas() {
         List<Node> b = new ArrayList<>();
-        for (int i = 0; i < allTags.length; i++) {
-            if (allTags[i].isChecked()) {
+        for (int i = 0; i < allTags.size(); i++) {
+            if (allTags.get(i).isChecked()) {
                 Node bigIdea = bigIdeas.get(i);
                 Log.d("LL", bigIdeas.get(i).getName());
                 b.add(bigIdea);
@@ -170,13 +143,10 @@ public class BigIdeasFragment extends Fragment {
     //4. Modify onViewCreated
 
     private void populateBigIdeas(List<Node> bigIdeas) {
-        sportsTag.setText(bigIdeas.get(0).getName());
-        entTag.setText(bigIdeas.get(1).getName());
-        moneyTag.setText(bigIdeas.get(2).getName());
-        techTag.setText(bigIdeas.get(3).getName());
-        envTag.setText(bigIdeas.get(4).getName());
-        govTag.setText(bigIdeas.get(5).getName());
-        socialTag.setText(bigIdeas.get(6).getName());
-        militaryTag.setText(bigIdeas.get(7).getName());
+        for (int i = 0; i < bigIdeas.size(); i++) {
+            CheckBox bigIdeaBox = new CheckBox(getContext());
+            bigIdeaBox.setText(bigIdeas.get(i).getName());
+            allTags.add(bigIdeaBox);
+        }
     }
 }

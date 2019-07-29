@@ -31,11 +31,10 @@ public class DetailTagsFragment extends Fragment {
     private OnNextClickListener callback;
     private DetailTagsAdapter adapter;
     private LinearLayoutManager layoutManager;
-
     private RecyclerView rvTags;
     private Node bigIdea;
     private List<Node> bigIdeasList;
-    private int currentUserSelection;
+    private int currentUserSelection; //TODO this needs to go
 
     public static DetailTagsFragment newInstance(Node bigIdea, int currentUserSelection) {
         DetailTagsFragment detailTagsFragment = new DetailTagsFragment();
@@ -96,9 +95,7 @@ public class DetailTagsFragment extends Fragment {
     }
 
     private void nextClick() {
-        finishButton.setOnClickListener(view -> {
-            callback.goToNextDetailsFragment();
-        });
+        finishButton.setOnClickListener(view -> callback.goToNextDetailsFragment());
     }
 
     private void populateDetailTags() {
