@@ -77,7 +77,6 @@ public class DetailTagsFragment extends Fragment {
             bigIdeasList.add(bigIdea.getChildren().get(i));
             Log.d("ZZ", bigIdea.getChildren().get(i).getName());
         }
-        //adapter.notifyDataSetChanged();
 
         initializeObjects(view);
         setTextBasedOnBigIdea();

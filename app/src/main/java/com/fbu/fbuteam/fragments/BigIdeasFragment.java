@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BigIdeasFragment extends Fragment {
+public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
 
     private TextView textView1;
     private TextView textView2;
@@ -32,6 +34,7 @@ public class BigIdeasFragment extends Fragment {
     private BigIdeasAdapter adapter;
     private LinearLayoutManager layoutManager;
     private RecyclerView rvBigIdeas;
+    private CheckBox bigIdeaBox;
     private ArrayList<CheckBox> allTags = new ArrayList<>();
     private ArrayList<CheckBox> selectedTags = new ArrayList<>();
 
@@ -63,7 +66,6 @@ public class BigIdeasFragment extends Fragment {
         adapter = new BigIdeasAdapter(getContext(), bigIdeas);
         rvBigIdeas.setAdapter(adapter);
 
-
         queryNodes();
         goToDetailTags();
     }
@@ -74,11 +76,12 @@ public class BigIdeasFragment extends Fragment {
         nextButton = view.findViewById(R.id.nextButton);
     }
 
-    private boolean atLeastOneChecked() {
+    private boolean atLeastOneChecked() { //TODO always returns false
         boolean atLeastOneChecked = false;
         for (int i = 0; i < allTags.size(); i++) {
-            if (allTags.get(i).isChecked()) {
+            if (allTags.get(i).isChecked()) { //put a break point here
                 selectedTags.add(allTags.get(i));
+                Log.d("WTF", allTags.get(i).isChecked()+ "");
                 atLeastOneChecked = true;
                 break;
             }
@@ -88,6 +91,14 @@ public class BigIdeasFragment extends Fragment {
 
     public void setOnNextClickListener(OnNextClickListener callback) {
         this.callback = callback;
+    }
+
+    //***TEST***
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+        if (allTags.get(1).isChecked()) {
+            Toast.makeText(getContext(), "It worked", Toast.LENGTH_LONG).show();
+        }
     }
 
     public interface OnNextClickListener {
@@ -111,6 +122,7 @@ public class BigIdeasFragment extends Fragment {
         List<Node> b = new ArrayList<>();
         for (int i = 0; i < allTags.size(); i++) {
             if (allTags.get(i).isChecked()) {
+                Log.d("WTF2", allTags.get(i).isChecked() + "");
                 Node bigIdea = bigIdeas.get(i);
                 Log.d("LL", bigIdeas.get(i).getName());
                 b.add(bigIdea);
@@ -151,7 +163,7 @@ public class BigIdeasFragment extends Fragment {
 
     private void populateBigIdeas(List<Node> bigIdeas) {
         for (int i = 0; i < bigIdeas.size(); i++) {
-            CheckBox bigIdeaBox = new CheckBox(getContext());
+            bigIdeaBox = new CheckBox(getContext());
             bigIdeaBox.setText(bigIdeas.get(i).getName());
             allTags.add(bigIdeaBox);
         }
