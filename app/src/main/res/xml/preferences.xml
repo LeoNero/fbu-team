@@ -5,13 +5,15 @@
         android:title="@string/general"/>
 
         <ListPreference
-            android:key="language_preference"
+            android:key="@string/language_preference"
             android:title="@string/language_preference"
             android:entries="@array/entries_language_preference"
             android:entryValues="@array/entryValues_language_preference"
-            android:summary="@string/language_summary"/>
+            android:summary="@string/language_summary"
+            />
 
         <Preference
+            android:key="@string/clear_cache"
             android:title="@string/clear_cache"/>
             <intent android:action=""
                 android:targetPackage=""
@@ -22,7 +24,7 @@
         android:title="@string/social" />
 
         <ListPreference
-            android:key="linkSocial_preference"
+            android:key="@string/social_media_preference"
             android:title="@string/social_media_preference"
             android:entries="@array/entries_link_social_media"
             android:entryValues="@array/entryValues_link_social_media"
@@ -33,37 +35,40 @@
         android:title="@string/notifications" />
 
         <SwitchPreference
-            android:key="turn_off_notifications"
+            android:key="@string/offNotifications"
             android:title="@string/offNotifications"
-            android:defaultValue="@string/offNotifications"/>
+            android:defaultValue="true"
+            />
 
-        <CheckBoxPreference
-            android:key="enable_quiet_hours"
+        <SwitchPreference
+            android:key="@string/quietHours"
             android:title="@string/quietHours"
-            android:defaultValue="@string/quietHours"/>
+            android:defaultValue="false"/>
 
         <Preference
-            android:title="@string/notification_sound"/>
+            android:key="@string/change_notification_sound"
+            android:title="@string/change_notification_sound"/>
             <intent android:action=""
                 android:targetPackage=""
-                android:targetClass=""
+                android:targetClass=""/>
 
-         android:title="@string/get_notified_when"/>
+        <PreferenceCategory
+            android:title="@string/get_notified_when"/>
 
             <CheckBoxPreference
-                android:key="new_follow"
+                android:key="@string/new_follow"
                 android:title="@string/new_follow"
-                android:defaultValue="@string/new_follow"/>
+                android:defaultValue="true"/>
 
             <CheckBoxPreference
-                android:key="new_story"
+                android:key="@string/new_story"
                 android:title="@string/new_story"
-                android:defaultValue="@string/new_story"/>
+                android:defaultValue="true"/>
 
             <CheckBoxPreference
-                android:key="new_like_on_story"
+                android:key="@string/new_like_on_story"
                 android:title="@string/new_like_on_story"
-                android:defaultValue="@string/new_story"/>
+                android:defaultValue="true"/>
          />
     />
 
@@ -71,22 +76,24 @@
         android:title="@string/accountAndPrivacy" />
 
         <SwitchPreference
-            android:key="turn_off_location"
+            android:key="@string/turn_off_location"
             android:title="@string/turn_off_location"
-            android:defaultValue="@string/turn_off_location"/>
+            android:defaultValue="true"/>
 
         <CheckBoxPreference
-            android:key="make_account_private"
+            android:key="@string/make_account_private"
             android:title="@string/make_account_private"
-            android:defaultValue="@string/make_account_private"/>
+            android:defaultValue="true"/>
 
         <Preference
+            android:key="@string/reset_password"
             android:title="@string/reset_password"/>
             <intent android:action=""
                 android:targetPackage=""
                 android:targetClass=""/>
 
         <Preference
+            android:key="@string/delete_account"
             android:title="@string/delete_account"/>
             <intent android:action=""
                 android:targetPackage=""

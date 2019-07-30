@@ -16,25 +16,25 @@
     <string name="news">News</string>
     <string name="profile">Profile</string>
 
-    <string name="general">General</string>
+    <string name="general">GENERAL</string>
     <string name="language_summary">Change your language preference</string>
     <string name="language_preference">Change Language</string>
     <string name="clear_cache">Clear Cache</string>
 
-    <string name="social">Social</string>
+    <string name="social">SOCIAL</string>
     <string name="social_media_preference">Link to other accounts</string>
 
-    <string name="notifications">Notifications</string>
+    <string name="notifications">NOTIFICATIONS</string>
     <string name="offNotifications">Turn Off Notifications</string>
     <string name="quietHours">Enable Quiet Hours</string>
-    <string name="notification_sound">Change Notification Sound</string>
+    <string name="change_notification_sound">Change Notification Sound</string>
     <string name="get_notified_when">Get Notified When: </string>
     <string name="new_follow">Someone follows me </string>
-    <string name="new_story">New stories are posted under my tags </string>
-    <string name="new_like_on_story">My followers like stories under my tags </string>
+    <string name="new_story">New stories with my tags are posted </string>
+    <string name="new_like_on_story">My followers like stories with my tags </string>
 
 
-    <string name="accountAndPrivacy">Account &amp; Privacy</string>
+    <string name="accountAndPrivacy">ACCOUNT &amp; PRIVACY</string>
     <string name="turn_off_location">Turn Off Location Services</string>
     <string name="make_account_private">Make Account Private</string>
     <string name="reset_password">Reset Password</string>
