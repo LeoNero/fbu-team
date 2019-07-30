@@ -17,6 +17,9 @@
     <style name="AppTheme.NoActionBar">
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -49,7 +52,6 @@
 
     <style name="ButtonFilledWhite">
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:backgroundTint">@color/white</item>
     </style>
 
     <style name="ButtonFilledWhite.DefaultMargin">

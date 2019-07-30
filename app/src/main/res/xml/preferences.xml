@@ -5,7 +5,7 @@
         android:title="@string/general"/>
 
         <ListPreference
-            android:key="list_preference"
+            android:key="language_preference"
             android:title="@string/language_preference"
             android:entries="@array/entries_language_preference"
             android:entryValues="@array/entryValues_language_preference"
@@ -13,7 +13,7 @@
 
         <Preference
             android:title="@string/clear_cache"/>
-            <intent android:action="android.intent.action.VIEW"
+            <intent android:action=""
                 android:targetPackage=""
                 android:targetClass=""/>
     />
@@ -32,7 +32,7 @@
     <PreferenceCategory
         android:title="@string/notifications" />
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="turn_off_notifications"
             android:title="@string/offNotifications"
             android:defaultValue="@string/offNotifications"/>
@@ -44,7 +44,7 @@
 
         <Preference
             android:title="@string/notification_sound"/>
-            <intent android:action="android.intent.action.VIEW"
+            <intent android:action=""
                 android:targetPackage=""
                 android:targetClass=""
 
@@ -70,7 +70,7 @@
     <PreferenceCategory
         android:title="@string/accountAndPrivacy" />
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="turn_off_location"
             android:title="@string/turn_off_location"
             android:defaultValue="@string/turn_off_location"/>
@@ -82,13 +82,13 @@
 
         <Preference
             android:title="@string/reset_password"/>
-            <intent android:action="android.intent.action.VIEW"
+            <intent android:action=""
                 android:targetPackage=""
                 android:targetClass=""/>
 
         <Preference
             android:title="@string/delete_account"/>
-            <intent android:action="android.intent.action.VIEW"
+            <intent android:action=""
                 android:targetPackage=""
                 android:targetClass=""/>
     />
