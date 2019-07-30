@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,10 +19,12 @@ public class BigIdeasAdapter extends RecyclerView.Adapter<BigIdeasAdapter.ViewHo
 
     private Context context;
     private List<Node> bigIdeas;
+    private List<Boolean> listOfChecked;
 
-    public BigIdeasAdapter(Context context, List<Node> bigIdeas) {
+    public BigIdeasAdapter(Context context, List<Node> bigIdeas, List<Boolean> isChecked) {
         this.context = context;
         this.bigIdeas = bigIdeas;
+        this.listOfChecked = isChecked;
     }
 
     @NonNull
@@ -33,9 +36,13 @@ public class BigIdeasAdapter extends RecyclerView.Adapter<BigIdeasAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.bigIdeaBox.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            listOfChecked.set(position, isChecked);
+        });
 
         Node bigIdea = bigIdeas.get(position);
         holder.bigIdeaBox.setText(bigIdea.getName());
+        holder.bigIdeaBox.setChecked(listOfChecked.get(position));
     }
 
     @Override

@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
+public class BigIdeasFragment extends Fragment {
 
     private TextView textView1;
     private TextView textView2;
@@ -34,9 +34,9 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
     private BigIdeasAdapter adapter;
     private LinearLayoutManager layoutManager;
     private RecyclerView rvBigIdeas;
-    private CheckBox bigIdeaBox;
-    private ArrayList<CheckBox> allTags = new ArrayList<>();
-    private ArrayList<CheckBox> selectedTags = new ArrayList<>();
+    //private CheckBox bigIdeaBox;
+    private ArrayList<Boolean> allTags = new ArrayList<>();
+    private ArrayList<Boolean> selectedTags = new ArrayList<>();
 
     public static List<Node> selectedBigIdeas = new ArrayList<>();
     public List<Node> bigIdeas = new ArrayList<>();
@@ -61,9 +61,9 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         super.onViewCreated(view, savedInstanceState);
 
         rvBigIdeas = (RecyclerView) view.findViewById(R.id.rvBigIdeas);
-        layoutManager = new GridLayoutManager(getContext(), 2);
+        layoutManager = new GridLayoutManager(getContext(), 1);
         rvBigIdeas.setLayoutManager(layoutManager);
-        adapter = new BigIdeasAdapter(getContext(), bigIdeas);
+        adapter = new BigIdeasAdapter(getContext(), bigIdeas, allTags);
         rvBigIdeas.setAdapter(adapter);
 
         queryNodes();
@@ -76,12 +76,12 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         nextButton = view.findViewById(R.id.nextButton);
     }
 
-    private boolean atLeastOneChecked() { //TODO always returns false
+    private boolean atLeastOneChecked() {
         boolean atLeastOneChecked = false;
         for (int i = 0; i < allTags.size(); i++) {
-            if (allTags.get(i).isChecked()) { //put a break point here
+            if (allTags.get(i)) { 
                 selectedTags.add(allTags.get(i));
-                Log.d("WTF", allTags.get(i).isChecked()+ "");
+                Log.d("WTF", allTags.get(i)+ "");
                 atLeastOneChecked = true;
                 break;
             }
@@ -91,14 +91,6 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
 
     public void setOnNextClickListener(OnNextClickListener callback) {
         this.callback = callback;
-    }
-
-    //***TEST***
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-        if (allTags.get(1).isChecked()) {
-            Toast.makeText(getContext(), "It worked", Toast.LENGTH_LONG).show();
-        }
     }
 
     public interface OnNextClickListener {
@@ -121,8 +113,8 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
     private List<Node> getSelectedBigIdeas() {
         List<Node> b = new ArrayList<>();
         for (int i = 0; i < allTags.size(); i++) {
-            if (allTags.get(i).isChecked()) {
-                Log.d("WTF2", allTags.get(i).isChecked() + "");
+            if (allTags.get(i)) {
+                Log.d("WTF2", allTags.get(i) + "");
                 Node bigIdea = bigIdeas.get(i);
                 Log.d("LL", bigIdeas.get(i).getName());
                 b.add(bigIdea);
@@ -139,6 +131,7 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
         query.findInBackground((response, e) -> { //response queries for the big ideas
             if (e == null) {
                 for (Node a : response) {
+                    allTags.add(false);
                     bigIdeas.add(a);
                     List<Node> children = a.getChildren(); //list containing a list of the children of each big idea ([],[],[]) --> get a list<> of children for every big idea
                     if (children != null) { //if every big idea has children
@@ -148,7 +141,7 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
                         }
                     }
                 }
-                populateBigIdeas(bigIdeas);
+                adapter.notifyDataSetChanged();
                 Log.d("DD", bigIdeas.get(0).getName());
                 Log.d("EE", bigIdeas.get(1).getName());
                 Log.d("FF",  bigIdeas.get(2).getName());
@@ -159,15 +152,5 @@ public class BigIdeasFragment extends Fragment implements CompoundButton.OnCheck
                 Log.d("KK",  bigIdeas.get(7).getName());
             }
         });
-    }
-
-    private void populateBigIdeas(List<Node> bigIdeas) {
-        for (int i = 0; i < bigIdeas.size(); i++) {
-            bigIdeaBox = new CheckBox(getContext());
-            bigIdeaBox.setText(bigIdeas.get(i).getName());
-            allTags.add(bigIdeaBox);
-        }
-        Log.d("ALLTAGS", allTags.size()+"");
-        adapter.notifyDataSetChanged();
     }
 }
