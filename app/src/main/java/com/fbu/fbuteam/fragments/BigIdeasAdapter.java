@@ -40,9 +40,11 @@ public class BigIdeasAdapter extends RecyclerView.Adapter<BigIdeasAdapter.ViewHo
             listOfChecked.set(position, isChecked);
         });
 
-        Node bigIdea = bigIdeas.get(position);
-        holder.bigIdeaBox.setText(bigIdea.getName());
-        holder.bigIdeaBox.setChecked(listOfChecked.get(position));
+        for (int i = 0; i < bigIdeas.size(); i++) {
+            Node bigIdea = bigIdeas.get(position);
+            holder.bigIdeaBox.setText(bigIdea.getName());
+            holder.bigIdeaBox.setChecked(listOfChecked.get(position));
+        }
     }
 
     @Override

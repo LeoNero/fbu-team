@@ -60,7 +60,7 @@ public class BigIdeasFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         rvBigIdeas = (RecyclerView) view.findViewById(R.id.rvBigIdeas);
-        layoutManager = new GridLayoutManager(getContext(), 1);
+        layoutManager = new GridLayoutManager(getContext(), 2);
         rvBigIdeas.setLayoutManager(layoutManager);
         adapter = new BigIdeasAdapter(getContext(), bigIdeas, allTags);
         rvBigIdeas.setAdapter(adapter);
