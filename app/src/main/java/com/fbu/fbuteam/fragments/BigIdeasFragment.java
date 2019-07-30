@@ -34,7 +34,6 @@ public class BigIdeasFragment extends Fragment {
     private BigIdeasAdapter adapter;
     private LinearLayoutManager layoutManager;
     private RecyclerView rvBigIdeas;
-    //private CheckBox bigIdeaBox;
     private ArrayList<Boolean> allTags = new ArrayList<>();
     private ArrayList<Boolean> selectedTags = new ArrayList<>();
 
@@ -79,7 +78,7 @@ public class BigIdeasFragment extends Fragment {
     private boolean atLeastOneChecked() {
         boolean atLeastOneChecked = false;
         for (int i = 0; i < allTags.size(); i++) {
-            if (allTags.get(i)) { 
+            if (allTags.get(i)) {
                 selectedTags.add(allTags.get(i));
                 Log.d("WTF", allTags.get(i)+ "");
                 atLeastOneChecked = true;

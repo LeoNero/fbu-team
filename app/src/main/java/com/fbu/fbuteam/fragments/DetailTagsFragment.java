@@ -34,13 +34,11 @@ public class DetailTagsFragment extends Fragment {
     private RecyclerView rvTags;
     private Node bigIdea;
     private List<Node> bigIdeasList;
-    private int currentUserSelection; //TODO this needs to go
 
-    public static DetailTagsFragment newInstance(Node bigIdea, int currentUserSelection) {
+    public static DetailTagsFragment newInstance(Node bigIdea) {
         DetailTagsFragment detailTagsFragment = new DetailTagsFragment();
         Bundle args = new Bundle();
         args.putParcelable("bigIdea", bigIdea);
-        args.putInt("currentUserSelection", currentUserSelection);
         detailTagsFragment.setArguments(args);
         return detailTagsFragment;
     }
@@ -49,7 +47,6 @@ public class DetailTagsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bigIdea = getArguments().getParcelable("bigIdea");
-        currentUserSelection = getArguments().getInt("currentUserSelection");
     }
 
     @Nullable
