@@ -26,7 +26,7 @@ import com.fbu.fbuteam.R;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences.OnSharedPreferenceChangeListener prefListener;
 
     public ListPreference KEY_LANGUAGE_PREFERENCE;
     public Preference KEY_CLEAR_CACHE;
@@ -42,13 +42,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public Preference KEY_RESET_PASSWORD;
     public Preference KEY_DELETE_ACCOUNT;
 
-    //inflates the preference xml
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        keyInitializations();
         addPreferencesFromResource(R.xml.preferences);
     }
 
-    //pause and resume register/unregister listener
     @Override
     public void onResume() {
         super.onResume();
@@ -68,13 +67,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         //TODO: do as a stretch feature
+
     }
 
     public void keyInitializations() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         KEY_LANGUAGE_PREFERENCE = (ListPreference) getPreferenceManager().findPreference("language_preference");
-        KEY_CLEAR_CACHE = (Preference) getPreferenceManager().findPreference("clear_cache");
+        KEY_CLEAR_CACHE = getPreferenceManager().findPreference("clear_cache");
         KEY_LINK_SOCIAL = (ListPreference) getPreferenceManager().findPreference("social_media_preference");
         KEY_TURN_OFF_NOTIFICATIONS = (SwitchPreference) getPreferenceManager().findPreference("offNotifications");
         KEY_ENABLE_QUIET_HOURS = (SwitchPreference) getPreferenceManager().findPreference("quietHours");
@@ -84,8 +84,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         KEY_NEW_LIKE_ON_STORY = (CheckBoxPreference) getPreferenceManager().findPreference("new_like_on_story");
         KEY_TURN_OFF_LOCATION = (SwitchPreference) getPreferenceManager().findPreference("turn_off_location");
         KEY_MAKE_ACCOUNT_PRIVATE = (CheckBoxPreference) getPreferenceManager().findPreference("make_account_private");
-        KEY_RESET_PASSWORD = (Preference) getPreferenceManager().findPreference("reset_password");
-        KEY_DELETE_ACCOUNT = (Preference) getPreferenceManager().findPreference("delete_account");
+        KEY_RESET_PASSWORD = getPreferenceManager().findPreference("reset_password");
+        KEY_DELETE_ACCOUNT = getPreferenceManager().findPreference("delete_account");
     }
 
 }

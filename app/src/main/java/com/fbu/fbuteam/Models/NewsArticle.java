@@ -24,15 +24,6 @@ public class NewsArticle extends ParseObject {
         put(KEY_NAME, name);
     }
 
-    public java.util.Date getCreatedAt() {
-        return getDate(KEY_CREATED_AT);
-
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        put(KEY_CREATED_AT, createdAt);
-    }
-
     public String getBodySnippet() {
         return getString(KEY_BODY_SNIPPET);
     }
