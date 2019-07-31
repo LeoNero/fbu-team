@@ -1,5 +1,6 @@
 package com.fbu.fbuteam.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -76,12 +77,18 @@ public class BigIdeasFragment extends Fragment {
         for (int i = 0; i < allTags.size(); i++) {
             if (allTags.get(i)) {
                 selectedTags.add(allTags.get(i));
-                Log.d("WTF", allTags.get(i)+ "");
                 atLeastOneChecked = true;
                 break;
             }
         }
         return atLeastOneChecked;
+    }
+
+    private void changeNextBtnColor(boolean atLeastOneChecked) {
+        if (atLeastOneChecked) {
+            nextButton.setBackgroundColor(Color.rgb(83, 29, 85));
+            nextButton.setTextColor(Color.WHITE);
+        }
     }
 
     public void setOnNextClickListener(OnNextClickListener callback) {
@@ -96,6 +103,7 @@ public class BigIdeasFragment extends Fragment {
         nextButton.setOnClickListener(view1 -> {
             if (atLeastOneChecked()) {
                 if (callback != null) {
+                    changeNextBtnColor(atLeastOneChecked());
                     selectedBigIdeas = getSelectedBigIdeas();
                     callback.goToDetailTagsFragment(selectedBigIdeas);
                 }
