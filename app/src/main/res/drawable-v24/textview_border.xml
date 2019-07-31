@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <shape
+        android:layout_marginStart="393dp"
+        android:layout_marginLeft="393dp"
+        android:layout_marginEnd="393dp"
+        android:layout_marginRight="393dp"
+        android:layout_marginBottom="785dp"
+        android:shape="rectangle">
+
+        <stroke
+            android:width="2dp"
+            android:color="#000000" />
+    </shape>
+</selector>

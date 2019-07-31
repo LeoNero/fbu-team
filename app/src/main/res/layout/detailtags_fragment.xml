@@ -32,6 +32,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text='"Big Idea"'
+        android:background="@drawable/textview_border"
         android:textColor="@color/white"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
