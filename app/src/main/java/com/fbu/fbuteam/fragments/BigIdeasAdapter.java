@@ -42,7 +42,6 @@ public class BigIdeasAdapter extends RecyclerView.Adapter<BigIdeasAdapter.ViewHo
         holder.bigIdeaBox.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             listOfChecked.set(position, isChecked);
             if (listOfChecked.get(position)) {
-                Toast.makeText(context, "IT WORKED", Toast.LENGTH_LONG).show();
                 holder.cardView.setCardBackgroundColor(Color.rgb(83, 29, 85));
                 holder.bigIdeaBox.setTextColor(Color.WHITE);
             }
