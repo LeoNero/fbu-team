@@ -6,14 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +20,6 @@ import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.models.Node;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class BigIdeasFragment extends Fragment {
@@ -113,42 +109,24 @@ public class BigIdeasFragment extends Fragment {
         List<Node> b = new ArrayList<>();
         for (int i = 0; i < allTags.size(); i++) {
             if (allTags.get(i)) {
-                Log.d("WTF2", allTags.get(i) + "");
                 Node bigIdea = bigIdeas.get(i);
-                Log.d("LL", bigIdeas.get(i).getName());
                 b.add(bigIdea);
             }
         }
-        return b; //this is the list of selected big ideas
+        return b;
     }
 
     private void queryNodes() {
         Node.Query query = new Node.Query();
         query.withRelations();
         query.fromType("big-idea");
-
-        query.findInBackground((response, e) -> { //response queries for the big ideas
+        query.findInBackground((response, e) -> {
             if (e == null) {
                 for (Node a : response) {
                     allTags.add(false);
                     bigIdeas.add(a);
-                    List<Node> children = a.getChildren(); //list containing a list of the children of each big idea ([],[],[]) --> get a list<> of children for every big idea
-                    if (children != null) { //if every big idea has children
-                        for (Node b : children) { //b represents each "mini" list of children
-                            Log.d("CHILDREN", b.getName()); //children
-                            Log.d("BB", children.size()+"");
-                        }
-                    }
                 }
                 adapter.notifyDataSetChanged();
-                Log.d("DD", bigIdeas.get(0).getName());
-                Log.d("EE", bigIdeas.get(1).getName());
-                Log.d("FF",  bigIdeas.get(2).getName());
-                Log.d("GG",  bigIdeas.get(3).getName());
-                Log.d("HH", bigIdeas.get(4).getName());
-                Log.d("II", bigIdeas.get(5).getName());
-                Log.d("JJ",  bigIdeas.get(6).getName());
-                Log.d("KK",  bigIdeas.get(7).getName());
             }
         });
     }
