@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +33,9 @@ public class DetailTagsFragment extends Fragment {
     private RecyclerView rvTags;
     private Node bigIdea;
     private List<Node> bigIdeasList;
+    private ArrayList<Boolean> allTags = new ArrayList<>();
+    private ArrayList<Boolean> selectedTags = new ArrayList<>();
+    public static List<Node> selectedDetails = new ArrayList<>();
 
     public static DetailTagsFragment newInstance(Node bigIdea) {
         DetailTagsFragment detailTagsFragment = new DetailTagsFragment();
@@ -60,7 +64,6 @@ public class DetailTagsFragment extends Fragment {
         createRV(view);
         initializeObjects(view);
         setTextBasedOnBigIdea();
-        populateDetailTags();
         nextClick();
     }
 
@@ -69,11 +72,13 @@ public class DetailTagsFragment extends Fragment {
         layoutManager = new GridLayoutManager(getContext(), 2);
         rvTags.setLayoutManager(layoutManager);
         bigIdeasList = new ArrayList<>();
-        adapter = new DetailTagsAdapter(getContext(), bigIdeasList);
+        adapter = new DetailTagsAdapter(getContext(), bigIdeasList, allTags);
         rvTags.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         for (int i = 0; i < bigIdea.getChildren().size(); i++) {
             bigIdeasList.add(bigIdea.getChildren().get(i));
+            allTags.add(false);
         }
     }
 
@@ -87,15 +92,39 @@ public class DetailTagsFragment extends Fragment {
     }
 
     private void nextClick() {
-        finishButton.setOnClickListener(view -> callback.goToNextDetailsFragment());
+        finishButton.setOnClickListener(view -> {
+            if (atLeastOneChecked()) {
+                if (callback != null) {
+                    callback.goToNextDetailsFragment();
+                    selectedDetails = getSelectedDetails();
+                }
+            } else {
+                Toast.makeText(getContext(), "Please select at least one topic.", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
-    private void populateDetailTags() {
-        for (int i = 0; i < bigIdea.getChildren().size(); i++) {
-            CheckBox tagBox = new CheckBox(getContext());
-            tagBox.setText(bigIdea.getChildren().get(i).getName());
+    private boolean atLeastOneChecked() {
+        boolean atLeastOneChecked = false;
+        for (int i = 0; i < allTags.size(); i++) {
+            if (allTags.get(i)) {
+                selectedTags.add(allTags.get(i));
+                atLeastOneChecked = true;
+                break;
+            }
         }
-        adapter.notifyDataSetChanged();
+        return atLeastOneChecked;
+    }
+
+    private List<Node> getSelectedDetails() {
+        List<Node> b = new ArrayList<>();
+        for (int i = 0; i < allTags.size(); i++) {
+            if (allTags.get(i)) {
+                Node bigIdea = bigIdeasList.get(i);
+                b.add(bigIdea);
+            }
+        }
+        return b;
     }
 
     public void setOnNextClickListener(OnNextClickListener callback) {
