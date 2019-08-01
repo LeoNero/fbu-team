@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.models.Node;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,8 +95,9 @@ public class DetailTagsFragment extends Fragment {
         finishButton.setOnClickListener(view -> {
             if (atLeastOneChecked()) {
                 if (callback != null) {
-                    callback.goToNextDetailsFragment();
                     selectedDetails = getSelectedDetails();
+                    saveDetailTags();
+                    callback.goToNextDetailsFragment();
                 }
             } else {
                 Toast.makeText(getContext(), "Please select at least one topic.", Toast.LENGTH_LONG).show();
@@ -133,4 +135,10 @@ public class DetailTagsFragment extends Fragment {
     public interface OnNextClickListener {
         void goToNextDetailsFragment();
     }
-}
+
+    private void saveDetailTags() {
+        ParseUser user = ParseUser.getCurrentUser();
+        user.addAllUnique("detailTags", selectedDetails);
+        user.saveInBackground();
+    }
+ }
