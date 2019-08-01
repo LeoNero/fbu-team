@@ -19,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.models.Node;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,13 +87,6 @@ public class BigIdeasFragment extends Fragment {
         return atLeastOneChecked;
     }
 
-    private void changeNextBtnColor(boolean atLeastOneChecked) {
-        if (atLeastOneChecked) {
-            nextButton.setBackgroundColor(Color.rgb(83, 29, 85));
-            nextButton.setTextColor(Color.WHITE);
-        }
-    }
-
     public void setOnNextClickListener(OnNextClickListener callback) {
         this.callback = callback;
     }
@@ -103,8 +99,8 @@ public class BigIdeasFragment extends Fragment {
         nextButton.setOnClickListener(view1 -> {
             if (atLeastOneChecked()) {
                 if (callback != null) {
-                    changeNextBtnColor(atLeastOneChecked());
                     selectedBigIdeas = getSelectedBigIdeas();
+                    saveBigIdeas();
                     callback.goToDetailTagsFragment(selectedBigIdeas);
                 }
             } else {
@@ -137,5 +133,11 @@ public class BigIdeasFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private void saveBigIdeas() {
+        ParseUser user = ParseUser.getCurrentUser();
+        user.addAllUnique("bigIdeaTags", selectedBigIdeas);
+        user.saveInBackground();
     }
 }

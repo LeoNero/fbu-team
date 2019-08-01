@@ -14,8 +14,8 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".activities.LoginActivity"></activity>
-        <activity android:name=".activities.TagActivity">
+        <activity android:name=".activities.TagActivity"></activity>
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
