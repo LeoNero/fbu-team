@@ -45,6 +45,9 @@ public class DetailTagsAdapter extends RecyclerView.Adapter<DetailTagsAdapter.Vi
             if (listOfChecked.get(position)) {
                 holder.cardView.setCardBackgroundColor(Color.rgb(83, 29, 85));
                 holder.tagBox.setTextColor(Color.WHITE);
+            } else {
+                holder.cardView.setCardBackgroundColor(Color.WHITE);
+                holder.tagBox.setTextColor(Color.rgb(56, 14, 67));
             }
         });
 

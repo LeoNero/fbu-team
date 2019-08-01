@@ -44,6 +44,9 @@ public class BigIdeasAdapter extends RecyclerView.Adapter<BigIdeasAdapter.ViewHo
             if (listOfChecked.get(position)) {
                 holder.cardView.setCardBackgroundColor(Color.rgb(83, 29, 85));
                 holder.bigIdeaBox.setTextColor(Color.WHITE);
+            } else {
+                holder.cardView.setCardBackgroundColor(Color.WHITE);
+                holder.bigIdeaBox.setTextColor(Color.rgb(56, 14, 67));
             }
         });
 

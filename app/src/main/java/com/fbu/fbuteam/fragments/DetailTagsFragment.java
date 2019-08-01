@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -104,6 +103,17 @@ public class DetailTagsFragment extends Fragment {
         });
     }
 
+    private List<Node> getSelectedDetails() {
+        List<Node> b = new ArrayList<>();
+        for (int i = 0; i < allTags.size(); i++) {
+            if (allTags.get(i)) {
+                Node bigIdea = bigIdeasList.get(i);
+                b.add(bigIdea);
+            }
+        }
+        return b;
+    }
+
     private boolean atLeastOneChecked() {
         boolean atLeastOneChecked = false;
         for (int i = 0; i < allTags.size(); i++) {
@@ -114,17 +124,6 @@ public class DetailTagsFragment extends Fragment {
             }
         }
         return atLeastOneChecked;
-    }
-
-    private List<Node> getSelectedDetails() {
-        List<Node> b = new ArrayList<>();
-        for (int i = 0; i < allTags.size(); i++) {
-            if (allTags.get(i)) {
-                Node bigIdea = bigIdeasList.get(i);
-                b.add(bigIdea);
-            }
-        }
-        return b;
     }
 
     public void setOnNextClickListener(OnNextClickListener callback) {
