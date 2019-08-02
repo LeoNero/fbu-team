@@ -33,8 +33,8 @@ public class DetailTagsFragment extends Fragment {
     private RecyclerView rvTags;
     private Node bigIdea;
     private List<Node> bigIdeasList;
-    private ArrayList<Boolean> allTags = new ArrayList<>();
-    private ArrayList<Boolean> selectedTags = new ArrayList<>();
+    private List<Boolean> allTags = new ArrayList<>();
+    private List<Boolean> selectedTags = new ArrayList<>();
     public static List<Node> selectedDetails = new ArrayList<>();
 
     public static DetailTagsFragment newInstance(Node bigIdea) {

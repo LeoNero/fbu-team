@@ -32,8 +32,8 @@ public class BigIdeasFragment extends Fragment {
     private BigIdeasAdapter adapter;
     private LinearLayoutManager layoutManager;
     private RecyclerView rvBigIdeas;
-    private ArrayList<Boolean> allTags = new ArrayList<>();
-    private ArrayList<Boolean> selectedTags = new ArrayList<>();
+    private List<Boolean> allTags = new ArrayList<>();
+    private List<Boolean> selectedTags = new ArrayList<>();
 
     public static List<Node> selectedBigIdeas = new ArrayList<>();
     public List<Node> bigIdeas = new ArrayList<>();
