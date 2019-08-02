@@ -28,13 +28,17 @@ public class HomeActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.miLogout:
                     ParseUser.logOut();
-                    final Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+                    goToLogin();
                     break;
             }
             return true;
         });
+    }
+
+    private void goToLogin() {
+        final Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
