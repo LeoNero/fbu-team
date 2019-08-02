@@ -59,15 +59,14 @@ public class DetailTagsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
         super.onViewCreated(view, savedInstanceState);
-        createRV(view);
+        createRecyclerView(view);
         initializeObjects(view);
         setTextBasedOnBigIdea();
         nextClick();
     }
 
-    private void createRV(@NonNull View view) {
+    private void createRecyclerView(@NonNull View view) {
         rvTags = (RecyclerView) view.findViewById(R.id.rvTags);
         layoutManager = new GridLayoutManager(getContext(), 2);
         rvTags.setLayoutManager(layoutManager);
@@ -76,6 +75,10 @@ public class DetailTagsFragment extends Fragment {
         rvTags.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
+        populateLists();
+    }
+
+    private void populateLists() {
         for (int i = 0; i < bigIdea.getChildren().size(); i++) {
             bigIdeasList.add(bigIdea.getChildren().get(i));
             allTags.add(false);
@@ -106,14 +109,14 @@ public class DetailTagsFragment extends Fragment {
     }
 
     private List<Node> getSelectedDetails() {
-        List<Node> b = new ArrayList<>();
+        List<Node> selectedDetails = new ArrayList<>();
         for (int i = 0; i < allTags.size(); i++) {
             if (allTags.get(i)) {
                 Node bigIdea = bigIdeasList.get(i);
-                b.add(bigIdea);
+                selectedDetails.add(bigIdea);
             }
         }
-        return b;
+        return selectedDetails;
     }
 
     private boolean atLeastOneChecked() {
