@@ -39,21 +39,32 @@ public class BigIdeasAdapter extends RecyclerView.Adapter<BigIdeasAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bigIdeaBox.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-            listOfChecked.set(position, isChecked);
-            if (listOfChecked.get(position)) {
-                holder.cardView.setCardBackgroundColor(Color.rgb(83, 29, 85));
-                holder.bigIdeaBox.setTextColor(Color.WHITE);
-            } else {
-                holder.cardView.setCardBackgroundColor(Color.WHITE);
-                holder.bigIdeaBox.setTextColor(Color.rgb(56, 14, 67));
-            }
-        });
+        changeCheckedState(holder, position);
+        setUpCheckBoxes(holder, position);
+    }
 
+    private void setUpCheckBoxes(@NonNull ViewHolder holder, int position) {
         for (int i = 0; i < bigIdeas.size(); i++) {
             Node bigIdea = bigIdeas.get(position);
             holder.bigIdeaBox.setText(bigIdea.getName());
             holder.bigIdeaBox.setChecked(listOfChecked.get(position));
+        }
+    }
+
+    private void changeCheckedState(@NonNull ViewHolder holder, int position) {
+        holder.bigIdeaBox.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            listOfChecked.set(position, isChecked);
+            checkColorChange(holder, position);
+        });
+    }
+
+    private void checkColorChange(@NonNull ViewHolder holder, int position) {
+        if (listOfChecked.get(position)) {
+            holder.cardView.setCardBackgroundColor(Color.rgb(83, 29, 85));
+            holder.bigIdeaBox.setTextColor(Color.WHITE);
+        } else {
+            holder.cardView.setCardBackgroundColor(Color.WHITE);
+            holder.bigIdeaBox.setTextColor(Color.rgb(56, 14, 67));
         }
     }
 
