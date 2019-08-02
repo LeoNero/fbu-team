@@ -69,8 +69,11 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
             return;
         }
 
-        Node bigIdea = selectedBigIdeas.get(currentUserSelection);
+        replaceFragment();
+    }
 
+    private void replaceFragment() {
+        Node bigIdea = selectedBigIdeas.get(currentUserSelection);
         DetailTagsFragment detailTagsFragment = DetailTagsFragment.newInstance(bigIdea);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.placeholder, detailTagsFragment);
