@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fbu.fbuteam.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -44,7 +45,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void signUp() {
         ParseUser user = createParseUser();
-
         if (anyFieldIsEmpty()) {
             Toast.makeText(SignUpActivity.this, "Please fill out all fields.", Toast.LENGTH_LONG).show();
         } else {
@@ -56,11 +56,17 @@ public class SignUpActivity extends AppCompatActivity {
         user.signUpInBackground((error) -> {
             if (error == null) {
                 Toast.makeText(SignUpActivity.this, "Successfully signed up", Toast.LENGTH_SHORT).show();
-                goToHome();
+                goToTags();
             } else {
                 Log.e("SignUpActivity.", "Failed to sign up", error);
+                handleSignUpError(error);
             }
         });
+    }
+
+    private void handleSignUpError(ParseException error) {
+        String message = error.getMessage();
+        Toast.makeText(SignUpActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
     private boolean anyFieldIsEmpty() {
@@ -76,8 +82,8 @@ public class SignUpActivity extends AppCompatActivity {
         return user;
     }
 
-    private void goToHome() {
-        Intent intent = new Intent(this, HomeActivity.class);
+    private void goToTags() {
+        Intent intent = new Intent(this, TagActivity.class);
         startActivity(intent);
         finish();
     }

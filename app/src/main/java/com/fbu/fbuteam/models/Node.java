@@ -1,13 +1,16 @@
 package com.fbu.fbuteam.models;
 
+import android.os.Parcelable;
+
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @ParseClassName("Node")
-public class Node extends ParseObject {
+public class Node extends ParseObject implements Parcelable {
     private static final String KEY_NAME = "name";
     private static final String KEY_TYPE = "type";
     private static final String KEY_LEVEL = "level";
@@ -61,7 +64,7 @@ public class Node extends ParseObject {
             return (List<Node>) children;
         }
 
-        return null;
+        return new ArrayList<>();
     }
 
     public void setChildren(List<Node> children) {
