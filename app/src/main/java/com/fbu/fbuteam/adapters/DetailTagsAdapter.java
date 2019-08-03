@@ -1,4 +1,4 @@
-package com.fbu.fbuteam.fragments;
+package com.fbu.fbuteam.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -18,41 +16,40 @@ import com.fbu.fbuteam.models.Node;
 
 import java.util.List;
 
-public class BigIdeasAdapter extends RecyclerView.Adapter<BigIdeasAdapter.ViewHolder> {
+public class DetailTagsAdapter extends RecyclerView.Adapter<DetailTagsAdapter.ViewHolder> {
 
     private Context context;
-    private List<Node> bigIdeas;
+    private List<Node> selectedBigIdeas;
     private List<Boolean> listOfChecked;
 
-    public BigIdeasAdapter(Context context, List<Node> bigIdeas, List<Boolean> listOfChecked) {
+    public DetailTagsAdapter(Context context, List<Node> bigIdeas, List<Boolean> listOfChecked) {
         this.context = context;
-        this.bigIdeas = bigIdeas;
+        this.selectedBigIdeas = bigIdeas;
         this.listOfChecked = listOfChecked;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.bigidea_item, parent, false);
-        return new BigIdeasAdapter.ViewHolder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_tag, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Node bigIdea = selectedBigIdeas.get(position);
         changeCheckedState(holder, position);
-        setUpCheckBoxes(holder, position);
+        setCheckBoxText(holder, bigIdea);
     }
 
-    private void setUpCheckBoxes(@NonNull ViewHolder holder, int position) {
-        for (int i = 0; i < bigIdeas.size(); i++) {
-            Node bigIdea = bigIdeas.get(position);
-            holder.bigIdeaBox.setText(bigIdea.getName());
-            holder.bigIdeaBox.setChecked(listOfChecked.get(position));
+    private void setCheckBoxText(@NonNull ViewHolder holder, Node bigIdea) {
+        for (int i = 0; i < bigIdea.getChildren().size(); i++) {
+            holder.tagBox.setText(bigIdea.getChildren().get(i).getName());
         }
     }
 
     private void changeCheckedState(@NonNull ViewHolder holder, int position) {
-        holder.bigIdeaBox.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+        holder.tagBox.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             listOfChecked.set(position, isChecked);
             checkColorChange(holder, position);
         });
@@ -61,27 +58,27 @@ public class BigIdeasAdapter extends RecyclerView.Adapter<BigIdeasAdapter.ViewHo
     private void checkColorChange(@NonNull ViewHolder holder, int position) {
         if (listOfChecked.get(position)) {
             holder.cardView.setCardBackgroundColor(Color.rgb(83, 29, 85));
-            holder.bigIdeaBox.setTextColor(Color.WHITE);
+            holder.tagBox.setTextColor(Color.WHITE);
         } else {
             holder.cardView.setCardBackgroundColor(Color.WHITE);
-            holder.bigIdeaBox.setTextColor(Color.rgb(56, 14, 67));
+            holder.tagBox.setTextColor(Color.rgb(56, 14, 67));
         }
     }
 
     @Override
     public int getItemCount() {
-        return bigIdeas.size();
+        return selectedBigIdeas.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        CheckBox bigIdeaBox;
+        CheckBox tagBox;
         CardView cardView;
 
-        public ViewHolder(@NonNull View itemView) {
+        private ViewHolder(@NonNull View itemView) {
             super(itemView);
-            bigIdeaBox = (CheckBox) itemView.findViewById(R.id.bigIdeaBox);
-            cardView = (CardView) itemView.findViewById(R.id.cardview1);
+            tagBox = itemView.findViewById(R.id.tagBox);
+            cardView = itemView.findViewById(R.id.cardview1);
         }
     }
 }

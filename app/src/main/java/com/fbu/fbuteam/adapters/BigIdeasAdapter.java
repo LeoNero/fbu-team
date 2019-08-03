@@ -1,4 +1,4 @@
-package com.fbu.fbuteam.fragments;
+package com.fbu.fbuteam.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -16,40 +16,41 @@ import com.fbu.fbuteam.models.Node;
 
 import java.util.List;
 
-public class DetailTagsAdapter extends RecyclerView.Adapter<DetailTagsAdapter.ViewHolder> {
+public class BigIdeasAdapter extends RecyclerView.Adapter<BigIdeasAdapter.ViewHolder> {
 
     private Context context;
-    private List<Node> selectedBigIdeas;
+    private List<Node> bigIdeas;
     private List<Boolean> listOfChecked;
 
-    public DetailTagsAdapter(Context context, List<Node> bigIdeas, List<Boolean> listOfChecked) {
+    public BigIdeasAdapter(Context context, List<Node> bigIdeas, List<Boolean> listOfChecked) {
         this.context = context;
-        this.selectedBigIdeas = bigIdeas;
+        this.bigIdeas = bigIdeas;
         this.listOfChecked = listOfChecked;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_tag, parent, false);
-        return new ViewHolder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.bigidea_item, parent, false);
+        return new BigIdeasAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Node bigIdea = selectedBigIdeas.get(position);
         changeCheckedState(holder, position);
-        setCheckBoxText(holder, bigIdea);
+        setUpCheckBoxes(holder, position);
     }
 
-    private void setCheckBoxText(@NonNull ViewHolder holder, Node bigIdea) {
-        for (int i = 0; i < bigIdea.getChildren().size(); i++) {
-            holder.tagBox.setText(bigIdea.getChildren().get(i).getName());
+    private void setUpCheckBoxes(@NonNull ViewHolder holder, int position) {
+        for (int i = 0; i < bigIdeas.size(); i++) {
+            Node bigIdea = bigIdeas.get(position);
+            holder.bigIdeaBox.setText(bigIdea.getName());
+            holder.bigIdeaBox.setChecked(listOfChecked.get(position));
         }
     }
 
     private void changeCheckedState(@NonNull ViewHolder holder, int position) {
-        holder.tagBox.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+        holder.bigIdeaBox.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             listOfChecked.set(position, isChecked);
             checkColorChange(holder, position);
         });
@@ -58,27 +59,27 @@ public class DetailTagsAdapter extends RecyclerView.Adapter<DetailTagsAdapter.Vi
     private void checkColorChange(@NonNull ViewHolder holder, int position) {
         if (listOfChecked.get(position)) {
             holder.cardView.setCardBackgroundColor(Color.rgb(83, 29, 85));
-            holder.tagBox.setTextColor(Color.WHITE);
+            holder.bigIdeaBox.setTextColor(Color.WHITE);
         } else {
             holder.cardView.setCardBackgroundColor(Color.WHITE);
-            holder.tagBox.setTextColor(Color.rgb(56, 14, 67));
+            holder.bigIdeaBox.setTextColor(Color.rgb(56, 14, 67));
         }
     }
 
     @Override
     public int getItemCount() {
-        return selectedBigIdeas.size();
+        return bigIdeas.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        CheckBox tagBox;
+        CheckBox bigIdeaBox;
         CardView cardView;
 
-        private ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tagBox = itemView.findViewById(R.id.tagBox);
-            cardView = itemView.findViewById(R.id.cardview1);
+            bigIdeaBox = (CheckBox) itemView.findViewById(R.id.bigIdeaBox);
+            cardView = (CardView) itemView.findViewById(R.id.cardview1);
         }
     }
 }

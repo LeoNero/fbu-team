@@ -1,7 +1,6 @@
 package com.fbu.fbuteam.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fbu.fbuteam.R;
+import com.fbu.fbuteam.adapters.DetailTagsAdapter;
 import com.fbu.fbuteam.models.Node;
 import com.parse.ParseUser;
 
