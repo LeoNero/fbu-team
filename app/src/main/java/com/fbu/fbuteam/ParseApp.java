@@ -1,20 +1,20 @@
 package com.fbu.fbuteam;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.fbu.fbuteam.Models.NewsArticle;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
-import com.fbu.fbuteam.models.Node;
-
 public class ParseApp extends Application {
+
+    private static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-        ParseObject.registerSubclass(Node.class);
+        ParseApp.context = getApplicationContext();
         setUpParse();
     }
 
@@ -25,7 +25,10 @@ public class ParseApp extends Application {
                 .clientKey("LeoHaleyPlaxides")
                 .server("https://fbu-team-app.herokuapp.com/parse")
                 .build();
-
         Parse.initialize(configuration);
+    }
+
+    public static Context getAppContext() {
+        return ParseApp.context;
     }
 }
