@@ -16,8 +16,10 @@ import com.parse.ParseUser;
 public class SignUpActivity extends AppCompatActivity {
 
     private TextInputEditText emailSignup;
+    private TextInputEditText nameSignup;
     private TextInputEditText usernameSignup;
     private TextInputEditText passwordSignup;
+
     private Button signupBtn;
 
     @Override
@@ -30,6 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void setupComponents() {
         emailSignup = findViewById(R.id.email_et);
+        nameSignup = findViewById(R.id.name_et);
         usernameSignup = findViewById(R.id.username_et);
         passwordSignup = findViewById(R.id.password_et);
         signupBtn = findViewById(R.id.create_new_signup);
@@ -64,7 +67,12 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private boolean anyFieldIsEmpty() {
-        return usernameSignup.equals("") || passwordSignup.equals("") || emailSignup.equals("");
+        boolean isUsernameEmpty = getText(usernameSignup).isEmpty();
+        boolean isNameEmpty = getText(nameSignup).isEmpty();
+        boolean isEmailEmpty = getText(emailSignup).isEmpty();
+        boolean isPasswordEmpty = getText(passwordSignup).isEmpty();
+
+        return isUsernameEmpty || isNameEmpty || isEmailEmpty || isPasswordEmpty;
     }
 
     private ParseUser createParseUser() {
