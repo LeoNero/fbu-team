@@ -37,4 +37,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.facebook.litho:litho-core:0.29.0'
+    implementation 'com.facebook.litho:litho-widget:0.29.0'
+    annotationProcessor 'com.facebook.litho:litho-processor:0.29.0'
+    implementation 'com.facebook.soloader:soloader:0.5.1'
 }
