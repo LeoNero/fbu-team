@@ -47,7 +47,7 @@ public class BigIdeasFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.bigideas_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_bigideas, container, false);
         initializeObjects(rootView);
         return rootView;
     }

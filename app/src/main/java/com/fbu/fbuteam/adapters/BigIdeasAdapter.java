@@ -31,7 +31,7 @@ public class BigIdeasAdapter extends RecyclerView.Adapter<BigIdeasAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.bigidea_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_bigidea, parent, false);
         return new BigIdeasAdapter.ViewHolder(view);
     }
 
