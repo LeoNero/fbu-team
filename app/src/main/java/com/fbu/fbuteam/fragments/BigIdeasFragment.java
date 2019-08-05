@@ -25,8 +25,6 @@ import java.util.List;
 
 public class BigIdeasFragment extends Fragment {
 
-    private TextView textView1;
-    private TextView textView2;
     private Button nextButton;
     private BigIdeasAdapter adapter;
     private LinearLayoutManager layoutManager;
@@ -55,13 +53,14 @@ public class BigIdeasFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         createRecyclerView(view);
         queryNodes();
         goToDetailTags();
     }
 
     private void createRecyclerView(@NonNull View view) {
-        rvBigIdeas = (RecyclerView) view.findViewById(R.id.rvBigIdeas);
+        rvBigIdeas = view.findViewById(R.id.rvBigIdeas);
         layoutManager = new GridLayoutManager(getContext(), 2);
         rvBigIdeas.setLayoutManager(layoutManager);
         adapter = new BigIdeasAdapter(getContext(), bigIdeas, allTags);
@@ -69,8 +68,6 @@ public class BigIdeasFragment extends Fragment {
     }
 
     private void initializeObjects(View view) {
-        textView1 = view.findViewById(R.id.textView1);
-        textView2 = view.findViewById(R.id.textView2);
         nextButton = view.findViewById(R.id.nextButton);
     }
 
@@ -116,6 +113,7 @@ public class BigIdeasFragment extends Fragment {
                 selectedBigIdeas.add(bigIdea);
             }
         }
+
         return selectedBigIdeas;
     }
 
@@ -125,10 +123,11 @@ public class BigIdeasFragment extends Fragment {
         query.fromType("big-idea");
         query.findInBackground((response, e) -> {
             if (e == null) {
-                for (Node node: response) {
+                for (Node node : response) {
                     allTags.add(false);
                     bigIdeas.add(node);
                 }
+
                 adapter.notifyDataSetChanged();
             }
         });
