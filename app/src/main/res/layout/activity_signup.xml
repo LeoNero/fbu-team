@@ -46,6 +46,25 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_signup"
+        style="@style/TextInputLayoutWhite.DefaultMargin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_signup"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_et"
+            style="@style/TextInputEditTextWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/username_signup"
         style="@style/TextInputLayoutWhite.DefaultMargin"
         android:layout_width="0dp"
@@ -53,7 +72,7 @@
         android:hint="@string/username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_signup"
+        app:layout_constraintTop_toBottomOf="@+id/name_signup"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText

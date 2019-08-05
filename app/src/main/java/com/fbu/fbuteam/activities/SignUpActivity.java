@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fbu.fbuteam.R;
+import com.fbu.fbuteam.models.User;
 import com.google.android.material.textfield.TextInputEditText;
 import com.parse.ParseUser;
 
@@ -76,8 +77,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private ParseUser createParseUser() {
-        ParseUser user = new ParseUser();
+        User user = new User();
         user.setUsername(getText(usernameSignup));
+        user.setName(getText(nameSignup));
         user.setPassword(getText(passwordSignup));
         Log.e("SignUpActivity.", "Getting here");
         user.setEmail(getText(emailSignup));
