@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.fbu.fbuteam.R;
 import com.parse.LogInCallback;
@@ -26,17 +25,18 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         persistUser();
         setupComponents();
-
         setupLoginClickListener();
         setupSignupClickListener();
+        //goToHome();
     }
 
     private void persistUser() {
         ParseUser currentUser = ParseUser.getCurrentUser();
         checkSession(currentUser);
+        Log.e("LoginActivity", "Checking for session");
+
     }
 
     private void setupComponents() {
