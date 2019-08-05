@@ -42,6 +42,7 @@ public class DetailTagsFragment extends Fragment {
         Bundle args = new Bundle();
         args.putParcelable("bigIdea", bigIdea);
         detailTagsFragment.setArguments(args);
+
         return detailTagsFragment;
     }
 
@@ -60,6 +61,7 @@ public class DetailTagsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         createRecyclerView(view);
         initializeObjects(view);
         setTextBasedOnBigIdea();
