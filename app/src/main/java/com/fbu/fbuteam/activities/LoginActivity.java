@@ -11,14 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.fbu.fbuteam.R;
+import com.google.android.material.textfield.TextInputEditText;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText usernameInput;
-    private EditText passwordInput;
+    private TextInputEditText usernameInput;
+    private TextInputEditText passwordInput;
     private Button loginButton;
     private Button signupButton;
 
@@ -76,11 +77,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException error) {
                 if (error == null) {
-                    Log.d("LoginActivity", "Login successful!");
                     Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_LONG).show();
                     goToHome();
                 } else {
-                    Log.e("LoginActivity", "Login failure.");
                     Toast.makeText(LoginActivity.this, "Login failure", Toast.LENGTH_LONG).show();
                     error.printStackTrace();
                 }
@@ -94,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToHome() {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }

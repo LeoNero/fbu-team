@@ -83,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void goToTags() {
-        Intent intent = new Intent(this, TagActivity.class);
+        Intent intent = new Intent(SignUpActivity.this, TagActivity.class);
         startActivity(intent);
         finish();
     }

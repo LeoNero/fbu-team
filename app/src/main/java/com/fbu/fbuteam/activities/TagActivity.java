@@ -24,7 +24,7 @@ public class TagActivity extends AppCompatActivity implements BigIdeasFragment.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tag_activity);
+        setContentView(R.layout.activity_tag);
         goToBigIdeas();
     }
 
