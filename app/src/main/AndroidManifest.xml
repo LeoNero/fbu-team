@@ -4,6 +4,9 @@
     android:versionCode="1"
     android:versionName="1.0">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".ParseApp"
         android:allowBackup="true"
@@ -13,19 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".activities.TagActivity"></activity>
-        <activity android:name=".activities.LoginActivity">
+        <activity android:name=".activities.ProfileActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.HomeActivity" />
         <activity android:name=".activities.SignUpActivity" />
+        <activity android:name=".activities.HomeActivity" />
+        <activity android:name=".activities.TagActivity" />
+        <activity android:name=".activities.LoginActivity" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>
