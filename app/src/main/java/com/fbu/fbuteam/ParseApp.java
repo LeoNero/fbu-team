@@ -2,6 +2,8 @@ package com.fbu.fbuteam;
 
 import android.app.Application;
 
+import com.facebook.soloader.SoLoader;
+import com.fbu.fbuteam.models.User;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -13,8 +15,14 @@ public class ParseApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        ParseObject.registerSubclass(Node.class);
+        registerParseSubclasses();
         setUpParse();
+        setupSoLoader();
+    }
+
+    private void registerParseSubclasses() {
+        ParseObject.registerSubclass(User.class);
+        ParseObject.registerSubclass(Node.class);
     }
 
     private void setUpParse() {
@@ -25,5 +33,9 @@ public class ParseApp extends Application {
                 .build();
 
         Parse.initialize(configuration);
+    }
+
+    private void setupSoLoader() {
+        SoLoader.init(this, false);
     }
 }
