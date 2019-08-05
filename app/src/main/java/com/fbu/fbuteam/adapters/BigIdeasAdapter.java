@@ -78,8 +78,8 @@ public class BigIdeasAdapter extends RecyclerView.Adapter<BigIdeasAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            bigIdeaBox = (CheckBox) itemView.findViewById(R.id.bigIdeaBox);
-            cardView = (CardView) itemView.findViewById(R.id.cardview1);
+            bigIdeaBox = itemView.findViewById(R.id.bigIdeaBox);
+            cardView = itemView.findViewById(R.id.cardview1);
         }
     }
 }
