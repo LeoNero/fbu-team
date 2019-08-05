@@ -2,6 +2,7 @@ package com.fbu.fbuteam.fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,9 +68,7 @@ public class BigIdeasFragment extends Fragment {
         new Thread(() -> {
             while (progressStatus < 100) {
                 progressStatus += 1;
-                handler.post(() -> {
-                    progressBar.setProgress(progressStatus);
-                });
+                handler.post(() -> progressBar.setProgress(progressStatus));
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
@@ -151,8 +150,11 @@ public class BigIdeasFragment extends Fragment {
                     bigIdeas.add(node);
                 }
                 adapter.notifyDataSetChanged();
+            } else {
+                Log.d("AA", e.toString());
             }
         });
+        Log.d("AA", bigIdeas.size()+"");
     }
 
     private void saveBigIdeas() {

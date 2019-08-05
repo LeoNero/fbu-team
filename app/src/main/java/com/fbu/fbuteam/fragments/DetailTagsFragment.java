@@ -76,9 +76,7 @@ public class DetailTagsFragment extends Fragment {
         new Thread(() -> {
             while (progressStatus < 100) {
                 progressStatus += 1;
-                handler.post(() -> {
-                    progressBar.setProgress(progressStatus);
-                });
+                handler.post(() -> progressBar.setProgress(progressStatus));
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
