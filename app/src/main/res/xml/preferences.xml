@@ -88,7 +88,7 @@
     <Preference
         android:key="logoutKey"
         android:title="@string/logout"/>
-    <intent android:action="android.intent.action.VIEW"
+    <intent android:action="android.intent.action.MAIN"
         android:targetPackage="com.fbu.fbuteam"
         android:targetClass="com.fbu.fbuteam.activities.LoginActivity"/>
 
