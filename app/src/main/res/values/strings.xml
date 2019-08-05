@@ -9,7 +9,12 @@
 
     <string name="email">Email</string>
     <string name="username">Username</string>
+    <string name="name">Name</string>
     <string name="password">Password</string>
 
     <string name="create_account_message">Don\'t have an account? Sign up.</string>
+
+    <string name="topics">Topics</string>
+    <string name="saved_posts">Saved posts</string>
+    <string name="settings">Settings</string>
 </resources>
