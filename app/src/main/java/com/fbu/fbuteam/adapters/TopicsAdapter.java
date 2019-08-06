@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.models.Node;
-import com.fbu.fbuteam.models.User;
 
 import java.util.List;
 
@@ -38,23 +37,21 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull TopicsAdapter.ViewHolder holder, int position) {
         Node userTag = userTags.get(position);
-        displayTags(userTags, holder);
-        Log.d("AA", userTags.size()+"");
+        displayTag(userTag, holder);
     }
 
-    private void displayTags(List<Node> userTags, TopicsAdapter.ViewHolder holder) {
-        for (Node tag : userTags) {
-            tag.fetchIfNeededInBackground((res, e) -> {
-                String name = ((Node) res).getName();
-                int level = ((Node) res).getLevel();
-                holder.topicView.setText(name);
-                if (level == 1) {
-                    holder.topicView.setTextColor(Color.RED); //test colors
-                } else {
-                    holder.topicView.setTextColor(Color.GREEN);
-                }
-            });
-        }
+    private void displayTag(Node userTag, TopicsAdapter.ViewHolder holder) {
+        userTag.fetchIfNeededInBackground((res, e) -> {
+            String name = ((Node) res).getName();
+            int level = ((Node) res).getLevel();
+            holder.topicView.setText(name);
+            if (level == 1) {
+                holder.topicView.setTextColor(Color.RED); //test colors
+            } else {
+                holder.topicView.setTextColor(Color.GREEN);
+            }
+        });
+
     }
 
     @Override
