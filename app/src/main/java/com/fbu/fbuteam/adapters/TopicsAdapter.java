@@ -2,6 +2,7 @@ package com.fbu.fbuteam.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.models.Node;
+import com.fbu.fbuteam.models.User;
 
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
     public void onBindViewHolder(@NonNull TopicsAdapter.ViewHolder holder, int position) {
         Node userTag = userTags.get(position);
         displayTags(userTags, holder);
+        Log.d("AA", userTags.size()+"");
     }
 
     private void displayTags(List<Node> userTags, TopicsAdapter.ViewHolder holder) {

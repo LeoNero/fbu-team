@@ -64,6 +64,8 @@ public class TopicsFragment extends Fragment {
         userTags = new ArrayList<>();
         userTags.addAll(bigIdeaTags); //combine bigIdeaTags and detailTags into one ArrayList
         userTags.addAll(detailTags);
+        bigIdeaTags = new ArrayList<>();
+        detailTags = new ArrayList<>();
         adapter = new TopicsAdapter(getContext(), userTags);
         rvTopics.setAdapter(adapter);
         adapter.notifyDataSetChanged();
