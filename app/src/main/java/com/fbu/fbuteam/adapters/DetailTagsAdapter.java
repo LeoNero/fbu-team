@@ -38,6 +38,7 @@ public class DetailTagsAdapter extends RecyclerView.Adapter<DetailTagsAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Node bigIdea = selectedBigIdeas.get(position);
+        holder.tagBox.setText(bigIdea.getName());
         changeCheckedState(holder, position);
         setCheckBoxText(holder, bigIdea);
     }
