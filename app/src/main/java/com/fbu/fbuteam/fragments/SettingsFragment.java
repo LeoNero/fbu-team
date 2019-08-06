@@ -74,6 +74,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 if (e == null) {
                     Toast.makeText(getContext(), "Account deleted!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    goToLogin();
                 } else {
                     Toast.makeText(getContext(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
