@@ -22,7 +22,6 @@ import com.parse.ParseUser;
 import java.util.List;
 
 public class TopicsFragment extends Fragment {
-    private LinearLayout llTopics;
 
     private User currentUser;
     private List<Node> bigIdeaTags;
@@ -44,14 +43,8 @@ public class TopicsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        setupViews(view);
         getBigIdeasTags();
         getDetailTags();
-    }
-
-    private void setupViews(View view) {
-        llTopics = view.findViewById(R.id.llTopics);
     }
 
     private void getCurrentUser() {
@@ -83,7 +76,7 @@ public class TopicsFragment extends Fragment {
                     tv.setTextColor(getResources().getColor(R.color.detailIdeaTopic));
                 }
 
-                llTopics.addView(tv);
+                //llTopics.addView(tv);
             });
         }
     }
