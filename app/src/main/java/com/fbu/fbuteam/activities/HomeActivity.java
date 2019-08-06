@@ -15,7 +15,6 @@ import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.bumptech.glide.load.engine.Resource;
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.fragments.NewsFragment;
 import com.fbu.fbuteam.fragments.ProfileFragment;

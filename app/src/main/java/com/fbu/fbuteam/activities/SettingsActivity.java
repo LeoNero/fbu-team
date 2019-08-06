@@ -1,27 +1,13 @@
 package com.fbu.fbuteam.activities;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
-import androidx.preference.CheckBoxPreference;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
-import androidx.preference.SwitchPreference;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.widget.Toast;
-
-import com.fbu.fbuteam.ParseApp;
 import com.fbu.fbuteam.R;
-import com.parse.ParseUser;
-
-import static android.widget.Toast.LENGTH_SHORT;
 
 public class SettingsActivity extends AppCompatActivity {
 
