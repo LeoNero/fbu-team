@@ -31,15 +31,10 @@ public class TopicsFragment extends Fragment {
     private User currentUser;
     private List<Node> bigIdeaTags;
     private List<Node> detailTags;
-    private List<Node> userTags;
-    private TopicsAdapter adapter;
-    private LinearLayoutManager layoutManager;
-    private RecyclerView rvTopics;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getCurrentUser();
     }
 
@@ -58,15 +53,15 @@ public class TopicsFragment extends Fragment {
     }
 
     private void createRecyclerView(View view) {
-        rvTopics = (RecyclerView) view.findViewById(R.id.rvTopics);
-        layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView rvTopics = (RecyclerView) view.findViewById(R.id.rvTopics);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvTopics.setLayoutManager(layoutManager);
-        userTags = new ArrayList<>();
-        userTags.addAll(bigIdeaTags); //combine bigIdeaTags and detailTags into one ArrayList
+        List<Node> userTags = new ArrayList<>();
+        userTags.addAll(bigIdeaTags);
         userTags.addAll(detailTags);
         bigIdeaTags = new ArrayList<>();
         detailTags = new ArrayList<>();
-        adapter = new TopicsAdapter(getContext(), userTags);
+        TopicsAdapter adapter = new TopicsAdapter(getContext(), userTags);
         rvTopics.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -77,29 +72,9 @@ public class TopicsFragment extends Fragment {
 
     private void getBigIdeasTags() {
         bigIdeaTags = currentUser.getBigIdeaTags();
-        //displayTags(bigIdeaTags);
     }
 
     private void getDetailTags() {
         detailTags = currentUser.getDetailTags();
-        //displayTags(detailTags);
     }
-
-//    private void displayTags(List<Node> tags) {
-//        for (Node tag : tags) {
-//            tag.fetchIfNeededInBackground((res, e) -> {
-//                String name = ((Node) res).getName();
-//                int level = ((Node) res).getLevel();
-//
-//                TextView tv = new TextView(getContext());
-//                tv.setText(name);
-//
-//                if (level == 1) {
-//                    tv.setTextColor(getResources().getColor(R.color.bigIdeaTopic));
-//                } else {
-//                    tv.setTextColor(getResources().getColor(R.color.detailIdeaTopic));
-//                }
-//            });
-//        }
-//    }
 }
