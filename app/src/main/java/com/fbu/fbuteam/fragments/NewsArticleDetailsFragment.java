@@ -42,5 +42,7 @@ public class NewsArticleDetailsFragment extends Fragment {
         articleBody = view.findViewById(R.id.tvBody);
         articleSource = view.findViewById(R.id.tvSource);
     }
+
+
 }
 
