@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.fbu.fbuteam.Models.NewsArticle;
 import com.fbu.fbuteam.R;
+import com.fbu.fbuteam.activities.NewsAdapter;
 
 
 public class WebViewDetailsFragment extends Fragment {
@@ -33,7 +34,7 @@ public class WebViewDetailsFragment extends Fragment {
     }
 
     private void setItems(){
-        NewsArticle newsArticle = NewsFragment.news.get(NewsFragment.clickPosition);
+        NewsArticle newsArticle = NewsFragment.news.get(NewsAdapter.pos);
         articleSource = newsArticle.getSource();
     }
 }
