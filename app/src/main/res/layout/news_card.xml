@@ -30,6 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginRight="16dp"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@+id/tvTitle"
