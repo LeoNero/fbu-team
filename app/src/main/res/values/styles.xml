@@ -14,11 +14,11 @@
         <item name="buttonTint">@drawable/checkbox_color</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.DarkActionBar">
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <item name="windowActionBar">false</item>
+        <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
     </style>
 
