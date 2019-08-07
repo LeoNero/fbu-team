@@ -45,10 +45,11 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
             String name = ((Node) res).getName();
             int level = ((Node) res).getLevel();
             holder.topicView.setText(name);
+            holder.topicView.setTextColor(Color.rgb(56, 14, 67));
             if (level == 1) {
-                holder.topicView.setTextColor(Color.RED); //test colors
+                holder.cardView.setCardBackgroundColor(Color.WHITE);
             } else {
-                holder.topicView.setTextColor(Color.GREEN);
+                holder.cardView.setCardBackgroundColor(Color.rgb(225,190,231));
             }
         });
 
