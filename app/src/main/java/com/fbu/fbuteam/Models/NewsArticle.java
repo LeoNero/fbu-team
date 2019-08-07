@@ -2,10 +2,6 @@ package com.fbu.fbuteam.Models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 @ParseClassName("NewsArticle")
@@ -17,6 +13,7 @@ public class NewsArticle extends ParseObject {
     public static final String KEY_AUTHOR = "Author";
     public static final String KEY_BODY = "Body";
     public static final String KEY_SOURCE = "Source";
+    public static final String KEY_IMAGE = "Image";
 
 
     public String getName() {
@@ -47,6 +44,13 @@ public class NewsArticle extends ParseObject {
 
     public void setSource(String source) {put(KEY_SOURCE, source); }
 
+    public String getImage() {
+        return getString(KEY_IMAGE);
+    }
+
+    public void setImage(String image) {
+        put(KEY_IMAGE, image);
+    }
 
 }
 
