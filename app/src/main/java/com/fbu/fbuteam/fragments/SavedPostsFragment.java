@@ -1,6 +1,8 @@
 package com.fbu.fbuteam.fragments;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.adapters.SavedPostsAdapter;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SavedPostsFragment extends Fragment {
-
-    List<String> mockData;
+    List<ParseObject> newsArticles = new ArrayList<>();
 
     @Nullable
     @Override
@@ -35,15 +40,20 @@ public class SavedPostsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvSavedPosts.setLayoutManager(layoutManager);
 
-        mockData = new ArrayList<>();
-        mockData.add("Data1");
-        mockData.add("Data2");
-        mockData.add("Data3");
-        mockData.add("Data4");
-        mockData.add("Data5");
-
-        SavedPostsAdapter adapter = new SavedPostsAdapter(getContext(), mockData);
+        SavedPostsAdapter adapter = new SavedPostsAdapter(getContext(), newsArticles);
+        createMockSavedArticles(adapter);
         rvSavedPosts.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+    }
+
+    private void createMockSavedArticles(SavedPostsAdapter adapter) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("NewsArticle");
+        query.whereEqualTo("Author", "BBC");
+        query.setLimit(3);
+        query.findInBackground((objects, e) -> {
+            if (e == null) {
+                newsArticles.addAll(objects);
+            }
+            adapter.notifyDataSetChanged();
+        });
     }
 }
