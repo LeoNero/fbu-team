@@ -8,21 +8,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fbu.fbuteam.R;
+import com.parse.ParseObject;
 
 import java.util.List;
 
 public class SavedPostsAdapter extends RecyclerView.Adapter<SavedPostsAdapter.ViewHolder> {
 
     Context context;
-    List<String> mockData;
+    List<ParseObject> newsArticles;
 
 
-    public SavedPostsAdapter(Context context, List<String> mockData) {
+    public SavedPostsAdapter(Context context, List<ParseObject> newsArticles) {
         this.context = context;
-        this.mockData = mockData;
+        this.newsArticles = newsArticles;
     }
 
     @NonNull
@@ -34,28 +36,27 @@ public class SavedPostsAdapter extends RecyclerView.Adapter<SavedPostsAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull SavedPostsAdapter.ViewHolder holder, int position) {
-        String dataPoint = mockData.get(position);
-        displayMockData(dataPoint, holder);
+        ParseObject article = newsArticles.get(position);
+        displayMockData(article, holder);
     }
 
-    private void displayMockData(String dataPoint, SavedPostsAdapter.ViewHolder holder) {
-        holder.tvMockData.setText(dataPoint);
-        holder.tvMockData.setTextColor(Color.WHITE);
+    private void displayMockData(ParseObject article, SavedPostsAdapter.ViewHolder holder) {
+
     }
 
     @Override
     public int getItemCount() {
-        return mockData.size();
+        return newsArticles.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvMockData;
+        CardView cardView;
 
         private ViewHolder(View itemView) {
             super(itemView);
 
-            tvMockData = itemView.findViewById(R.id.tvMockData);
+            cardView = itemView.findViewById(R.id.cvMockArticle);
         }
     }
 }
