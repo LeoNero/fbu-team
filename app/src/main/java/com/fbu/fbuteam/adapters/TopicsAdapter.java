@@ -45,7 +45,6 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
             String name = ((Node) res).getName();
             int level = ((Node) res).getLevel();
             holder.topicView.setText(name);
-            holder.topicView.setTextColor(Color.rgb(56, 14, 67));
             if (level == 1) {
                 holder.cardView.setCardBackgroundColor(Color.WHITE);
             } else {
