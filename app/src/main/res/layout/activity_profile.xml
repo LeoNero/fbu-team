@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".activities.ProfileActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +22,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@color/design_default_color_on_secondary" />
@@ -34,6 +37,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:textColor="@color/white"
             android:text="TextView"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +54,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:textColor="@color/white"
             android:text="TextView"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,6 +69,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
+            android:textColor="@color/white"
             android:text="TextView"
             app:layout_constraintStart_toEndOf="@+id/ivPhoto"
             app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
@@ -75,6 +81,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:textColor="@color/white"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
@@ -84,6 +91,7 @@
         android:id="@+id/tlTabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorOther"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         tools:layout_editor_absoluteX="8dp" />
 

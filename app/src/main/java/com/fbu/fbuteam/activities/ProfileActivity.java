@@ -1,10 +1,15 @@
 package com.fbu.fbuteam.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -68,6 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
             tlTabs.getTabAt(i).setIcon(tabIcons[i]);
             tlTabs.getTabAt(i).setText(tabText[i]);
         }
+        tlTabs.setTabTextColors(Color.WHITE, Color.rgb(121,14,139));
     }
 
     private void getCurrentUser() {

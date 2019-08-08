@@ -1,5 +1,6 @@
 package com.fbu.fbuteam.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,7 +56,7 @@ public class TopicsFragment extends Fragment {
 
     private void createRecyclerView(View view) {
         RecyclerView rvTopics = (RecyclerView) view.findViewById(R.id.rvTopics);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         rvTopics.setLayoutManager(layoutManager);
         List<Node> userTags = new ArrayList<>();
         userTags.addAll(bigIdeaTags);
