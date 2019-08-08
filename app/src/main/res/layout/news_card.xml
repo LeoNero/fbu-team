@@ -52,8 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivImage"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/ivImage"/>
 
         <TextView
             android:id="@+id/tvCreatedAt"
@@ -64,8 +63,7 @@
             app:layout_constraintBottom_toTopOf="@+id/tvBodySnippet"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
 
         <TextView
             android:id="@+id/tvBodySnippet"
@@ -77,8 +75,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCreatedAt"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/tvCreatedAt"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

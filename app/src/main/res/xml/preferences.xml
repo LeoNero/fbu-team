@@ -9,8 +9,7 @@
         android:title="@string/language_preference"
         android:entries="@array/entries_language_preference"
         android:entryValues="@array/entryValues_language_preference"
-        android:summary="@string/language_summary"
-        />
+        android:summary="@string/language_summary" />
 
     <Preference
         android:key="@string/clear_cache"
@@ -21,7 +20,7 @@
     />
 
     <PreferenceCategory
-        android:title="@string/social" />
+        android:title="@string/social"/>
 
     <ListPreference
         android:key="@string/social_media_preference"
@@ -37,8 +36,7 @@
     <SwitchPreference
         android:key="@string/offNotifications"
         android:title="@string/offNotifications"
-        android:defaultValue="true"
-        />
+        android:defaultValue="true" />
 
     <SwitchPreference
         android:key="@string/quietHours"

@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
         setupComponents();
         setupLoginClickListener();
         setupSignupClickListener();
-        //goToHome();
     }
 
     private void persistUser() {
@@ -50,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener((view) -> {
             final String username = usernameInput.getText().toString();
             final String password = passwordInput.getText().toString();
-
             login(username, password);
         });
     }

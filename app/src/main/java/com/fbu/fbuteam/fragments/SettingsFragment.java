@@ -18,8 +18,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
+        cache();
+        logoutPref();
+        deleteAccount();
+    }
 
-
+    public void cache() {
         Preference cache = (Preference) findPreference(getString(R.string.clear_cache));
         cache.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
@@ -28,6 +32,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
 
+    }
+
+    public void logoutPref() {
         Preference logout = (Preference) findPreference(getString(R.string.logout));
         logout.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
@@ -35,7 +42,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
+    }
 
+    public void deleteAccount() {
         Preference deleteAccount = (Preference) findPreference(getString(R.string.delete_account));
         deleteAccount.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
@@ -45,7 +54,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
 
         });
-
     }
 
     private void logout() {
