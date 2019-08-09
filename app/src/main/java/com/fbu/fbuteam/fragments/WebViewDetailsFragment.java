@@ -14,7 +14,6 @@ import com.fbu.fbuteam.Models.NewsArticle;
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.activities.NewsAdapter;
 
-
 public class WebViewDetailsFragment extends Fragment {
 
     private WebView detailsWebView;
