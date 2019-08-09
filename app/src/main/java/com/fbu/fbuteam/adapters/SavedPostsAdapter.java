@@ -37,7 +37,6 @@ public class SavedPostsAdapter extends RecyclerView.Adapter<SavedPostsAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull SavedPostsAdapter.ViewHolder holder, int position) {
         ParseObject article = newsArticles.get(position);
-        //holder.bind(article);
         displayMockData(article, holder);
     }
 
@@ -65,11 +64,5 @@ public class SavedPostsAdapter extends RecyclerView.Adapter<SavedPostsAdapter.Vi
             tvCreatedAt = itemView.findViewById(R.id.tvCreatedAt);
             tvBodySnippet = itemView.findViewById(R.id.tvBodySnippet);
         }
-
-//        private void bind(ParseObject article) {
-//            tvTitle.setText(article.getName());
-//            tvCreatedAt.setText(Time.getRelativeTimeAgo(article.getCreatedAt().toString()));
-//            tvBodySnippet.setText(article.getBodySnippet());
-//        }
     }
 }
