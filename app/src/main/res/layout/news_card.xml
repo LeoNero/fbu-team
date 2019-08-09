@@ -43,10 +43,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/ivImage"
             android:layout_alignParentTop="true"
-            android:textAlignment="center"
+            android:layout_marginBottom="24dp"
             android:text="TextView"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
-            app:layout_constraintBottom_toTopOf="@+id/tvCreatedAt"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,25 +59,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvTitle"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:text="TextView"
             android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@+id/tvBodySnippet"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
-
-        <TextView
-            android:id="@+id/tvBodySnippet"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_below="@id/tvCreatedAt"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCreatedAt" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
