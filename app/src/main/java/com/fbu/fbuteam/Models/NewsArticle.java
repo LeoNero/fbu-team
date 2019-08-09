@@ -25,7 +25,13 @@ public class NewsArticle extends ParseObject {
     }
 
     public String getBodySnippet() {
-        return getString(KEY_BODY_SNIPPET);
+        String bodySnippet = getString(KEY_BODY_SNIPPET);
+        String[] bodySnippetArray = bodySnippet.split("\\.");
+        if (bodySnippetArray.length > 0) {
+            return bodySnippetArray[0];
+        } else {
+            return "";
+        }
     }
 
     public void setKeyBodySnippet(String bodySnippet) {
