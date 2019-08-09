@@ -130,6 +130,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             }
         }
     }
+    
+    private void toastSave(ImageView savePost) {
+        savePost.setOnClickListener(view -> {
+            Toast.makeText(view.getContext(), "This post has been saved to your profile!", Toast.LENGTH_LONG).show();
+        });
+    }
 
     private void toastSave(ImageView savePost) {
         savePost.setOnClickListener(view -> {
