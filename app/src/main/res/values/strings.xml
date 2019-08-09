@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FBUTeam</string>
+    <string name="app_name">Buzzle</string>
     <string name="title_activity_home">HomeActivity</string>
 
     <string name="create_new_signup">Create account</string>
