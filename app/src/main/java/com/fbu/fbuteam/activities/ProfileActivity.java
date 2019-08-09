@@ -3,6 +3,7 @@ package com.fbu.fbuteam.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -11,10 +12,14 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.adapters.ProfileViewPagerAdapter;
+import com.fbu.fbuteam.fragments.EditProfileFragment;
 import com.fbu.fbuteam.models.User;
 import com.google.android.material.tabs.TabLayout;
 
@@ -23,6 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tvUsername;
     private TextView tvFollowers;
     private TextView tvFollowing;
+    private ImageView ivPhoto;
     private ViewPager vpTabs;
     private TabLayout tlTabs;
 
@@ -40,6 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
         setupTabsIcon();
 
         getCurrentUser();
+        goToProfilePicture();
     }
 
     private void setupComponents() {
@@ -47,6 +54,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvUsername = findViewById(R.id.tvUsername);
         tvFollowers = findViewById(R.id.tvFollowers);
         tvFollowing = findViewById(R.id.tvFollowing);
+        ivPhoto = findViewById(R.id.ivPhoto);
         vpTabs = findViewById(R.id.vpTabs);
         tlTabs = findViewById(R.id.tlTabs);
     }
@@ -115,5 +123,16 @@ public class ProfileActivity extends AppCompatActivity {
         int followingCount = currentUser.getFollowing();
 
         return followingCount + " following";
+    }
+
+    private void goToProfilePicture() {
+        ivPhoto.setOnClickListener(view -> goToEdit());
+    }
+
+    private void goToEdit() {
+        EditProfileFragment editProfileFragment = new EditProfileFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.editContainer, editProfileFragment);
+        transaction.commit();
     }
 }
