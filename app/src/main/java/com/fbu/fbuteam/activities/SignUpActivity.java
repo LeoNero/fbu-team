@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fbu.fbuteam.R;
 import com.google.android.material.textfield.TextInputEditText;
-import com.parse.ParseException;
 import com.parse.ParseUser;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -25,7 +24,6 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
         setupComponents();
         setSignupBtnClickListener();
     }
@@ -45,6 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void signUp() {
         ParseUser user = createParseUser();
+
         if (anyFieldIsEmpty()) {
             Toast.makeText(SignUpActivity.this, "Please fill out all fields.", Toast.LENGTH_LONG).show();
         } else {
@@ -56,17 +55,12 @@ public class SignUpActivity extends AppCompatActivity {
         user.signUpInBackground((error) -> {
             if (error == null) {
                 Toast.makeText(SignUpActivity.this, "Successfully signed up", Toast.LENGTH_SHORT).show();
-                goToTags();
+                goToHome();
             } else {
                 Log.e("SignUpActivity.", "Failed to sign up", error);
-                handleSignUpError(error);
+                error.printStackTrace();
             }
         });
-    }
-
-    private void handleSignUpError(ParseException error) {
-        String message = error.getMessage();
-        Toast.makeText(SignUpActivity.this, message, Toast.LENGTH_LONG).show();
     }
 
     private boolean anyFieldIsEmpty() {
@@ -77,14 +71,18 @@ public class SignUpActivity extends AppCompatActivity {
         ParseUser user = new ParseUser();
         user.setUsername(getText(usernameSignup));
         user.setPassword(getText(passwordSignup));
+        Log.e("SignUpActivity.", "Getting here");
         user.setEmail(getText(emailSignup));
 
+        Log.e("SignUpActivity.", "Returning user");
         return user;
     }
 
-    private void goToTags() {
-        Intent intent = new Intent(this, TagActivity.class);
+    private void goToHome() {
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+        Log.e("SignUpActivity.", "Getting to intent");
+
         finish();
     }
 
@@ -92,6 +90,3 @@ public class SignUpActivity extends AppCompatActivity {
         return et.getText().toString();
     }
 }
-
-
-

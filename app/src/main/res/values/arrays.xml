@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="entries_language_preference">
+        <item>English (US)</item>
+        <item>English(UK)</item>
+        <item>Français</item>
+        <item>Español</item>
+        <item>Português</item>
+        <item>普通话</item>
+        <item>हिंदी</item>
+        <item>عربى</item>
+        <item>русский</item>
+        <item>Swahili</item>
+    </string-array>
+
+    <string-array name="entryValues_language_preference">
+        <item>English (US)</item>
+        <item>English(UK)</item>
+        <item>Français</item>
+        <item>Español</item>
+        <item>Português</item>
+        <item>普通话</item>
+        <item>हिंदी</item>
+        <item>عربى</item>
+        <item>русский</item>
+        <item>Swahili</item>
+    </string-array>
+
+    <string-array name="entries_link_social_media">
+        <item>Facebook</item>
+        <item>Twitter</item>
+        <item>Google</item>
+    </string-array>
+
+    <string-array name="entryValues_link_social_media">
+        <item>Facebook</item>
+        <item>Twitter</item>
+        <item>Google</item>
+    </string-array>
+</resources>
