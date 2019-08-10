@@ -1,10 +1,12 @@
 package com.fbu.fbuteam.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +27,7 @@ import java.util.List;
 
 public class DetailTagsFragment extends Fragment {
 
-    public static Button finishButton;
+    public Button finishButton;
     private TextView textView;
     private OnNextClickListener callback;
     private DetailTagsAdapter adapter;
@@ -36,6 +38,9 @@ public class DetailTagsFragment extends Fragment {
     private List<Boolean> allTags = new ArrayList<>();
     private List<Boolean> selectedTags = new ArrayList<>();
     public static List<Node> selectedDetails = new ArrayList<>();
+    private ProgressBar progressBar;
+    private int progressStatus = 0;
+    private Handler handler = new Handler();
 
     public static DetailTagsFragment newInstance(Node bigIdea) {
         DetailTagsFragment detailTagsFragment = new DetailTagsFragment();
@@ -49,6 +54,7 @@ public class DetailTagsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bigIdea = getArguments().getParcelable("bigIdea");
+        progressBar();
     }
 
     @Nullable
@@ -64,6 +70,20 @@ public class DetailTagsFragment extends Fragment {
         initializeObjects(view);
         setTextBasedOnBigIdea();
         nextClick();
+    }
+
+    private void progressBar() {
+        new Thread(() -> {
+            while (progressStatus < 100) {
+                progressStatus += 1;
+                handler.post(() -> progressBar.setProgress(progressStatus));
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     private void createRecyclerView(@NonNull View view) {
@@ -92,6 +112,7 @@ public class DetailTagsFragment extends Fragment {
     private void initializeObjects(@NonNull View view) {
         finishButton = view.findViewById(R.id.finishButton);
         textView = view.findViewById(R.id.textView);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
     }
 
     private void nextClick() {
