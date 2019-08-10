@@ -11,4 +11,16 @@
         app:showAsAction="always"
         app:actionLayout="@layout/action_view_progress" />
 
+    <item android:id="@+id/action_search"
+        android:orderInCategory="5"
+        android:title="Search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:iconTint="@color/white"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.widget.SearchView" />
+
+    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+        android:iconTint="@color/white"
+        android:orderInCategory="100" app:showAsAction="never" />
+
 </menu>
