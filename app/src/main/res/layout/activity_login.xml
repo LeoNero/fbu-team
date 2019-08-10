@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     tools:context=".activities.LoginActivity">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -26,6 +26,7 @@
 
     <Button
         android:id="@+id/loginButton"
+        android:backgroundTint="@color/white"
         style="@style/ButtonFilledWhite.DefaultMargin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -34,6 +35,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
+
+    <Button
+        android:id="@+id/FBloginButton"
+        android:backgroundTint="@color/FBblue"
+        style="@style/ButtonFilledWhite.DefaultMargin"
+        android:textColor="@color/white"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/FBlogin"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilPassword"
@@ -66,7 +80,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+        app:layout_constraintTop_toBottomOf="@+id/FBloginButton" />
 
     <ImageView
         android:id="@+id/imageView"
