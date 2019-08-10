@@ -83,6 +83,8 @@ public class SignUpActivity extends AppCompatActivity {
         user.setPassword(getText(passwordSignup));
         Log.e("SignUpActivity.", "Getting here");
         user.setEmail(getText(emailSignup));
+        user.setFollowers(76);
+        user.setFollowing(23);
 
         Log.e("SignUpActivity.", "Returning user");
         return user;
