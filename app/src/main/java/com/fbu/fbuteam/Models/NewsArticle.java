@@ -1,7 +1,14 @@
 package com.fbu.fbuteam.models;
 
+import android.nfc.Tag;
+
+import com.fbu.fbuteam.models.Node;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @ParseClassName("NewsArticle")
@@ -14,7 +21,7 @@ public class NewsArticle extends ParseObject {
     public static final String KEY_BODY = "Body";
     public static final String KEY_SOURCE = "Source";
     public static final String KEY_IMAGE = "Image";
-
+    public static final String KEY_TAGS = "Tags";
 
     public String getName() {
         return getString(KEY_NAME);
@@ -34,7 +41,7 @@ public class NewsArticle extends ParseObject {
 
     public String getAuthor() { return getString(KEY_AUTHOR); }
 
-    public void setAuthor(String author) {put(KEY_AUTHOR, author); }
+    public void setAuthor(String author) { put(KEY_AUTHOR, author); }
 
     public String getBody() { return getString(KEY_BODY); }
 
@@ -52,5 +59,25 @@ public class NewsArticle extends ParseObject {
         put(KEY_IMAGE, image);
     }
 
+    public List<ParseObject> getTags() {
+        Object tags = get(KEY_TAGS);
+
+        if (tags != null) {
+            return (List<ParseObject>) tags;
+        }
+
+        return new ArrayList<>();
+    }
+
+    public static class Query extends ParseQuery<NewsArticle> {
+        public Query() {
+            super(NewsArticle.class);
+        }
+
+        public Query withRelations() {
+            include(KEY_TAGS);
+            return this;
+        }
+    }
 }
 

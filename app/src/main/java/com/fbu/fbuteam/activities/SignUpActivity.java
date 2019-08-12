@@ -81,19 +81,16 @@ public class SignUpActivity extends AppCompatActivity {
         user.setUsername(getText(usernameSignup));
         user.setName(getText(nameSignup));
         user.setPassword(getText(passwordSignup));
-        Log.e("SignUpActivity.", "Getting here");
         user.setEmail(getText(emailSignup));
         user.setFollowers(76);
         user.setFollowing(23);
 
-        Log.e("SignUpActivity.", "Returning user");
         return user;
     }
 
     private void goToTags() {
         Intent intent = new Intent(this, TagActivity.class);
         startActivity(intent);
-        Log.e("SignUpActivity.", "Getting to intent");
 
         finish();
     }

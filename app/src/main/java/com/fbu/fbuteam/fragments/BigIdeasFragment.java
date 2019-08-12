@@ -145,16 +145,13 @@ public class BigIdeasFragment extends Fragment {
         query.fromType("big-idea");
         query.findInBackground((response, e) -> {
             if (e == null) {
-                for (Node node: response) {
+                for (Node node : response) {
                     allTags.add(false);
                     bigIdeas.add(node);
                 }
                 adapter.notifyDataSetChanged();
-            } else {
-                Log.d("AA", e.toString());
             }
         });
-        Log.d("AA", bigIdeas.size()+"");
     }
 
     private void saveBigIdeas() {

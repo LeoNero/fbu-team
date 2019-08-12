@@ -32,8 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     private void persistUser() {
         ParseUser currentUser = ParseUser.getCurrentUser();
         checkSession(currentUser);
-        Log.e("LoginActivity", "Checking for session");
-
     }
 
     private void setupComponents() {

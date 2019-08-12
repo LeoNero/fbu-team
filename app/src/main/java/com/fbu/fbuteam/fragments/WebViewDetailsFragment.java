@@ -40,8 +40,8 @@ public class WebViewDetailsFragment extends Fragment {
         detailsWebView.loadUrl(articleSource);
     }
 
-    private void setItems() {
-        NewsArticle newsArticle = NewsFragment.news.get(NewsAdapter.pos);
+    private void setItems(){
+        NewsArticle newsArticle = NewsFragment.currentRecommendations.get(NewsAdapter.pos);
         articleSource = newsArticle.getSource();
     }
 }

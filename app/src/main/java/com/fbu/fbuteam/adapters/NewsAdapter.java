@@ -20,6 +20,7 @@ import com.fbu.fbuteam.fragments.WebViewDetailsFragment;
 import com.fbu.fbuteam.utils.Time;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
@@ -27,10 +28,10 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<NewsArticle> newsArticles;
+    private List<NewsArticle> newsArticles;
     public static int pos;
 
-    public NewsAdapter(Context context, ArrayList<NewsArticle> listOfArticles) {
+    public NewsAdapter(Context context, List<NewsArticle> listOfArticles) {
         this.context = context;
         this.newsArticles = listOfArticles;
     }

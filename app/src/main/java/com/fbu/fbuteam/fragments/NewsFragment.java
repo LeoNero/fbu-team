@@ -1,7 +1,6 @@
 package com.fbu.fbuteam.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,25 +12,32 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.fbu.fbuteam.models.NewsArticle;
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.activities.HomeActivity;
+import com.fbu.fbuteam.models.Node;
+import com.fbu.fbuteam.models.User;
 import com.fbu.fbuteam.adapters.NewsAdapter;
-import com.fbu.fbuteam.models.NewsArticle;
 import com.fbu.fbuteam.utils.EndlessRecyclerViewScrollListener;
-import com.parse.ParseQuery;
+import com.parse.ParseObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class NewsFragment extends Fragment {
 
     public static final String TAG = "NewsFragment";
     public static final int newsArticlesPerQuery = 20;
+    public static List<NewsArticle> currentRecommendations = new ArrayList<>();
     public RecyclerView rvNews;
     public static NewsAdapter adapter;
-    public static ArrayList<NewsArticle> news;
     public LinearLayoutManager linearLayoutManager;
     public SwipeRefreshLayout swipeContainer;
     public EndlessRecyclerViewScrollListener scrollListener;
+    private List<String> userSelectedTagsId = new ArrayList<>();
+    private Iterator<NewsArticle> currentRecommendationsIterator;
+    private User currentUser;
 
     @Nullable
     @Override
@@ -42,21 +48,39 @@ public class NewsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         rvNews = view.findViewById(R.id.rvNews);
-        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        swipeContainer = view.findViewById(R.id.swipeContainer);
 
+        setCurrentUser();
+        setUserSelectedTagsId();
         setupRecycler();
         setup(view);
-        loadArticles();
+        loadPersonalizedNews();
         swipeRefresh();
+    }
+
+    private void setCurrentUser() {
+        currentUser = User.getCurrentUser();
+    }
+
+    private void setUserSelectedTagsId() {
+        List<Node> bigIdeaTags = currentUser.getBigIdeaTags();
+        List<Node> detailTags = currentUser.getDetailTags();
+
+        List<Node> allTags = new ArrayList<>();
+        allTags.addAll(bigIdeaTags);
+        allTags.addAll(detailTags);
+
+        for (Node node : allTags) {
+            userSelectedTagsId.add(node.getObjectId());
+        }
     }
 
     private void setupRecycler() {
         linearLayoutManager = new LinearLayoutManager(getContext());
         rvNews.setLayoutManager(linearLayoutManager);
-        news = new ArrayList<>();
         endlessScrollListener();
         rvNews.addOnScrollListener(scrollListener);
-        adapter = new NewsAdapter(getContext(), news);
+        adapter = new NewsAdapter(getContext(), currentRecommendations);
         rvNews.setAdapter(adapter);
     }
 
@@ -64,7 +88,7 @@ public class NewsFragment extends Fragment {
         scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                loadNextData();
+                getNextRecommendations();
             }
         };
     }
@@ -77,7 +101,7 @@ public class NewsFragment extends Fragment {
         swipeContainer.setOnRefreshListener(() -> {
             HomeActivity.showProgressBar();
             adapter.clear();
-            loadArticles();
+            loadPersonalizedNews();
             HomeActivity.hideProgressBar();
             scrollListener.resetState();
             swipeContainer.setRefreshing(false);
@@ -93,67 +117,51 @@ public class NewsFragment extends Fragment {
                 android.R.color.holo_red_light);
     }
 
-    private void loadNextData() {
-        ParseQuery<NewsArticle> newsArticleQuery = new ParseQuery<>(NewsArticle.class);
-        newsArticleQuery.setLimit(newsArticlesPerQuery);
-        newsArticleQuery.whereLessThan("createdAt", news.get(news.size() - 1).getCreatedAt());
-        newsArticleQuery.addDescendingOrder(NewsArticle.KEY_CREATED_AT);
-        newsArticleQuery.findInBackground((objects, e) -> {
-            if (e != null) {
-                Log.e(TAG, "Error with query");
-                e.printStackTrace();
+    private void loadPersonalizedNews() {
+        NewsArticle.Query getAllQuery = new NewsArticle.Query();
+        getAllQuery.withRelations();
+        getAllQuery.setLimit(300);
+
+        getAllQuery.findInBackground((objects, e) -> {
+            if (e == null) {
+                getRecommendations(objects);
             } else {
-                news.addAll(objects);
-                adapter.notifyDataSetChanged();
-                for (int i = 0; i < objects.size(); i++) {
-                    NewsArticle newsArticle = objects.get(i);
-                    Log.d(TAG, "Name: " + newsArticle.getName()
-                            + " Created At: " + newsArticle.getCreatedAt().toString()
-                            + " Body Snippet: " + newsArticle.getBodySnippet());
-                }
+                e.printStackTrace();
             }
         });
     }
 
-    private void loadArticles() {
-        ParseQuery<NewsArticle> newsArticleQuery = new ParseQuery<>(NewsArticle.class);
-        newsArticleQuery.setLimit(newsArticlesPerQuery);
-        newsArticleQuery.addDescendingOrder(NewsArticle.KEY_CREATED_AT);
-        newsArticleQuery.findInBackground((objects, e) -> {
-            if (e != null) {
-                Log.e(TAG, "Error with query");
-                e.printStackTrace();
-            } else {
-                news.addAll(objects);
-                adapter.notifyDataSetChanged();
-                for (int i = 0; i < objects.size(); i++) {
-                    NewsArticle newsArticle = objects.get(i);
-                    Log.d(TAG, "Name: " + newsArticle.getName()
-                            + " Created At: " + newsArticle.getCreatedAt().toString()
-                            + " Body Snippet: " + newsArticle.getBodySnippet());
+    private void getRecommendations(List<NewsArticle> articles) {
+        currentRecommendations.clear();
+
+        List<NewsArticle> allRecommendations = new ArrayList<>();
+        for (NewsArticle article : articles) {
+            List<ParseObject> articleTags = article.getTags();
+
+            for (ParseObject tag : articleTags) {
+                String tagId = tag.getObjectId();
+
+                if (userSelectedTagsId.contains(tagId)) {
+                    allRecommendations.add(article);
+                    break;
                 }
             }
-        });
+        }
+
+        currentRecommendationsIterator = allRecommendations.iterator();
+
+        getNextRecommendations();
     }
 
-    public static void searchNameQuery(String query) {
-        ParseQuery<NewsArticle> newsArticleQuery = new ParseQuery<>(NewsArticle.class);
-        newsArticleQuery.whereFullText("Body", query);
-        newsArticleQuery.findInBackground((articles, e) -> {
-            if (e != null) {
-                Log.e(TAG, "Error with query");
-                e.printStackTrace();
+    private void getNextRecommendations() {
+        for (int i = 0; i < newsArticlesPerQuery; i++) {
+            if (currentRecommendationsIterator.hasNext()) {
+                currentRecommendations.add(currentRecommendationsIterator.next());
             } else {
-                news.addAll(articles);
-                Log.d("AA", news.size() + "");
-                adapter.notifyDataSetChanged();
-                for (int i = 0; i < articles.size(); i++) {
-                    NewsArticle newsArticle = articles.get(i);
-                    Log.d(TAG, "Name: " + newsArticle.getName()
-                            + " Created At: " + newsArticle.getCreatedAt().toString()
-                            + " Body Snippet: " + newsArticle.getBodySnippet());
-                }
+                break;
             }
-        });
+        }
+
+        adapter.notifyDataSetChanged();
     }
 }
