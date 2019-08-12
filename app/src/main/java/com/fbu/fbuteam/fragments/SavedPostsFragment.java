@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SavedPostsFragment extends Fragment {
-    public static List<NewsArticle> newsArticles = new ArrayList<>();
+    private List<NewsArticle> newsArticles = new ArrayList<>();
 
     @Nullable
     @Override
