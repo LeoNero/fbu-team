@@ -1,4 +1,4 @@
-package com.fbu.fbuteam.activities;
+package com.fbu.fbuteam.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -104,12 +104,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             int margin = 0;
             if (newsArticle.getImage().contains("npr") || newsArticle.getImage().contains("bbc")) {
                 Glide.with(context)
-                        .load("ht" + newsArticle.getImage())
+                        .load(newsArticle.getImage())
                         .transform(new RoundedCornersTransformation(radius, margin))
                         .into(ivImage);
             } else if (newsArticle.getImage().contains("cdn")) {
                 Glide.with(context)
-                        .load("https://" + newsArticle.getImage())
+                        .load(newsArticle.getImage())
                         .transform(new RoundedCornersTransformation(radius, margin))
                         .into(ivImage);
             }

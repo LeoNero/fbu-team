@@ -1,4 +1,4 @@
-package com.fbu.fbuteam.fragments;
+package com.fbu.fbuteam.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,27 +10,19 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.fbu.fbuteam.R;
-import com.fbu.fbuteam.activities.LoginActivity;
 import com.fbu.fbuteam.adapters.ProfileViewPagerAdapter;
 import com.fbu.fbuteam.models.User;
 import com.google.android.material.tabs.TabLayout;
 
-public class ProfileFragment extends Fragment {
-
+public class ProfileActivity extends AppCompatActivity {
     private TextView tvName;
     private TextView tvUsername;
     private TextView tvFollowers;
@@ -44,16 +36,14 @@ public class ProfileFragment extends Fragment {
     private User currentUser;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_profile, container, false);
-    }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        setupComponents(view);
+        setupComponents();
         setupViewPagerAdapter();
         setupTabsIcon();
+
         getCurrentUser();
         imageRounded();
     }
@@ -69,18 +59,18 @@ public class ProfileFragment extends Fragment {
         ivPhoto.setImageBitmap(imageRounded);
     }
 
-    private void setupComponents(View view) {
-        tvName = view.findViewById(R.id.tvName);
-        tvUsername = view.findViewById(R.id.tvUsername);
-        tvFollowers = view.findViewById(R.id.tvFollowers);
-        tvFollowing = view.findViewById(R.id.tvFollowing);
-        ivPhoto = view.findViewById(R.id.ivPhoto);
-        vpTabs = view.findViewById(R.id.vpTabs);
-        tlTabs = view.findViewById(R.id.tlTabs);
+    private void setupComponents() {
+        tvName = findViewById(R.id.tvName);
+        tvUsername = findViewById(R.id.tvUsername);
+        tvFollowers = findViewById(R.id.tvFollowers);
+        tvFollowing = findViewById(R.id.tvFollowing);
+        ivPhoto = findViewById(R.id.ivPhoto);
+        vpTabs = findViewById(R.id.vpTabs);
+        tlTabs = findViewById(R.id.tlTabs);
     }
 
     private void setupViewPagerAdapter() {
-        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         profileViewPagerAdapter = new ProfileViewPagerAdapter(fragmentManager);
         vpTabs.setAdapter(profileViewPagerAdapter);
         tlTabs.setupWithViewPager(vpTabs);
@@ -108,7 +98,6 @@ public class ProfileFragment extends Fragment {
         currentUser = User.getCurrentUser();
 
         if (currentUser == null) {
-            Log.d("SDDD", "AA");
             goToLogin();
             return;
         }
@@ -116,10 +105,10 @@ public class ProfileFragment extends Fragment {
         displayUserInformation();
     }
 
-
     private void goToLogin() {
-        Intent i = new Intent(getActivity(), LoginActivity.class);
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
+        finish();
     }
 
     private void displayUserInformation() {
@@ -146,4 +135,3 @@ public class ProfileFragment extends Fragment {
         return followingCount + " following";
     }
 }
-

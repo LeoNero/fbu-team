@@ -89,6 +89,4 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
 
     public abstract void onLoadMore(int page, int totalItemsCount, RecyclerView view);
 
-
-
 }

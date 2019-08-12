@@ -10,8 +10,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fbu.fbuteam.R;
-import com.parse.LogInCallback;
-import com.parse.ParseException;
 import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
@@ -68,18 +66,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(String username, String password) {
-        ParseUser.logInInBackground(username, password, new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException error) {
-                if (error == null) {
-                    Log.d("LoginActivity", "Login successful!");
-                    Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_LONG).show();
-                    goToHome();
-                } else {
-                    Log.e("LoginActivity", "Login failure.");
-                    Toast.makeText(LoginActivity.this, "Login failure", Toast.LENGTH_LONG).show();
-                    error.printStackTrace();
-                }
+        ParseUser.logInInBackground(username, password, (user, error) -> {
+            if (error == null) {
+                Log.d("LoginActivity", "Login successful!");
+                Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_LONG).show();
+                goToHome();
+            } else {
+                Log.e("LoginActivity", "Login failure.");
+                Toast.makeText(LoginActivity.this, "Login failure", Toast.LENGTH_LONG).show();
+                error.printStackTrace();
             }
         });
     }

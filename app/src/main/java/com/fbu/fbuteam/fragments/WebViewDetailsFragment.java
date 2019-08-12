@@ -5,14 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.fbu.fbuteam.models.NewsArticle;
 import com.fbu.fbuteam.R;
-import com.fbu.fbuteam.activities.NewsAdapter;
+import com.fbu.fbuteam.adapters.NewsAdapter;
 
 public class WebViewDetailsFragment extends Fragment {
 
