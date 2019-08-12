@@ -1,6 +1,5 @@
 package com.fbu.fbuteam.activities;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -27,23 +26,17 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
 
         setupComponents();
-        setupToolbar();
         setupFragments();
         setupBottomNavigationViewItemSelectedListener();
         setupDefaultFragment();
-
     }
 
     private void setupComponents() {
         toolbar = findViewById(R.id.toolbar);
         bnvHome = findViewById(R.id.bottomNavigationView);
-    }
-
-    private void setupToolbar() {
-        setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(Color.rgb(121,14,139));
     }
 
     private void setupFragments() {
