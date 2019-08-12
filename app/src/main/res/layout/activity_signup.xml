@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorPrimaryDark"
     tools:context=".activities.SignUpActivity">
 
     <TextView
@@ -105,6 +105,7 @@
 
     <Button
         android:id="@+id/create_new_signup"
+        android:backgroundTint="@color/white"
         style="@style/ButtonFilledWhite.DefaultMargin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
