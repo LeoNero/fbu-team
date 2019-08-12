@@ -98,10 +98,8 @@ public class HomeActivity extends AppCompatActivity {
       
       return super.onCreateOptionsMenu(menu);
     }
-}
 
-
-private void setUpMenuItems(Menu menu) {
+    private void setUpMenuItems(Menu menu) {
         MenuItem menuItem = menu.findItem(R.id.action_settings);
         MenuItem  progressItem = menu.findItem(R.id.miActionProgress);
         final ProgressBar progressBar = (ProgressBar) MenuItemCompat.getActionView(progressItem);

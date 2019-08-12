@@ -1,9 +1,16 @@
 package com.fbu.fbuteam.fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
 import android.graphics.Color;
-
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +21,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.fbu.fbuteam.R;
@@ -40,17 +46,27 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile3, container, false);
+        return inflater.inflate(R.layout.activity_profile, container, false);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        setUpComponents
+        setupComponents(view);
         setupViewPagerAdapter();
         setupTabsIcon();
-
         getCurrentUser();
-        goToProfilePicture();
+        imageRounded();
+    }
+
+    private void imageRounded() {
+        Bitmap mbitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.profile_picture)).getBitmap();
+        Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
+        Canvas canvas = new Canvas(imageRounded);
+        Paint mpaint = new Paint();
+        mpaint.setAntiAlias(true);
+        mpaint.setShader(new BitmapShader(mbitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+        canvas.drawRoundRect((new RectF(0, 0, mbitmap.getWidth(), mbitmap.getHeight())), 100, 100, mpaint);// Round Image Corner 100 100 100 100
+        ivPhoto.setImageBitmap(imageRounded);
     }
 
     private void setupComponents(View view) {
@@ -64,8 +80,8 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setupViewPagerAdapter() {
-        FragmentManager fragmentManager = getFragmentManager();
-        profileViewPagerAdapter = new ProfileViewPagerAdapter(getContext(), fragmentManager);
+        FragmentManager fragmentManager = getChildFragmentManager();
+        profileViewPagerAdapter = new ProfileViewPagerAdapter(fragmentManager);
         vpTabs.setAdapter(profileViewPagerAdapter);
         tlTabs.setupWithViewPager(vpTabs);
     }
@@ -92,12 +108,14 @@ public class ProfileFragment extends Fragment {
         currentUser = User.getCurrentUser();
 
         if (currentUser == null) {
+            Log.d("SDDD", "AA");
             goToLogin();
             return;
         }
 
         displayUserInformation();
     }
+
 
     private void goToLogin() {
         Intent i = new Intent(getActivity(), LoginActivity.class);
@@ -126,17 +144,6 @@ public class ProfileFragment extends Fragment {
         int followingCount = currentUser.getFollowing();
 
         return followingCount + " following";
-    }
-
-    private void goToProfilePicture() {
-        ivPhoto.setOnClickListener(view -> goToEdit());
-    }
-
-    private void goToEdit() {
-        EditProfileFragment editProfileFragment = new EditProfileFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.editContainer, editProfileFragment);
-        transaction.commit();
     }
 }
 

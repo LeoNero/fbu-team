@@ -30,7 +30,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.SignUpActivity" />
-        <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.TagActivity" />
         <activity android:name=".activities.LoginActivity" />
     </application>

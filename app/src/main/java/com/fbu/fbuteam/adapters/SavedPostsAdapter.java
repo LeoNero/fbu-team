@@ -44,7 +44,6 @@ public class SavedPostsAdapter extends RecyclerView.Adapter<SavedPostsAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull SavedPostsAdapter.ViewHolder holder, int position) {
-
         article = newsArticles.get(position);
         displayMockData(article);
         holder.bind(article);
@@ -78,6 +77,10 @@ public class SavedPostsAdapter extends RecyclerView.Adapter<SavedPostsAdapter.Vi
         private ViewHolder(View itemView) {
             super(itemView);
 
+            setUpComponents(itemView);
+        }
+
+        private void setUpComponents(View itemView) {
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvCreatedAt = itemView.findViewById(R.id.tvCreatedAt);
             ivImage = itemView.findViewById(R.id.ivImage);
