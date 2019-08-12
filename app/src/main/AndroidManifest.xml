@@ -3,10 +3,6 @@
     package="com.fbu.fbuteam">
     <uses-permission android:name="android.permission.INTERNET" />
 
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -23,21 +19,21 @@
         <activity android:name=".activities.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SignUpActivity" />
-        <activity android:name=".activities.ProfileActivity" />
+       
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/action_settings"
             android:parentActivityName=".activities.HomeActivity">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.HomeActivity"/>
         </activity>
+        
+      <activity android:name=".activities.SignUpActivity" />
+        <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.TagActivity" />
         <activity android:name=".activities.LoginActivity" />
     </application>
