@@ -3,7 +3,9 @@ package com.fbu.fbuteam;
 import android.app.Application;
 import android.content.Context;
 
-import com.fbu.fbuteam.Models.NewsArticle;
+import com.fbu.fbuteam.models.NewsArticle;
+import com.fbu.fbuteam.models.Node;
+import com.fbu.fbuteam.models.User;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -19,7 +21,10 @@ public class ParseApp extends Application {
     }
 
     private void setUpParse() {
+        ParseObject.registerSubclass(User.class);
         ParseObject.registerSubclass(NewsArticle.class);
+        ParseObject.registerSubclass(Node.class);
+
         final Parse.Configuration configuration = new Parse.Configuration.Builder(this)
                 .applicationId("LeoHaleyPlaxides")
                 .clientKey("LeoHaleyPlaxides")

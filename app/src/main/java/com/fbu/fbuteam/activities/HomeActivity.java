@@ -112,14 +112,12 @@ public class HomeActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                NewsFragment.searchNameQuery(query);
                 searchView.clearFocus();
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                NewsFragment.searchNameQuery(newText);
                 Toast.makeText(HomeActivity.this, "Result:"+newText, Toast.LENGTH_LONG).show();
                 return true;
             }

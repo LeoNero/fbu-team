@@ -5,9 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.fbu.fbuteam.Models.NewsArticle;
-import com.fbu.fbuteam.fragments.NewsFragment;
-
 public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
 
     private int minBeforeEndlessScroll = 5;

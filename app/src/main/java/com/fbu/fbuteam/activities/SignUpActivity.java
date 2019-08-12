@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fbu.fbuteam.R;
+import com.fbu.fbuteam.models.User;
 import com.google.android.material.textfield.TextInputEditText;
 import com.parse.ParseUser;
 
@@ -55,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
         user.signUpInBackground((error) -> {
             if (error == null) {
                 Toast.makeText(SignUpActivity.this, "Successfully signed up", Toast.LENGTH_SHORT).show();
-                goToHome();
+                goToTags();
             } else {
                 Log.e("SignUpActivity.", "Failed to sign up", error);
                 error.printStackTrace();
@@ -68,20 +69,17 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private ParseUser createParseUser() {
-        ParseUser user = new ParseUser();
+        User user = new User();
         user.setUsername(getText(usernameSignup));
         user.setPassword(getText(passwordSignup));
-        Log.e("SignUpActivity.", "Getting here");
         user.setEmail(getText(emailSignup));
 
-        Log.e("SignUpActivity.", "Returning user");
         return user;
     }
 
-    private void goToHome() {
-        Intent intent = new Intent(this, HomeActivity.class);
+    private void goToTags() {
+        Intent intent = new Intent(this, TagActivity.class);
         startActivity(intent);
-        Log.e("SignUpActivity.", "Getting to intent");
 
         finish();
     }

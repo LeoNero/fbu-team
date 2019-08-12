@@ -121,5 +121,10 @@ public class Node extends ParseObject implements Parcelable {
             whereEqualTo("type", type);
             return this;
         }
+
+        public Query fromTagsId(List<String> tagsId) {
+            whereContainedIn("Tags", tagsId);
+            return this;
+        }
     }
 }
