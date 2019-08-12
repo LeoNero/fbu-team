@@ -70,18 +70,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(String username, String password) {
-        ParseUser.logInInBackground(username, password, new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException error) {
-                if (error == null) {
-                    Log.d("LoginActivity", "Login successful!");
-                    Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_LONG).show();
-                    goToHome();
-                } else {
-                    Log.e("LoginActivity", "Login failure.");
-                    Toast.makeText(LoginActivity.this, "Login failure", Toast.LENGTH_LONG).show();
-                    error.printStackTrace();
-                }
+        ParseUser.logInInBackground(username, password, (user, error) -> {
+            if (error == null) {
+                Log.d("LoginActivity", "Login successful!");
+                Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_LONG).show();
+                goToHome();
+            } else {
+                Log.e("LoginActivity", "Login failure.");
+                Toast.makeText(LoginActivity.this, "Login failure", Toast.LENGTH_LONG).show();
+                error.printStackTrace();
             }
         });
     }
@@ -92,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToHome() {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
         finish();
     }

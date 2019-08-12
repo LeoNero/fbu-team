@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.fbu.fbuteam.Models.NewsArticle;
+import com.fbu.fbuteam.models.NewsArticle;
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.activities.HomeActivity;
-import com.fbu.fbuteam.activities.NewsAdapter;
+import com.fbu.fbuteam.adapters.NewsAdapter;
 import com.fbu.fbuteam.utils.EndlessRecyclerViewScrollListener;
 import com.parse.ParseQuery;
 
@@ -139,7 +139,6 @@ public class NewsFragment extends Fragment {
 
     public static void searchNameQuery(String query) {
         ParseQuery<NewsArticle> newsArticleQuery = new ParseQuery<>(NewsArticle.class);
-        //ParseQuery<NewsArticle> newsArticleQuery = ParseQuery.getQuery("NewsArticle");
         newsArticleQuery.whereFullText("Body", query);
         newsArticleQuery.findInBackground((articles, e) -> {
             if (e != null) {
@@ -151,26 +150,6 @@ public class NewsFragment extends Fragment {
                 adapter.notifyDataSetChanged();
                 for (int i = 0; i < articles.size(); i++) {
                     NewsArticle newsArticle = articles.get(i);
-                    Log.d(TAG, "Name: " + newsArticle.getName()
-                            + " Created At: " + newsArticle.getCreatedAt().toString()
-                            + " Body Snippet: " + newsArticle.getBodySnippet());
-                }
-            }
-        });
-    }
-
-    public static void searchAuthorQuery(String query) {
-        ParseQuery<NewsArticle> newsArticleQuery = new ParseQuery<>(NewsArticle.class);
-        newsArticleQuery.whereContains(NewsArticle.KEY_AUTHOR, query) ;
-        newsArticleQuery.findInBackground((objects, e) -> {
-            if (e != null) {
-                Log.e(TAG, "Error with query");
-                e.printStackTrace();
-            } else {
-                news.addAll(objects);
-                adapter.notifyDataSetChanged();
-                for (int i = 0; i < objects.size(); i++) {
-                    NewsArticle newsArticle = objects.get(i);
                     Log.d(TAG, "Name: " + newsArticle.getName()
                             + " Created At: " + newsArticle.getCreatedAt().toString()
                             + " Body Snippet: " + newsArticle.getBodySnippet());

@@ -4,6 +4,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".ParseApp"
         android:allowBackup="true"
@@ -13,17 +16,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-      
+
         <activity android:name=".activities.LoginActivity"></activity>
-        <activity android:name=".activities.TagActivity">
+        <activity android:name=".activities.TagActivity" />
+        <activity android:name=".activities.HomeActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".activities.SignUpActivity" />
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/action_settings"
@@ -33,6 +36,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.HomeActivity"/>
         </activity>
-    </application>
 
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.SignUpActivity" />
+    </application>
 </manifest>

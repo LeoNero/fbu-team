@@ -27,7 +27,6 @@ public class HomeActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private BottomNavigationView bnvHome;
     private static MenuItem menuActionProgressItem;
-    private static MenuItem searchItem;
     private static MenuItem settings;
 
     private FragmentManager fragmentManager;
@@ -130,7 +129,6 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         menuActionProgressItem = menu.findItem(R.id.miActionProgress);
         settings = menu.findItem(R.id.action_settings);
-
         return super.onPrepareOptionsMenu(menu);
     }
 

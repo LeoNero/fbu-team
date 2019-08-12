@@ -10,14 +10,17 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fbu.fbuteam.R;
+import com.fbu.fbuteam.models.User;
 import com.google.android.material.textfield.TextInputEditText;
 import com.parse.ParseUser;
 
 public class SignUpActivity extends AppCompatActivity {
 
     private TextInputEditText emailSignup;
+    private TextInputEditText nameSignup;
     private TextInputEditText usernameSignup;
     private TextInputEditText passwordSignup;
+
     private Button signupBtn;
 
     @Override
@@ -30,6 +33,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void setupComponents() {
         emailSignup = findViewById(R.id.email_et);
+        nameSignup = findViewById(R.id.name_et);
         usernameSignup = findViewById(R.id.username_et);
         passwordSignup = findViewById(R.id.password_et);
         signupBtn = findViewById(R.id.create_new_signup);
@@ -64,15 +68,23 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private boolean anyFieldIsEmpty() {
-        return usernameSignup.equals("") || passwordSignup.equals("") || emailSignup.equals("");
+        boolean isUsernameEmpty = getText(usernameSignup).isEmpty();
+        boolean isNameEmpty = getText(nameSignup).isEmpty();
+        boolean isEmailEmpty = getText(emailSignup).isEmpty();
+        boolean isPasswordEmpty = getText(passwordSignup).isEmpty();
+
+        return isUsernameEmpty || isNameEmpty || isEmailEmpty || isPasswordEmpty;
     }
 
     private ParseUser createParseUser() {
-        ParseUser user = new ParseUser();
+        User user = new User();
         user.setUsername(getText(usernameSignup));
+        user.setName(getText(nameSignup));
         user.setPassword(getText(passwordSignup));
         Log.e("SignUpActivity.", "Getting here");
         user.setEmail(getText(emailSignup));
+        user.setFollowers(76);
+        user.setFollowing(23);
 
         Log.e("SignUpActivity.", "Returning user");
         return user;
