@@ -1,6 +1,10 @@
 package com.fbu.fbuteam.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,10 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.fbu.fbuteam.models.NewsArticle;
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.activities.HomeActivity;
 import com.fbu.fbuteam.adapters.NewsAdapter;
+import com.fbu.fbuteam.models.NewsArticle;
 import com.fbu.fbuteam.utils.EndlessRecyclerViewScrollListener;
 import com.parse.ParseQuery;
 
