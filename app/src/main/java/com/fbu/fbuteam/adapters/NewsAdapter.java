@@ -1,4 +1,4 @@
-package com.fbu.fbuteam.activities;
+package com.fbu.fbuteam.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.fbu.fbuteam.Models.NewsArticle;
+import com.fbu.fbuteam.models.NewsArticle;
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.fragments.WebViewDetailsFragment;
 import com.fbu.fbuteam.utils.Time;
@@ -103,12 +103,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             int margin = 0;
             if (newsArticle.getImage().contains("npr") || newsArticle.getImage().contains("bbc")) {
                 Glide.with(context)
-                        .load("ht" + newsArticle.getImage())
+                        .load(newsArticle.getImage())
                         .transform(new RoundedCornersTransformation(radius, margin))
                         .into(ivImage);
             } else if (newsArticle.getImage().contains("cdn")) {
                 Glide.with(context)
-                        .load("https://" + newsArticle.getImage())
+                        .load(newsArticle.getImage())
                         .transform(new RoundedCornersTransformation(radius, margin))
                         .into(ivImage);
             }

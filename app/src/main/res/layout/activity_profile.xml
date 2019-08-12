@@ -8,9 +8,13 @@
     tools:context=".activities.ProfileActivity">
 
     <FrameLayout
-        android:id="@+id/editContainer"
-        android:layout_width="wrap_content"
+        android:id="@+id/savedPostsContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     </FrameLayout>

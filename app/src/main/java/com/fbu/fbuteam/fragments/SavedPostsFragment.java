@@ -1,8 +1,6 @@
 package com.fbu.fbuteam.fragments;
 
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.adapters.SavedPostsAdapter;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
+import com.fbu.fbuteam.models.NewsArticle;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SavedPostsFragment extends Fragment {
-    List<ParseObject> newsArticles = new ArrayList<>();
+    public static List<NewsArticle> newsArticles = new ArrayList<>();
 
     @Nullable
     @Override
@@ -46,10 +42,10 @@ public class SavedPostsFragment extends Fragment {
     }
 
     private void createMockSavedArticles(SavedPostsAdapter adapter) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("NewsArticle");
-        query.whereEqualTo("Author", "BBC");
-        query.setLimit(3);
-        query.findInBackground((objects, e) -> {
+        ParseQuery<NewsArticle> newsArticleQuery = new ParseQuery<>(NewsArticle.class);
+        newsArticleQuery.setLimit(8);
+        newsArticleQuery.addDescendingOrder(NewsArticle.KEY_CREATED_AT);
+        newsArticleQuery.findInBackground((objects, e) -> {
             if (e == null) {
                 newsArticles.addAll(objects);
             }

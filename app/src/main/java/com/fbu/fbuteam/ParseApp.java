@@ -2,7 +2,7 @@ package com.fbu.fbuteam;
 
 import android.app.Application;
 import android.content.Context;
-import com.fbu.fbuteam.Models.NewsArticle;
+import com.fbu.fbuteam.models.NewsArticle;
 import com.facebook.soloader.SoLoader;
 import com.fbu.fbuteam.models.Node;
 import com.fbu.fbuteam.models.User;
