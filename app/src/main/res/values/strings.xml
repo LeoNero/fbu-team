@@ -19,6 +19,8 @@
     <string name="news">News</string>
     <string name="profile">Profile</string>
 
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="general">GENERAL</string>
     <string name="language_summary">Change your language preference</string>
     <string name="language_preference">Change Language</string>

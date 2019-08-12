@@ -1,7 +1,6 @@
 package com.fbu.fbuteam.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,26 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fbu.fbuteam.R;
-import com.fbu.fbuteam.fragments.WebViewDetailsFragment;
 import com.fbu.fbuteam.models.NewsArticle;
 import com.fbu.fbuteam.utils.Time;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
-import static com.fbu.fbuteam.fragments.NewsFragment.news;
-import static com.fbu.fbuteam.fragments.NewsFragment.newsArticlesPerQuery;
 
 public class SavedPostsAdapter extends RecyclerView.Adapter<SavedPostsAdapter.ViewHolder> {
 
@@ -53,6 +44,7 @@ public class SavedPostsAdapter extends RecyclerView.Adapter<SavedPostsAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull SavedPostsAdapter.ViewHolder holder, int position) {
+
         article = newsArticles.get(position);
         displayMockData(article);
         holder.bind(article);
@@ -86,10 +78,6 @@ public class SavedPostsAdapter extends RecyclerView.Adapter<SavedPostsAdapter.Vi
         private ViewHolder(View itemView) {
             super(itemView);
 
-            setUpComponents(itemView);
-        }
-
-        private void setUpComponents(View itemView) {
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvCreatedAt = itemView.findViewById(R.id.tvCreatedAt);
             ivImage = itemView.findViewById(R.id.ivImage);

@@ -15,7 +15,6 @@ import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.bumptech.glide.load.engine.Resource;
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.fragments.NewsFragment;
 import com.fbu.fbuteam.fragments.ProfileFragment;
@@ -27,6 +26,7 @@ public class HomeActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private BottomNavigationView bnvHome;
     private static MenuItem menuActionProgressItem;
+    private static MenuItem searchItem;
     private static MenuItem settings;
 
     private FragmentManager fragmentManager;
@@ -54,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setupToolbar() {
         setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(Color.rgb(121,14,139));
+        toolbar.setBackgroundColor(Color.rgb(121, 14, 139));
     }
 
     private void setupFragments() {
@@ -62,6 +62,7 @@ public class HomeActivity extends AppCompatActivity {
         newsFragment = new NewsFragment();
         profileFragment = new ProfileFragment();
         settingsFragment = new SettingsFragment();
+
     }
 
     private void setupBottomNavigationViewItemSelectedListener() {
@@ -91,14 +92,16 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_timeline, menu);
+
         setUpMenuItems(menu);
         setUpSearch(menu);
-
-
-        return super.onCreateOptionsMenu(menu);
+      
+      return super.onCreateOptionsMenu(menu);
     }
+}
 
-    private void setUpMenuItems(Menu menu) {
+
+private void setUpMenuItems(Menu menu) {
         MenuItem menuItem = menu.findItem(R.id.action_settings);
         MenuItem  progressItem = menu.findItem(R.id.miActionProgress);
         final ProgressBar progressBar = (ProgressBar) MenuItemCompat.getActionView(progressItem);
@@ -129,6 +132,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         menuActionProgressItem = menu.findItem(R.id.miActionProgress);
         settings = menu.findItem(R.id.action_settings);
+
         return super.onPrepareOptionsMenu(menu);
     }
 

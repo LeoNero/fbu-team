@@ -1,5 +1,7 @@
 package com.fbu.fbuteam.activities;
 
+import android.content.Intent;
+import android.graphics.Color;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,6 +20,14 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+
+import com.fbu.fbuteam.R;
+import com.fbu.fbuteam.adapters.ProfileViewPagerAdapter;
+import com.fbu.fbuteam.fragments.EditProfileFragment;
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.adapters.ProfileViewPagerAdapter;
 import com.fbu.fbuteam.models.User;
@@ -39,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_profile3);
         setContentView(R.layout.activity_profile);
 
         setupComponents();
@@ -46,6 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
         setupTabsIcon();
 
         getCurrentUser();
+        goToProfilePicture();
         imageRounded();
     }
 
@@ -134,5 +146,16 @@ public class ProfileActivity extends AppCompatActivity {
         int followingCount = currentUser.getFollowing();
 
         return followingCount + " following";
+    }
+
+    private void goToProfilePicture() {
+        ivPhoto.setOnClickListener(view -> goToEdit());
+    }
+
+    private void goToEdit() {
+        EditProfileFragment editProfileFragment = new EditProfileFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.editContainer, editProfileFragment);
+        transaction.commit();
     }
 }

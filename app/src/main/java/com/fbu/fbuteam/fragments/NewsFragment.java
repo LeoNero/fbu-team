@@ -1,10 +1,6 @@
 package com.fbu.fbuteam.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -96,7 +92,7 @@ public class NewsFragment extends Fragment {
     private void loadNextData() {
         ParseQuery<NewsArticle> newsArticleQuery = new ParseQuery<>(NewsArticle.class);
         newsArticleQuery.setLimit(newsArticlesPerQuery);
-        newsArticleQuery.whereLessThan("createdAt", news.get(news.size()-1).getCreatedAt());
+        newsArticleQuery.whereLessThan("createdAt", news.get(news.size() - 1).getCreatedAt());
         newsArticleQuery.addDescendingOrder(NewsArticle.KEY_CREATED_AT);
         newsArticleQuery.findInBackground((objects, e) -> {
             if (e != null) {
@@ -123,8 +119,7 @@ public class NewsFragment extends Fragment {
             if (e != null) {
                 Log.e(TAG, "Error with query");
                 e.printStackTrace();
-            }
-            else {
+            } else {
                 news.addAll(objects);
                 adapter.notifyDataSetChanged();
                 for (int i = 0; i < objects.size(); i++) {
@@ -146,7 +141,7 @@ public class NewsFragment extends Fragment {
                 e.printStackTrace();
             } else {
                 news.addAll(articles);
-                Log.d("AA", news.size()+"");
+                Log.d("AA", news.size() + "");
                 adapter.notifyDataSetChanged();
                 for (int i = 0; i < articles.size(); i++) {
                     NewsArticle newsArticle = articles.get(i);
