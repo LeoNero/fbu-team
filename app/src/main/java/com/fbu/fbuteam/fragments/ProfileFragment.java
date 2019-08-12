@@ -2,6 +2,7 @@ package com.fbu.fbuteam.fragments;
 
 import android.content.Intent;
 import android.graphics.Color;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,10 +41,10 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_profile3, container, false);
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         setupComponents(view);
         setupViewPagerAdapter();
         setupTabsIcon();
@@ -138,5 +139,4 @@ public class ProfileFragment extends Fragment {
         transaction.commit();
     }
 }
-
 

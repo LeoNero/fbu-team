@@ -2,6 +2,20 @@ package com.fbu.fbuteam.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +28,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.fbu.fbuteam.R;
 import com.fbu.fbuteam.adapters.ProfileViewPagerAdapter;
 import com.fbu.fbuteam.fragments.EditProfileFragment;
+import com.fbu.fbuteam.R;
+import com.fbu.fbuteam.adapters.ProfileViewPagerAdapter;
 import com.fbu.fbuteam.models.User;
 import com.google.android.material.tabs.TabLayout;
 
@@ -34,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_profile3);
+        setContentView(R.layout.activity_profile);
 
         setupComponents();
         setupViewPagerAdapter();
@@ -41,6 +58,18 @@ public class ProfileActivity extends AppCompatActivity {
 
         getCurrentUser();
         goToProfilePicture();
+        imageRounded();
+    }
+
+    private void imageRounded() {
+        Bitmap mbitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.profile_picture)).getBitmap();
+        Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
+        Canvas canvas = new Canvas(imageRounded);
+        Paint mpaint = new Paint();
+        mpaint.setAntiAlias(true);
+        mpaint.setShader(new BitmapShader(mbitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+        canvas.drawRoundRect((new RectF(0, 0, mbitmap.getWidth(), mbitmap.getHeight())), 100, 100, mpaint);// Round Image Corner 100 100 100 100
+        ivPhoto.setImageBitmap(imageRounded);
     }
 
     private void setupComponents() {

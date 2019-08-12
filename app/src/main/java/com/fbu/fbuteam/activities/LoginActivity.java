@@ -23,10 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         persistUser();
         setupComponents();
-
         setupLoginClickListener();
         setupSignupClickListener();
     }
@@ -34,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
     private void persistUser() {
         ParseUser currentUser = ParseUser.getCurrentUser();
         checkSession(currentUser);
+        Log.e("LoginActivity", "Checking for session");
+
     }
 
     private void setupComponents() {
@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener((view) -> {
             final String username = usernameInput.getText().toString();
             final String password = passwordInput.getText().toString();
-
             login(username, password);
         });
     }
@@ -88,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToHome() {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
         finish();
     }

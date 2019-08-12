@@ -31,6 +31,17 @@ public class User extends ParseUser {
         return getInt(KEY_FOLLOWING);
     }
 
+<<<<<<< HEAD
+=======
+    public void setFollowers(int num) {
+        put(KEY_FOLLOWERS, num);
+    }
+
+    public void setFollowing(int num) {
+        put(KEY_FOLLOWING, num);
+    }
+
+>>>>>>> 5b0230a71f4f952f2d5a01a138c01950705f41bf
     public static User getCurrentUser() {
         return (User) ParseUser.getCurrentUser();
     }
