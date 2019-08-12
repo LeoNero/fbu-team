@@ -1,10 +1,13 @@
 package com.fbu.fbuteam.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,14 +28,13 @@ import java.util.List;
 
 public class BigIdeasFragment extends Fragment {
 
-    private TextView textView1;
-    private TextView textView2;
     private Button nextButton;
     private BigIdeasAdapter adapter;
-    private LinearLayoutManager layoutManager;
-    private RecyclerView rvBigIdeas;
     private List<Boolean> allTags = new ArrayList<>();
     private List<Boolean> selectedTags = new ArrayList<>();
+    private ProgressBar progressBar;
+    private int progressStatus = 0;
+    private Handler handler = new Handler();
 
     public static List<Node> selectedBigIdeas = new ArrayList<>();
     public List<Node> bigIdeas = new ArrayList<>();
@@ -40,6 +42,8 @@ public class BigIdeasFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        progressBar();
+
     }
 
     private OnNextClickListener callback;
@@ -60,18 +64,33 @@ public class BigIdeasFragment extends Fragment {
         goToDetailTags();
     }
 
+    private void progressBar() {
+        new Thread(() -> {
+            while (progressStatus < 100) {
+                progressStatus += 1;
+                handler.post(() -> progressBar.setProgress(progressStatus));
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
     private void createRecyclerView(@NonNull View view) {
-        rvBigIdeas = (RecyclerView) view.findViewById(R.id.rvBigIdeas);
-        layoutManager = new GridLayoutManager(getContext(), 2);
+        RecyclerView rvBigIdeas = (RecyclerView) view.findViewById(R.id.rvBigIdeas);
+        LinearLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         rvBigIdeas.setLayoutManager(layoutManager);
         adapter = new BigIdeasAdapter(getContext(), bigIdeas, allTags);
         rvBigIdeas.setAdapter(adapter);
     }
 
     private void initializeObjects(View view) {
-        textView1 = view.findViewById(R.id.textView1);
-        textView2 = view.findViewById(R.id.textView2);
+        TextView textView1 = view.findViewById(R.id.textView1);
+        TextView textView2 = view.findViewById(R.id.textView2);
         nextButton = view.findViewById(R.id.nextButton);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
     }
 
     private boolean atLeastOneChecked() {
@@ -101,6 +120,7 @@ public class BigIdeasFragment extends Fragment {
                     selectedBigIdeas = getSelectedBigIdeas();
                     saveBigIdeas();
                     callback.goToDetailTagsFragment(selectedBigIdeas);
+
                 }
             } else {
                 Toast.makeText(getContext(), "Please select at least one topic.", Toast.LENGTH_LONG).show();
@@ -130,8 +150,11 @@ public class BigIdeasFragment extends Fragment {
                     bigIdeas.add(node);
                 }
                 adapter.notifyDataSetChanged();
+            } else {
+                Log.d("AA", e.toString());
             }
         });
+        Log.d("AA", bigIdeas.size()+"");
     }
 
     private void saveBigIdeas() {
