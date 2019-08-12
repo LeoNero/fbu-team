@@ -86,6 +86,10 @@ public class SavedPostsAdapter extends RecyclerView.Adapter<SavedPostsAdapter.Vi
         private ViewHolder(View itemView) {
             super(itemView);
 
+            setUpComponents(itemView);
+        }
+
+        private void setUpComponents(View itemView) {
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvCreatedAt = itemView.findViewById(R.id.tvCreatedAt);
             ivImage = itemView.findViewById(R.id.ivImage);
